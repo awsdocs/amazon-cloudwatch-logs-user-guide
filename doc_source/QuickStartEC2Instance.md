@@ -6,7 +6,7 @@ In addition to using the agent, you can also publish log data using the AWS CLI,
 
 ## Step 1: Configure Your IAM Role or User for CloudWatch Logs<a name="running-ec2-step-1"></a>
 
-The CloudWatch Logs agent supports IAM roles and users\. If your instance already has an IAM role associated with it, make sure that you include the IAM policy below\. If you don't already have an IAM role assigned to your instance, you can use your IAM credentials for the next steps or you can assign an IAM role to that instance\. For more information, see [Attaching an IAM Role to an Instance](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#attach-iam-role)\.<a name="cloudwatchlogs_iam_role_procedure"></a>
+The CloudWatch Logs agent supports IAM roles and users\. If your instance already has an IAM role associated with it, make sure that you include the IAM policy below\. If you don't already have an IAM role assigned to your instance, you can use your IAM credentials for the next steps or you can assign an IAM role to that instance\. For more information, see [Attaching an IAM Role to an Instance](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#attach-iam-role)\.
 
 **To configure your IAM role or user for CloudWatch Logs**
 

@@ -12,10 +12,7 @@ To collect logs from your Amazon EC2 instances and on\-premises servers into Clo
 
 The older CloudWatch Logs agent is still supported\. If you are already using that agent, you may continue to do so\. If you would like to migrate from the CloudWatch Logs agent to the new unified CloudWatch agent, we also provide a migration path\.
 
-
-+ [Use the Unified CloudWatch Agent to Get Started With CloudWatch Logs](UseCloudWatchUnifiedAgent.md)
-+ [Use the Previous CloudWatch Logs Agent to Get Started With CloudWatch Logs](UsePreviousCloudWatchLogsAgent.md)
-+ [Quick Start: Use AWS CloudFormation to Get Started With CloudWatch Logs](QuickStartCloudFormation.md)
+Contents
 
 **Differences between the two agents**
 

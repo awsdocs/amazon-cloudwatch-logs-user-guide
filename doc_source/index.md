@@ -58,6 +58,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Overview of Managing Access Permissions to Your CloudWatch Logs Resources](iam-access-control-overview-cwl.md)
    + [Using Identity-Based Policies (IAM Policies) for CloudWatch Logs](iam-identity-based-access-control-cwl.md)
    + [CloudWatch Logs Permissions Reference](permissions-reference-cwl.md)
++ [Using CloudWatch Logs with Interface VPC Endpoints](cloudwatch-logs-and-interface-VPC.md)
 + [Logging Amazon CloudWatch Logs API Calls in AWS CloudTrail](logging_cw_api_calls_cwl.md)
 + [CloudWatch Logs Agent Reference](AgentReference.md)
 + [Document History](DocumentHistory_cwl.md)

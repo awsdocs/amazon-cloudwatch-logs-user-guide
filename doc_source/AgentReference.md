@@ -296,3 +296,11 @@ In your IAM policy, you can restrict the agent to only the following operations:
 
 **What logs should I look at when troubleshooting?**  
 The agent installation log is at `/var/log/awslogs-agent-setup.log` and the agent log is at `/var/log/awslogs.log`\.
+
+**How can I manually configure the CloudWatch Logs agent to assume the IAM role of the instance?**  
+Edit `/etc/awslogs/awscli.conf` and add a `role_arn` field specifying the ARN of the role to assume, and add a `credential_source` field that sets the Amazon EC2 instance role as the source credentials to use\.  
+
+```
+role_arn = arn:aws:iam::111111111111:role/MyRoleName
+credential_source=Ec2InstanceMetadata
+```

@@ -74,21 +74,22 @@ The following is an example policy that grants permissions for the `logs:PutLogE
 
 ```
 {
-  "Version" : "2012-10-17",
-  "Statement" : [
-    {
-      "Sid" : "",
-      "Effect" : "Allow",
-      "Principal" : {
-        "AWS" : "234567890123"
-      },
-      "Action" : [
-          "logs:PutLogEvents",
-          "logs:CreateLogGroup",
-          "logs:CreateLogStream",
-      "Resource" : "arn:aws:logs:us-east-1:*:*"
-    }
-  ]
+   "Version":"2012-10-17",
+   "Statement":[
+      {
+         "Sid":"",
+         "Effect":"Allow",
+         "Principal":{
+            "AWS":"234567890123"
+         },
+         "Action":[
+            "logs:PutLogEvents",
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream"
+         ],
+         "Resource":"arn:aws:logs:us-east-1:*:*"
+      }
+   ]
 }
 ```
 

@@ -298,7 +298,7 @@ You can send the same log file to more than one destination\. For example, to se
    }
    ```
 
-1. For `Flows`, add each data type that to be uploaded \(for example, `ApplicationEventLog`\) and its destination \(for example, `CloudWatchLogs`\)\.
+1. For `Flows`, add each data type that is to be uploaded \(for example, `ApplicationEventLog`\) and its destination \(for example, `CloudWatchLogs`\)\.
 
 You are now finished editing the JSON file\. You use it in a later step\.
 
