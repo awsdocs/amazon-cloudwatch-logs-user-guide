@@ -8,7 +8,7 @@ To get started, create an interface VPC endpoint\. You do not need to change the
 
 CloudWatch Logs currently supports VPC endpoints in the following Regions:
 
-+ United States \(Oregon\);
++ US West \(Oregon\);
 
 + Asia Pacific \(Tokyo\);
 
