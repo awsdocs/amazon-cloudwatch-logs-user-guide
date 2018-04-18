@@ -177,7 +177,7 @@ HTTP proxies are supported in awslogs\-agent\-setup\.py version 1\.3\.8 or later
       sudo python awslogs-agent-setup.py --region us-east-1 --http-proxy http://your/proxy --https-proxy http://your-proxy --no-proxy 169.254.169.254
       ```
 
-      In order to maintain access to the Amazon EC2 metadata service on EC2 instances, use **\-\-no\-proxy 169\.254\.169\.254** \(recommended\)\. For more information , see [Instance Metadata and User Data](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/.ec2-instance-metadata.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+      In order to maintain access to the Amazon EC2 metadata service on EC2 instances, use **\-\-no\-proxy 169\.254\.169\.254** \(recommended\)\. For more information , see [Instance Metadata and User Data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
    1. For an existing installation of the CloudWatch Logs agent, edit /var/awslogs/etc/proxy\.conf, and add your proxies:
 
