@@ -2,7 +2,7 @@
 
 There are multiple methods you can use to enable instances running Windows Server 2016 to send logs to CloudWatch Logs\. The steps in this section use Systems Manager Run Command\. For information about the other possible methods, see [Sending Logs, Events, and Performance Counters to Amazon CloudWatch](http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/send_logs_to_cwl.html)\.
 
-
+**Topics**
 + [Download the Sample Configuration File](#configure_cwl_download)
 + [Configure the JSON File for CloudWatch](#send_logs_to_cwl_json)
 + [Create an IAM User and Role for Systems Manager](#iam_permissions)
@@ -18,7 +18,7 @@ Download the following sample file to your computer: [AWS\.EC2\.Windows\.CloudWa
 
 You determine which logs to send to CloudWatch by specifying your choices in a configuration file\. The process of creating this file and specifying your choices can take 30 minutes or more to complete\. After you have completed this task once, you can reuse the configuration file on all of your instances\.
 
-
+**Topics**
 + [Step 1: Enable CloudWatch Logs](#enable-CloudWatchLogs-in-JSON-file)
 + [Step 2: Configure Settings for CloudWatch](#configure_cwl_credentials)
 + [Step 3: Configure the Data to Send](#configure_logs)
@@ -87,11 +87,8 @@ You can send event log data, Event Tracing for Windows \(ETW\) data, and other l
    ```
 
 1. For `Levels`, specify the type of messages to upload\. You can specify one of the following values:
-
    + **1** \- Upload only error messages\.
-
    + **2** \- Upload only warning messages\.
-
    + **4** \- Upload only information messages\.
 
    You can combine values to include more than one type of message\. For example, a value of **3** uploads error messages \(**1**\) and warning messages \(**2**\)\. A value of **7** uploads error messages \(**1**\), warning messages \(**2**\), and information messages \(**4**\)\.
@@ -129,11 +126,8 @@ You can send event log data, Event Tracing for Windows \(ETW\) data, and other l
    ```
 
 1. For `Levels`, specify the type of messages to upload\. You can specify one of the following values:
-
    + **1** \- Upload only error messages\.
-
    + **2** \- Upload only warning messages\.
-
    + **4** \- Upload only information messages\.
 
    You can combine values to include more than one type of message\. For example, a value of **3** uploads error messages \(**1**\) and warning messages \(**2**\)\. A value of **7** uploads error messages \(**1**\), warning messages \(**2**\), and information messages \(**4**\)\.
@@ -164,11 +158,8 @@ You can send event log data, Event Tracing for Windows \(ETW\) data, and other l
    1. Navigate to the log, and then choose **Actions**, **Properties**\.
 
 1. For `Levels`, specify the type of messages to upload\. You can specify one of the following values:
-
    + **1** \- Upload only error messages\.
-
    + **2** \- Upload only warning messages\.
-
    + **4** \- Upload only information messages\.
 
    You can combine values to include more than one type of message\. For example, a value of **3** uploads error messages \(**1**\) and warning messages \(**2**\)\. A value of **7** uploads error messages \(**1**\), warning messages \(**2**\), and information messages \(**4**\)\.
@@ -193,11 +184,8 @@ ETW \(Event Tracing for Windows\) provides an efficient and detailed logging mec
 1. For `LogName`, type the name of the log to upload\.
 
 1. For `Levels`, specify the type of messages to upload\. You can specify one of the following values:
-
    + **1** \- Upload only error messages\.
-
    + **2** \- Upload only warning messages\.
-
    + **4** \- Upload only information messages\.
 
    You can combine values to include more than one type of message\. For example, a value of **3** uploads error messages \(**1**\) and warning messages \(**2**\)\. A value of **7** uploads error messages \(**1**\), warning messages \(**2**\), and information messages \(**4**\)\.
@@ -311,7 +299,7 @@ You can send the same log file to more than one destination\. For example, to se
 
 ### Step 5: Save JSON Content<a name="save_json_content"></a>
 
-You are now finished editing the JSON file\. Save it, and paste its contents into another window in a later step\.
+You are now finished editing the JSON file\. Save it, and paste the file contents into a text editor in another window\. You will need the file contents in a later step of this procedure\.
 
 ## Create an IAM User and Role for Systems Manager<a name="iam_permissions"></a>
 

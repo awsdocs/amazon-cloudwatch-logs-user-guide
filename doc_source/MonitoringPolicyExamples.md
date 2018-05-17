@@ -2,7 +2,7 @@
 
 The following examples show how to create metric filters\.
 
-
+**Topics**
 + [Example: Count Log Events](CountingLogEventsExample.md)
 + [Example: Count Occurrences of a Term](CountOccurrencesExample.md)
 + [Example: Count HTTP 404 Codes](Counting404Responses.md)

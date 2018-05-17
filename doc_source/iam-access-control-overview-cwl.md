@@ -3,11 +3,11 @@
 Every AWS resource is owned by an AWS account, and permissions to create or access a resource are governed by permissions policies\. An account administrator can attach permissions policies to IAM identities \(that is, users, groups, and roles\), and some services \(such as AWS Lambda\) also support attaching permissions policies to resources\. 
 
 **Note**  
-An *account administrator* \(or administrator user\) is a user with administrator privileges\. For more information, see [IAM Best Practices](http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html) in the *IAM User Guide*\.
+An *account administrator* \(or administrator IAM user\) is a user with administrator privileges\. For more information, see [IAM Best Practices](http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html) in the *IAM User Guide*\.
 
 When granting permissions, you decide who is getting the permissions, the resources they get permissions for, and the specific actions that you want to allow on those resources\.
 
-
+**Topics**
 + [CloudWatch Logs Resources and Operations](#CWL_ARN_Format)
 + [Understanding Resource Ownership](#understanding-resource-ownership-cwl)
 + [Managing Access to Resources](#managing-access-resources-cwl)
@@ -34,11 +34,8 @@ CloudWatch Logs provides a set of operations to work with the CloudWatch Logs re
 ## Understanding Resource Ownership<a name="understanding-resource-ownership-cwl"></a>
 
 The AWS account owns the resources that are created in the account, regardless of who created the resources\. Specifically, the resource owner is the AWS account of the [principal entity](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html) \(that is, the root account, an IAM user, or an IAM role\) that authenticates the resource creation request\. The following examples illustrate how this works:
-
 + If you use the root account credentials of your AWS account to create a log group, your AWS account is the owner of the CloudWatch Logs resource\.
-
 + If you create an IAM user in your AWS account and grant permissions to create CloudWatch Logs resources to that user, the user can create CloudWatch Logs resources\. However, your AWS account, to which the user belongs, owns the CloudWatch Logs resources\.
-
 + If you create an IAM role in your AWS account with permissions to create CloudWatch Logs resources, anyone who can assume the role can create CloudWatch Logs resources\. Your AWS account, to which the role belongs, owns the CloudWatch Logs resources\.
 
 ## Managing Access to Resources<a name="managing-access-resources-cwl"></a>
@@ -50,16 +47,14 @@ This section discusses using IAM in the context of CloudWatch Logs\. It doesn't 
 
 Policies attached to an IAM identity are referred to as identity\-based policies \(IAM polices\) and policies attached to a resource are referred to as resource\-based policies\. CloudWatch Logs supports identity\-based policies, and resource\-based policies for destinations, which are used to enable cross account subscriptions\. For more information, see [Cross\-Account Log Data Sharing with Subscriptions](CrossAccountSubscriptions.md)\.
 
-
+**Topics**
 + [Identity\-Based Policies \(IAM Policies\)](#identity-based-policies-cwl)
 + [Resource\-Based Policies](#resource-based-policies-cwl)
 
 ### Identity\-Based Policies \(IAM Policies\)<a name="identity-based-policies-cwl"></a>
 
 You can attach policies to IAM identities\. For example, you can do the following: 
-
 + **Attach a permissions policy to a user or a group in your account** – To grant a user permissions to view logs in the CloudWatch Logs, console you can attach a permissions policy to a user or group that the user belongs to\.
-
 + **Attach a permissions policy to a role \(grant cross\-account permissions\)** – You can attach an identity\-based permissions policy to an IAM role to grant cross\-account permissions\. For example, the administrator in Account A can create a role to grant cross\-account permissions to another AWS account \(for example, Account B\) or an AWS service as follows:
 
   1. Account A administrator creates an IAM role and attaches a permissions policy to the role that grants permissions on resources in Account A\.
@@ -121,13 +116,9 @@ CloudWatch Logs supports resource\-based policies for destinations, which you ca
  For each CloudWatch Logs resource, the service defines a set of API operations\. To grant permissions for these API operations, CloudWatch Logs defines a set of actions that you can specify in a policy\. Some API operations can require permissions for more than one action in order to perform the API operation\. For more information about resources and API operations, see [CloudWatch Logs Resources and Operations](#CWL_ARN_Format) and [CloudWatch Logs Permissions Reference](permissions-reference-cwl.md)\.
 
 The following are the basic policy elements:
-
 + **Resource** – You use an Amazon Resource Name \(ARN\) to identify the resource that the policy applies to\. For more information, see [CloudWatch Logs Resources and Operations](#CWL_ARN_Format)\.
-
 + **Action** – You use action keywords to identify resource operations that you want to allow or deny\. For example, the `logs.DescribeLogGroups` permission allows the user permissions to perform the `DescribeLogGroups` operation\.
-
 + **Effect** – You specify the effect, either allow or deny, when the user requests the specific action\. If you don't explicitly grant access to \(allow\) a resource, access is implicitly denied\. You can also explicitly deny access to a resource, which you might do to make sure that a user cannot access it, even if a different policy grants access\.
-
 + **Principal** – In identity\-based policies \(IAM policies\), the user that the policy is attached to is the implicit principal\. For resource\-based policies, you specify the user, account, service, or other entity that you want to receive permissions \(applies to resource\-based policies only\)\. CloudWatch Logs supports resource\-based policies for destinations\.
 
 To learn more about IAM policy syntax and descriptions, see [AWS IAM Policy Reference](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html) in the *IAM User Guide*\.

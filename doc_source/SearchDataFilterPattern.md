@@ -83,7 +83,5 @@ You can get to specific log entries from other parts of the console\.
 **Search takes too long to complete**
 
 If you have a lot of log data, search might take a long time to complete\. To speed up a search, you can do the following:
-
 + If you are using the AWS CLI, you can limit the search to just the log streams you are interested in\. For example, if your log group has 1000 log streams, but you just want to see three log streams that you know are relevant, you can use the AWS CLI to limit your search to only those three log streams within the log group\.
-
 + Use a shorter, more granular time range, which reduces the amount of data to be searched and speeds up the query\.

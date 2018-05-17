@@ -10,7 +10,7 @@ Download the following sample JSON file to your computer: [AWS\.EC2\.Windows\.Cl
 
 You determine which logs to send to CloudWatch by specifying your choices in the JSON configuration file\. The process of creating this file and specifying your choices can take 30 minutes or more to complete\. After you have completed this task once, you can reuse the configuration file on all of your instances\.
 
-
+**Topics**
 + [Step 1: Enable CloudWatch Logs](#enable-CloudWatchLogs-in-JSON-file2012)
 + [Step 2: Configure Settings for CloudWatch](#configure_cwl_credentials2012)
 + [Step 3: Configure the Data to Send](#configure_logs2012)
@@ -78,11 +78,8 @@ You can send event log data, Event Tracing for Windows \(ETW\) data, and other l
    ```
 
 1. For `Levels`, specify the type of messages to upload\. You can specify one of the following values:
-
    + **1** \- Upload only error messages\.
-
    + **2** \- Upload only warning messages\.
-
    + **4** \- Upload only information messages\.
 
    You can combine values to include more than one type of message\. For example, a value of **3** uploads error messages \(**1**\) and warning messages \(**2**\)\. A value of **7** uploads error messages \(**1**\), warning messages \(**2**\), and information messages \(**4**\)\.
@@ -120,11 +117,8 @@ You can send event log data, Event Tracing for Windows \(ETW\) data, and other l
    ```
 
 1. For `Levels`, specify the type of messages to upload\. You can specify one of the following values:
-
    + **1** \- Upload only error messages\.
-
    + **2** \- Upload only warning messages\.
-
    + **4** \- Upload only information messages\.
 
    You can combine values to include more than one type of message\. For example, a value of **3** uploads error messages \(**1**\) and warning messages \(**2**\)\. A value of **7** uploads error messages \(**1**\), warning messages \(**2**\), and information messages \(**4**\)\.
@@ -155,11 +149,8 @@ You can send event log data, Event Tracing for Windows \(ETW\) data, and other l
    1. Navigate to the log, and then choose **Actions**, **Properties**\.
 
 1. For `Levels`, specify the type of messages to upload\. You can specify one of the following values:
-
    + **1** \- Upload only error messages\.
-
    + **2** \- Upload only warning messages\.
-
    + **4** \- Upload only information messages\.
 
    You can combine values to include more than one type of message\. For example, a value of **3** uploads error messages \(**1**\) and warning messages \(**2**\)\. A value of **7** uploads error messages \(**1**\), warning messages \(**2**\), and information messages \(**4**\)\.
@@ -184,11 +175,8 @@ ETW \(Event Tracing for Windows\) provides an efficient and detailed logging mec
 1. For `LogName`, type the name of the log to upload\.
 
 1. For `Levels`, specify the type of messages to upload\. You can specify one of the following values:
-
    + **1** \- Upload only error messages\.
-
    + **2** \- Upload only warning messages\.
-
    + **4** \- Upload only information messages\.
 
    You can combine values to include more than one type of message\. For example, a value of **3** uploads error messages \(**1**\) and warning messages \(**2**\)\. A value of **7** uploads error messages \(**1**\), warning messages \(**2**\), and information messages \(**4**\)\.

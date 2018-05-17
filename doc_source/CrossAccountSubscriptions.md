@@ -5,9 +5,7 @@ You can collaborate with an owner of a different AWS account and receive their l
 Kinesis streams are currently the only resource supported as a destination for cross\-account subscriptions\.
 
 To share log data across accounts, you need to establish a log data sender and receiver:
-
 + **Log data sender**—gets the destination information from the recipient and lets CloudWatch Logs know that it is ready to send its log events to the specified destination\. In the procedures in the rest of this section, the log data sender is shown with a fictional AWS account number of 111111111111\.
-
 + **Log data recipient**—sets up a destination that encapsulates an Kinesis stream and lets CloudWatch Logs know that the recipient wants to receive log data\. The recipient then shares the information about his destination with the sender\. In the procedures in the rest of this section, the log data recipient is shown with a fictional AWS account number of 999999999999\.
 
 To start receiving log events from cross\-account users, the log data recipient first creates a CloudWatch Logs destination\. Each destination consists of the following key elements:
@@ -26,7 +24,7 @@ An IAM policy document \(in JSON format, written using IAM policy grammar\) that
 
 The log group and the destination must be in the same AWS region\. However, the AWS resource that the destination points to can be located in a different region\.
 
-
+**Topics**
 + [Create a Destination](CreateDestination.md)
 + [Create a Subscription Filter](CreateSubscriptionFilter.md)
 + [Validating the Flow of Log Events](ValidateLogEventFlow.md)

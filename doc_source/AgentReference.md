@@ -1,11 +1,8 @@
 # CloudWatch Logs Agent Reference<a name="AgentReference"></a>
 
 The CloudWatch Logs agent provides an automated way to send log data to CloudWatch Logs from Amazon EC2 instances\. The agent is comprised of the following components:
-
 + A plug\-in to the AWS CLI that pushes log data to CloudWatch Logs\.
-
 + A script \(daemon\) that initiates the process to push data to CloudWatch Logs\.
-
 + A cron job that ensures that the daemon is always running\.
 
 ## Agent Configuration File<a name="agent-configuration-file"></a>
@@ -174,10 +171,12 @@ HTTP proxies are supported in awslogs\-agent\-setup\.py version 1\.3\.8 or later
       ```
 
       ```
-      sudo python awslogs-agent-setup.py --region us-east-1 --http-proxy http://your/proxy --https-proxy http://your-proxy --no-proxy 169.254.169.254
+      sudo python awslogs-agent-setup.py --region us-east-1 --http-proxy http://your/proxy --https-proxy http://your/proxy --no-proxy 169.254.169.254
       ```
 
-      In order to maintain access to the Amazon EC2 metadata service on EC2 instances, use **\-\-no\-proxy 169\.254\.169\.254** \(recommended\)\. For more information , see [Instance Metadata and User Data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+      In order to maintain access to the Amazon EC2 metadata service on EC2 instances, use **\-\-no\-proxy 169\.254\.169\.254** \(recommended\)\. For more information, see [Instance Metadata and User Data](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+
+      In the values for `http-proxy` and `https-proxy`, you specify the entire URL\.
 
    1. For an existing installation of the CloudWatch Logs agent, edit /var/awslogs/etc/proxy\.conf, and add your proxies:
 
@@ -221,11 +220,8 @@ sudo service awslogsd restart
 
 **What kinds of file rotations are supported?**  
 The following file rotation mechanisms are supported:  
-
 + Renaming existing log files with a numerical suffix, then re\-creating the original empty log file\. For example, /var/log/syslog\.log is renamed /var/log/syslog\.log\.1\. If /var/log/syslog\.log\.1 already exists from a previous rotation, it is renamed /var/log/syslog\.log\.2\.
-
 + Truncating the original log file in place after creating a copy\. For example, /var/log/syslog\.log is copied to /var/log/syslog\.log\.1 and /var/log/syslog\.log is truncated\. There might be data loss for this case, so be careful about using this file rotation mechanism\.
-
 + Creating a new file with a common pattern as the old one\. For example, /var/log/syslog\.log\.2014\-01\-01 remains and /var/log/syslog\.log\.2014\-01\-02 is created\.
 The fingerprint \(source ID\) of the file is calculated by hashing the log stream key and the first line of file content\. To override this behavior, the **file\_fingerprint\_lines** option can be used\. When file rotation happens, the new file is supposed to have new content and the old file is not supposed to have content appended; the agent pushes the new file after it finishes reading the old file\.
 
@@ -296,6 +292,3 @@ In your IAM policy, you can restrict the agent to only the following operations:
 
 **What logs should I look at when troubleshooting?**  
 The agent installation log is at `/var/log/awslogs-agent-setup.log` and the agent log is at `/var/log/awslogs.log`\.
-
-
-```

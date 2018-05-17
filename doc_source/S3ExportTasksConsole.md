@@ -27,13 +27,15 @@ The Amazon S3 bucket must reside in the same region as the log data to export\. 
 
 By default, all Amazon S3 buckets and objects are private\. Only the resource owner, the AWS account that created the bucket, can access the bucket and any objects it contains\. However, the resource owner can choose to grant access permissions to other resources and users by writing an access policy\.
 
+When you set the policy, we recommend you include a randomly\-generated string as the prefix for the bucket, so that only intended log streams are exported to the bucket\.
+
 **To set permissions on an Amazon S3 bucket**
 
 1. In the Amazon S3 console, choose the bucket that you created in Step 1\.
 
-1. Choose **Permissions**, **Add bucket policy**\.
+1. Choose **Permissions**, **Bucket policy**\.
 
-1. In the **Bucket Policy Editor** dialog box, add the following policy, changing `Resource` to the name of your S3 bucket and `Principal` to the endpoint of the region where you are exporting log data\.
+1. In the **Bucket Policy Editor** dialog box, add the following policy, changing `my-exported-logs` to the name of your S3 bucket and `random-string` to a randomly\-generated string of characters\. Be sure to specify the correct region endpoint for **Principal**\.
 
    ```
    {
@@ -48,7 +50,7 @@ By default, all Amazon S3 buckets and objects are private\. Only the resource ow
          {
              "Action": "s3:PutObject" ,
              "Effect": "Allow",
-             "Resource": "arn:aws:s3:::my-exported-logs/*",
+             "Resource": "arn:aws:s3:::my-exported-logs/random-string/*",
              "Condition": { "StringEquals": { "s3:x-amz-acl": "bucket-owner-full-control" } },
              "Principal": { "Service": "logs.us-west-2.amazonaws.com" }
          }
@@ -70,7 +72,7 @@ In this step you create the export task for exporting logs from a log group\.
 
 1. In the navigation pane, choose **Logs**\.
 
-1. On the **Log Groups** screen, select the checkbox next to a log group, and then choose **Actions**, **Export data to Amazon S3**\.
+1. On the **Log Groups** screen, select the button next to a log group, and then choose **Actions**, **Export data to Amazon S3**\.
 
 1. On the **Export data to Amazon S3** screen, under **Define data to export**, set the time range for the data to export using **From** and **To**\.
 
@@ -80,7 +82,7 @@ In this step you create the export task for exporting logs from a log group\.
 
 1. For **S3 bucket name**, choose an Amazon S3 bucket\.
 
-1. To separate log data for each export task, you can specify an Amazon S3 prefix to be used as the Amazon S3 key prefix for all exported objects\. Choose **Advanced**, and then for **S3 Bucket prefix**, type the bucket prefix\.
+1. Choose **Advanced**, and then for **S3 Bucket prefix**, type the randomly\-generated string you specified in the bucket policy\.
 
 1. Choose **Export data** to export your log data to Amazon S3\.
 

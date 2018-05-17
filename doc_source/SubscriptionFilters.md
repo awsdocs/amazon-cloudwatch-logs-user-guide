@@ -2,7 +2,7 @@
 
 You can use a subscription filter with Kinesis, Lambda, or Kinesis Data Firehose\.
 
-
+**Topics**
 + [Example 1: Subscription Filters with Kinesis](#DestinationKinesisExample)
 + [Example 2: Subscription Filters with AWS Lambda](#LambdaFunctionExample)
 + [Example 3: Subscription Filters with Amazon Kinesis Data Firehose](#FirehoseExample)

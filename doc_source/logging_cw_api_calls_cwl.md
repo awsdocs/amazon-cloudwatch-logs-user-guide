@@ -4,7 +4,7 @@ AWS CloudTrail is a service that captures API calls made by or on behalf of your
 
 To learn more about CloudTrail, including how to configure and enable it, see the [What is AWS CloudTrail](http://docs.aws.amazon.com/awscloudtrail/latest/userguide/what_is_cloud_trail_top_level.html) in the *AWS CloudTrail User Guide*\.
 
-
+**Topics**
 + [CloudWatch Logs Information in CloudTrail](#cw_info_in_ct_cwl)
 + [Understanding Log File Entries](#understanding_cw_log_file_entries_cwl)
 
@@ -13,11 +13,8 @@ To learn more about CloudTrail, including how to configure and enable it, see th
 If CloudTrail logging is turned on, calls made to API actions are captured in CloudTrail log files\. Every log file entry contains information about who generated the request\. For example, if a request is made to create a CloudWatch Logs log stream \(`CreateLogStream`\), CloudTrail logs the user identity of the person or service that made the request\.
 
 The user identity information in the log entry helps you determine the following:
-
 + Whether the request was made with root or IAM user credentials
-
 + Whether the request was made with temporary security credentials for a role or federated user
-
 + Whether the request was made by another AWS service
 
 For more information, see the [CloudTrail userIdentity Element](http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-event-reference-user-identity.html) in the *AWS CloudTrail User Guide*\.
@@ -29,51 +26,29 @@ If you want to be notified upon CloudTrail log file delivery, you can configure 
 You can also aggregate CloudTrail log files from multiple AWS regions and multiple AWS accounts into a single S3 bucket\. For more information, see [Receiving CloudTrail Log Files from Multiple Regions](http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-receive-logs-from-multiple-accounts.html) and [Receiving CloudTrail Log Files from Multiple Accounts](http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-receive-logs-from-multiple-accounts.html) in the *AWS CloudTrail User Guide*\.
 
 When logging is turned on, the request and response elements are logged in CloudTrail for these CloudWatch Logs API actions:
-
 + CancelExportTask
-
 + CreateExportTask
-
 + CreateLogGroup
-
 + CreateLogStream
-
 + DeleteDestination
-
 + DeleteLogGroup
-
 + DeleteLogStream
-
 + DeleteMetricFilter
-
 + DeleteRetentionPolicy
-
 + DeleteSubscriptionFilter
-
 + PutDestination
-
 + PutDestinationPolicy
-
 + PutMetricFilter
-
 + PutRetentionPolicy
-
 + PutSubscriptionFilter
-
 + TestMetricFilter
 
 Only request elements are logged in CloudTrail for these CloudWatch Logs API actions:
-
 + DescribeDestinations
-
 + DescribeExportTasks
-
 + DescribeLogGroups
-
 + DescribeLogStreams
-
 + DescribeMetricFilters
-
 + DescribeSubscriptionFilters
 
 The `GetLogEvents`, `PutLogEvents`, and `FilterLogEvents` CloudWatch Logs API actions are not supported\.

@@ -13,7 +13,7 @@ Log groups define groups of log streams that share the same retention, monitorin
 There is no limit on the number of log streams that can belong to one log group\.
 
 **Metric Filters**  
-Metric filters can be used to express how the service would extract metric observations from ingested events and transform them to data points in a CloudWatch metric\. Metric filters are assigned to log groups, and all of the filters assigned to a log group are applied to their log streams\.
+You can use metric filters to extract metric observations from ingested events and transform them to data points in a CloudWatch metric\. Metric filters are assigned to log groups, and all of the filters assigned to a log group are applied to their log streams\.
 
 **Retention Settings**  
 Retention settings can be used to specify how long log events are kept in CloudWatch Logs\. Expired log events get deleted automatically\. Just like metric filters, retention settings are also assigned to log groups, and the retention assigned to a log group is applied to their log streams\.

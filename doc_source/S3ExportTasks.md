@@ -116,11 +116,8 @@ The following is example output:
 ```
 
 You can use the `describe-export-tasks` command in three different ways:
-
 + Without any filters: Lists all of your export tasks, in reverse order of creation\.
-
 + Filter on task ID: Lists the export task, if one exists, with the specified ID\.
-
 + Filter on task status: Lists the export tasks with the specified status\.
 
 For example, use the following command to filter on the FAILED status:

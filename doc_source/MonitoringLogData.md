@@ -4,7 +4,7 @@ After the CloudWatch Logs agent begins publishing log data to Amazon CloudWatch,
 
 Filters do not retroactively filter data\. Filters only publish the metric data points for events that happen after the filter was created\. Filtered results return the first 50 lines, which will not be displayed if the timestamp on the filtered results is earlier than the metric creation time\.
 
-
+**Topics**
 + [Concepts](#search-filter-concepts)
 + [Filter and Pattern Syntax](FilterAndPatternSyntax.md)
 + [Creating Metric Filters](MonitoringPolicyExamples.md)

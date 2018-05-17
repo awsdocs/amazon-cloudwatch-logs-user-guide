@@ -16,7 +16,7 @@ When you provision AWS using AWS CloudFormation, you create templates that descr
     "Type": "AWS::Logs::MetricFilter",
     "Properties": {
         "LogGroupName": {
-            Ref": "WebServerLogGroup"
+            "Ref": "WebServerLogGroup"
         },
         "FilterPattern": "[ip, identity, user_id, timestamp, request, status_code = 404, size, ...]",
         "MetricTransformations": [

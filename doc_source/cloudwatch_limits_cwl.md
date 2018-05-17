@@ -6,6 +6,7 @@ CloudWatch Logs has the following limits:
 | Resource | Default Limit | 
 | --- | --- | 
 |  Batch size  |  1 MB \(maximum\)\. This limit cannot be changed\.  | 
+|  CreateLogGroup  |  5000 log groups/account/Region\. If you exceed your log group limit, you get a `ResourceLimitExceeded` exception\. You can [request a limit increase](https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase&limitType=service-code-cloudwatch-logs)\.   | 
 |  Data archiving  |  Up to 5 GB of data archiving for free\. This limit cannot be changed\.  | 
 |  [DescribeLogStreams](http://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeLogStreams.html)  |  5 transactions per second \(TPS/account/Region\)\. If you experience frequent throttling, you can [request a limit increase](https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase&limitType=service-code-cloudwatch-logs)\.  | 
 |  Event size  |  256 KB \(maximum\)\. This limit cannot be changed\.  | 

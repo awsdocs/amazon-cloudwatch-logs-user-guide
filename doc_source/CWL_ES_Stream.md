@@ -15,7 +15,7 @@ For more information about Amazon ES, see the [Amazon Elasticsearch Service Deve
 At a command prompt, use the following [create\-elasticsearch\-domain](http://docs.aws.amazon.com/cli/latest/reference/es/create-elasticsearch-domain.html) command:
 
 ```
-aws es create-elasticsearch-domain –-domain-name my-domain
+aws es create-elasticsearch-domain --domain-name my-domain
 ```
 
 ## Subscribe a Log Group to Amazon ES<a name="CWL_ES_LG"></a>
@@ -37,9 +37,7 @@ You can use the CloudWatch console to subscribe a log group to Amazon ES\.
 1. Under **Lambda Function**, for **Lambda IAM Execution Role**, choose the IAM role that Lambda should use when executing calls to Amazon ES, and then choose **Next**\.
 
    The IAM role you choose must fulfill these requirements:
-
    + It must have `lambda.amazonaws.com` in the trust relationship\.
-
    + It must include the following policy:
 
      ```
@@ -56,7 +54,6 @@ You can use the CloudWatch console to subscribe a log group to Amazon ES\.
          ]
      }
      ```
-
    + If the target Amazon ES domain uses VPC access, the role must have the ** AWSLambdaVPCAccessExecutionRole** policy attached\. This Amazon\-managed policy grants Lambda access to the customer's VPC, enabling Lambda to write to the Amazon ES endpoint in the VPC\. 
 
 1. On the **Configure Log Format and Filters** screen, for **Log Format**, choose a log format\.

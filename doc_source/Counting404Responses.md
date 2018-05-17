@@ -1,19 +1,12 @@
 # Example: Count HTTP 404 Codes<a name="Counting404Responses"></a>
 
 Using CloudWatch Logs, you can monitor how many times your Apache servers return a HTTP 404 response, which is the response code for page not found\. You might want to monitor this to understand how often your site visitors do not find the resource they are looking for\. Assume that your log records are structured to include the following information for each log event \(site visit\):
-
 + Requestor IP Address
-
 + RFC 1413 Identity
-
 + Username
-
 + Timestamp
-
 + Request method with requested resource and protocol
-
 + HTTP response code to request
-
 + Bytes transferred in request
 
 An example of this might look like the following:

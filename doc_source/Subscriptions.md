@@ -4,7 +4,7 @@ You can use subscriptions to get access to a real\-time feed of log events from 
 
 CloudWatch Logs also produces CloudWatch metrics about the forwarding of log events to subscriptions\. For more information, see [Amazon CloudWatch Logs Metrics and Dimensions](http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cwl-metricscollected.html)\.
 
-
+**Topics**
 + [Concepts](#subscription-concepts)
 + [Using CloudWatch Logs Subscription Filters](SubscriptionFilters.md)
 + [Cross\-Account Log Data Sharing with Subscriptions](CrossAccountSubscriptions.md)

@@ -16,9 +16,7 @@ To exclude a term, use a minus sign \(\-\) before the term\.
 
 **Example 1: Single term**  
 The filter pattern "ERROR" matches log event messages that contain this term, such as the following:
-
 + \[ERROR\] A fatal exception has occurred
-
 + Exiting with ERRORCODE: \-1
 
 **Example 2: Include a term and exclude a term**  
@@ -26,36 +24,42 @@ In the previous example, if you change the filter pattern to "ERROR" \- "Exiting
 
 **Example 3: Multiple terms**  
 The filter pattern "ERROR Exception" matches log event messages that contain both terms, such as the following:
-
 + \[ERROR\] Caught IllegalArgumentException
-
 + \[ERROR\] Unhandled Exception
 
 The filter pattern "Failed to process the request" matches log event messages that contain all terms, such as the following:
-
 + \[WARN\] Failed to process the request
-
 + \[ERROR\] Unable to continue: Failed to process the request
 
-**Example 4: Matching terms specified using the OR operator**  
-The filter pattern `?Error ?fatal` matches log event messages that contain either one of the terms "Error" and "fatal" In the following examples, it would match the first two but not the last two\.
+### OR Pattern Matching<a name="log-filters-or-pattern-matching"></a>
 
-+ \[Error\] Unhandled Exception
+You can match terms in text\-based filters using OR pattern matching\. For the example patterns below, ERROR \(matches ERROR\) in pattern 1 and 2\. ?ERROR ?WARN \(matches lines containing ERROR or WARN\) in patterns 1, 2, and 3\. ERROR WARN \(matches lines containing both ERROR and WARN\) in pattern 1\. ERROR \-WARN \(matches lines containing ERROR and not containing WARN\) in pattern 2\.:
 
-+ \[ERROR\] A fatal exception has occurred
+1. ERROR WARN message
 
-+ \[ERROR\] Caught IllegalArgumentException 
+1. ERROR message
 
-+ Exiting with ERRORCODE: \-1
+1. WARN message
+
+You can match terms using OR pattern matching in space\-delimited filters\. For the example patterns below, \[w1=ERROR, w2\] matches ERROR \(pattern 2\), \[w1=ERROR \|\| w1=WARN, w2\] matches lines containing ERROR or WARN \(patterns 2 and 3\), \[w1=\!ERROR&&w1=\!WARN, w2\] matches lines containing both ERROR and WARN \(pattern 1\)\.
+
+1. ERROR WARN message
+
+1. ERROR message
+
+1. WARN message
+
+You can match terms using OR pattern matching in JSON filters\. For the example patterns below, \{$\.foo = bar\} matches pattern 1, \{$\.foo = baz \} matches pattern 2, and \{$\.foo = bar \|\| $\.foo = baz \} matches pattern 1 and 2\.
+
+1. \{"foo": "bar"\}
+
+1. \{"foo": "baz"\}
 
 ### Matching Terms in JSON Log Events<a name="matching-terms-events-json"></a>
 
 You can extract values from JSON log events\. To extract values from JSON log events, you need to create a string\-based metric filter\. Strings containing scientific notation are not supported\. The items in the JSON log event data must exactly match the metric filter\. You might want to create metric filters in JSON log events to indicate the following:
-
 + A certain event occurs\. For example eventName is "UpdateTrail"\.
-
 + The IP is outside a known subnet\. For example, sourceIPAddress is not in some known subnet range\.
-
 + A combination of two or more other conditions are true\. For example, the eventName is "UpdateTrail" and the recipientAccountId is 123456789012\.
 
 #### Using Metric Filters to Extract Values from JSON Log Events<a name="extract-json-log-event-values"></a>
@@ -154,7 +158,7 @@ Filters on ThisFlag being TRUE\. This also works for boolean filters which check
 
 ##### JSON Compound Conditions<a name="compound-conditions"></a>
 
-You can combine multiple conditions into a compound expression using OR \(||\) and AND \(&&\)\. Parenthesis are allowed and the syntax follows standard order of operations \(\) > && > ||\.
+You can combine multiple conditions into a compound expression using OR \(\|\|\) and AND \(&&\)\. Parenthesis are allowed and the syntax follows standard order of operations \(\) > && > \|\|\.
 
 ```
 {

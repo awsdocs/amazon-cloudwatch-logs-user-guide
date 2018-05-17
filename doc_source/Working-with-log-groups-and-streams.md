@@ -35,13 +35,9 @@ You can view and scroll through log data on a stream\-by\-stream basis as sent t
 1. For **Log Streams**, choose the log stream name to view the log data\.
 
 1. To change how the log data is displayed, do one of the following:
-
    + To expand all log events, above the list of log events, choose **Expand all**\.
-
    + To expand all log events and view them as plain text, above the list of log events, choose **Text**\.
-
    + To filter the log events, type the desired search filter in the search field\. For more information, see [Searching and Filtering Log Data](MonitoringLogData.md)\.
-
    + To view log data for a specified date and time range, above the list of log events, choose **custom**\. You can choose **Absolute** to specify a date and time range or **Relative** to choose a predefined number of minutes, hours, days, or weeks\. You can also switch between **UTC** and **Local timezone**\.
 
 ## Change Log Data Retention in CloudWatch Logs<a name="SettingLogRetention"></a>
@@ -64,7 +60,7 @@ By default, log data is stored in CloudWatch Logs indefinitely\. However, you ca
 
 You can assign your own metadata to the log groups you create in Amazon CloudWatch Logs in the form of *tags*\. A tag is a key\-value pair that you define for a log group\. Using tags is a simple yet powerful way to manage AWS resources and organize data, including billing data\.
 
-
+**Topics**
 + [Tag Basics](#tagging-basics)
 + [Tracking Costs Using Tagging](#tagging-billing)
 + [Tag Restrictions](#tagging-restrictions)
@@ -74,25 +70,16 @@ You can assign your own metadata to the log groups you create in Amazon CloudWat
 ### Tag Basics<a name="tagging-basics"></a>
 
 You use the AWS CLI or CloudWatch Logs API to complete the following tasks:
-
 + Add tags to a log group when you create it
-
 + Add tags to an existing log group
-
 + List the tags for a log group
-
 + Remove tags from a log group
 
 You can use tags to categorize your log groups\. For example, you can categorize them by purpose, owner, or environment\. Because you define the key and value for each tag, you can create a custom set of categories to meet your specific needs\. For example, you might define a set of tags that helps you track log groups by owner and associated application\. Here are several examples of tags:
-
 + Project: Project name
-
 + Owner: Name
-
 + Purpose: Load testing
-
 + Application: Application name
-
 + Environment: Production
 
 ### Tracking Costs Using Tagging<a name="tagging-billing"></a>
@@ -104,27 +91,18 @@ You can use tags to categorize and track your AWS costs\. When you apply tags to
 The following restrictions apply to tags\.
 
 **Basic restrictions**
-
 + The maximum number of tags per log group is 50\.
-
 + Tag keys and values are case\-sensitive\.
-
 + You can't change or edit tags for a deleted log group\.
 
 **Tag key restrictions**
-
 + Each tag key must be unique\. If you add a tag with a key that's already in use, your new tag overwrites the existing key\-value pair\.
-
 + You can't start a tag key with `aws:` because this prefix is reserved for use by AWS\. AWS creates tags that begin with this prefix on your behalf, but you can't edit or delete them\.
-
 + Tag keys must be between 1 and 128 Unicode characters in length\.
-
 + Tag keys must consist of the following characters: Unicode letters, digits, white space, and the following special characters: `_ . / = + - @`\.
 
 **Tag value restrictions**
-
 + Tag values must be between 0 and 255 Unicode characters in length\.
-
 + Tag values can be blank\. Otherwise, they must consist of the following characters: Unicode letters, digits, white space, and any of the following special characters: `_ . / = + - @`\.
 
 ### Tagging Log Groups Using the AWS CLI<a name="log-group-tagging-cli"></a>

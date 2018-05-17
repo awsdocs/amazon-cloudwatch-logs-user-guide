@@ -7,9 +7,6 @@ To get started, create an interface VPC endpoint\. You do not need to change the
 ## Availability<a name="cloudwatch-logs-interface-VPC-availability"></a>
 
 CloudWatch Logs currently supports VPC endpoints in the following Regions:
-
-+ US West \(Oregon\);
-
++ US West \(Oregon\)
 + Asia Pacific \(Tokyo\);
-
 + South America \(São Paulo\)

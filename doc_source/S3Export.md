@@ -8,7 +8,7 @@ You can export logs from multiple log groups or multiple time ranges to the same
 
 Log data can take up to 12 hours to become available for export\. For near real\-time analysis of log data, see [Real\-time Processing of Log Data with Subscriptions](Subscriptions.md) instead\.
 
-
+**Topics**
 + [Concepts](#S3concepts)
 + [Export Log Data to Amazon S3 Using the Console](S3ExportTasksConsole.md)
 + [Export Log Data to Amazon S3 Using the AWS CLI](S3ExportTasks.md)
