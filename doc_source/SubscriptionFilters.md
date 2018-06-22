@@ -379,7 +379,7 @@ Before you create the Kinesis Firehose stream, calculate the volume of log data 
                    "Action": "sts:AssumeRole",
                    "Effect": "Allow",
                    "Principal": {
-                       "Service": "logs.region.amazonaws.com"
+                       "Service": "firehose.amazonaws.com"
                    }
                }
            },
