@@ -98,7 +98,7 @@ Do not update the CloudWatch Logs agent using the RPM installation method if you
    sudo chkconfig awslogs on
    ```
 
-   If you are running Amazon Linux 2, start the `awslogs` service with the following command\.
+   If you are running Amazon Linux 2, use the following command to start the service at each system boot\.
 
    ```
    sudo systemctl enable awslogsd.service

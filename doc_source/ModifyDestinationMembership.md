@@ -13,9 +13,9 @@ You might encounter situations where you have to add or remove membership of som
       {
         "DestinationName": "testDestination",
         "RoleArn": "arn:aws:iam::123456789012:role/CWLtoKinesisRole",
-        "DestinationArn": "arn:aws:logs:region:999999999999:destination:testDestination",
-        "TargetArn": "arn:aws:kinesis:region:999999999999:stream/RecipientStream",
-        "AccessPolicy": "{\"Version\": \"2012-10-17\", \"Statement\": [{\"Sid\": \"\", \"Effect\": \"Allow\", \"Principal\": {\"AWS\": \"234567890123\"}, \"Action\": \"logs:PutSubscriptionFilter\", \"Resource\": \"arn:aws:logs:region:123456789012:destination:testDestination\"}] }"
+        "DestinationArn": "arn:aws:logs:region:123456789012:destination:testDestination",
+        "TargetArn": "arn:aws:kinesis:region:123456789012:stream/RecipientStream",
+        "AccessPolicy": "{\"Version\": \"2012-10-17\", \"Statement\": [{\"Sid\": \"\", \"Effect\": \"Allow\", \"Principal\": {\"AWS\": \"111111111111\"}, \"Action\": \"logs:PutSubscriptionFilter\", \"Resource\": \"arn:aws:logs:region:123456789012:destination:testDestination\"}] }"
       }
     ]
    }

@@ -1,6 +1,6 @@
 # Filter and Pattern Syntax<a name="FilterAndPatternSyntax"></a>
 
-You use metric filters to search for and match terms, phrases, or values in your log events\. When a metric filter finds one of the terms, phrases, or values in your log events, you can increment the value of a CloudWatch metric\. For example, you can create a metric filter to search for and count the occurrence of the word *ERROR* in your log events\. 
+You can use metric filters to search for and match terms, phrases, or values in your log events\. When a metric filter finds one of the terms, phrases, or values in your log events, you can increment the value of a CloudWatch metric\. For example, you can create a metric filter to search for and count the occurrence of the word *ERROR* in your log events\. 
 
 Metric filters can also extract numerical values from space\-delimited log events, such as the latency of web requests\. In these examples, you can increment your metric value by the actual numerical value extracted from the log\.
 
@@ -33,15 +33,17 @@ The filter pattern "Failed to process the request" matches log event messages th
 
 ### OR Pattern Matching<a name="log-filters-or-pattern-matching"></a>
 
-You can match terms in text\-based filters using OR pattern matching\. For the example patterns below, ERROR \(matches ERROR\) in pattern 1 and 2\. ?ERROR ?WARN \(matches lines containing ERROR or WARN\) in patterns 1, 2, and 3\. ERROR WARN \(matches lines containing both ERROR and WARN\) in pattern 1\. ERROR \-WARN \(matches lines containing ERROR and not containing WARN\) in pattern 2\.:
+You can match terms in text\-based filters using OR pattern matching\. Use a question mark for OR, such as `?term`\.
 
-1. ERROR WARN message
+Look at the three log event examples below\. `ERROR` matches examples 1 and 2\. `?ERROR ?WARN` matches examples 1, 2, and 3, as all of them include either the word ERROR or the word WARN\. `ERROR WARN` only matches example 1, as it is the only one containing both of those words\. ERROR \-WARN matches example 2, as it matches a string that contains ERROR but does not contain WARN\.
 
-1. ERROR message
+1. `ERROR WARN message`
 
-1. WARN message
+1. `ERROR message`
 
-You can match terms using OR pattern matching in space\-delimited filters\. For the example patterns below, \[w1=ERROR, w2\] matches ERROR \(pattern 2\), \[w1=ERROR \|\| w1=WARN, w2\] matches lines containing ERROR or WARN \(patterns 2 and 3\), \[w1=\!ERROR&&w1=\!WARN, w2\] matches lines containing both ERROR and WARN \(pattern 1\)\.
+1. `WARN message`
+
+You can match terms using OR pattern matching in space\-delimited filters\. For the examples patterns below, \[w1=ERROR, w2\] matches ERROR \(pattern 2\), \[w1=ERROR \|\| w1=WARN, w2\] matches lines containing ERROR or WARN \(patterns 2 and 3\), \[w1=\!ERROR&&w1=\!WARN, w2\] matches lines containing both ERROR and WARN \(pattern 1\)\.
 
 1. ERROR WARN message
 
@@ -290,7 +292,7 @@ You can also add conditions to your fields so that only log events that match al
 You can use `&&` as an AND operator, as in the following examples:
 
 ```
-[ip, user, username, timestamp, request, status_code = 4* && status_code = 5*, bytes]
+[ip, user, username, timestamp, request, status_code = 4* && bytes > 1000]
 [ip, user, username, timestamp, request, status_code = 4* && status_code != 403, bytes]
 ```
 
