@@ -362,7 +362,7 @@ Before you create the Kinesis Firehose stream, calculate the volume of log data 
        "Action": "sts:AssumeRole",
        "Condition": { "StringEquals": { "sts:ExternalId":"account-id" } }
      }
-     }
+   }
    ```
 
 1. Use the **create\-role** command to create the IAM role, specifying the trust policy file\. Note of the returned **Role\.Arn** value, as you will need it in a later step:
@@ -424,9 +424,9 @@ Before you create the Kinesis Firehose stream, calculate the volume of log data 
 
    ```
    aws firehose create-delivery-stream \
-   --delivery-stream-name 'my-delivery-stream' \
-   --s3-destination-configuration \
-   RoleARN='arn:aws:iam::123456789012:role/FirehosetoS3Role',BucketARN='arn:aws:s3:::my-bucket'
+       --delivery-stream-name 'my-delivery-stream' \
+       --s3-destination-configuration \
+      RoleARN='arn:aws:iam::123456789012:role/FirehosetoS3Role',BucketARN='arn:aws:s3:::my-bucket'
    ```
 
    Note that Kinesis Data Firehose automatically uses a prefix in YYYY/MM/DD/HH UTC time format for delivered Amazon S3 objects\. You can specify an extra prefix to be added in front of the time format prefix\. If the prefix ends with a forward slash \(/\), it appears as a folder in the Amazon S3 bucket\.
@@ -461,7 +461,7 @@ Before you create the Kinesis Firehose stream, calculate the volume of log data 
                }
            ]
        }
-       }
+   }
    ```
 
 1. Create the IAM role that will grant CloudWatch Logs permission to put data into your Kinesis Data Firehose delivery stream\. First, use a text editor to create a trust policy in a file `~/TrustPolicyForCWL.json`:
@@ -473,15 +473,15 @@ Before you create the Kinesis Firehose stream, calculate the volume of log data 
        "Principal": { "Service": "logs.region.amazonaws.com" },
        "Action": "sts:AssumeRole"
      }
-     }
+   }
    ```
 
 1. Use the **create\-role** command to create the IAM role, specifying the trust policy file\. Note of the returned **Role\.Arn** value, as you will need it in a later step:
 
    ```
    aws iam create-role \
-         --role-name CWLtoKinesisFirehoseRole \
-         --assume-role-policy-document file://~/TrustPolicyForCWL.json
+       --role-name CWLtoKinesisFirehoseRole \
+       --assume-role-policy-document file://~/TrustPolicyForCWL.json
    
    {
        "Role": {
@@ -525,7 +525,10 @@ Before you create the Kinesis Firehose stream, calculate the volume of log data 
 1. Associate the permissions policy with the role using the put\-role\-policy command:
 
    ```
-   aws iam put-role-policy --role-name CWLtoKinesisFirehoseRole --policy-name Permissions-Policy-For-CWL --policy-document file://~/PermissionsForCWL.json
+   aws iam put-role-policy \
+       --role-name CWLtoKinesisFirehoseRole \
+       --policy-name Permissions-Policy-For-CWL \
+       --policy-document file://~/PermissionsForCWL.json
    ```
 
 1. After the Amazon Kinesis Data Firehose delivery stream is in active state and you have created the IAM role, you can create the CloudWatch Logs subscription filter\. The subscription filter immediately starts the flow of real\-time log data from the chosen log group to your Amazon Kinesis Data Firehose delivery stream:
@@ -543,7 +546,6 @@ Before you create the Kinesis Firehose stream, calculate the volume of log data 
 
    ```
    aws s3api list-objects --bucket 'my-bucket' --prefix 'firehose/'
-   
    {
        "Contents": [
            {
@@ -569,7 +571,7 @@ Before you create the Kinesis Firehose stream, calculate the volume of log data 
                "Size": 5752
            }
        ]
-       }
+   }
    ```
 
    ```
@@ -581,7 +583,7 @@ Before you create the Kinesis Firehose stream, calculate the volume of log data 
        "LastModified": "Thu, 29 Oct 2015 00:07:06 GMT",
        "ContentLength": 593,
        "Metadata": {}
-       }
+   }
    ```
 
    The data in the Amazon S3 object is compressed with the gzip format\. You can examine the raw data from the command line using the following Unix command:
