@@ -191,7 +191,7 @@ You can combine multiple conditions into a compound expression using OR \(\|\|\)
 }
 ```
 
-##### Examples<a name="w3ab1c13c11b9c26b6b6b6"></a>
+##### Examples<a name="w4ab1c13c11b9c26b6b6b6"></a>
 
 ```
 { ($.user.id = 1) && ($.users[0].email = "John.Doe@example.com") }
@@ -217,7 +217,7 @@ Matches the JSON above\.
 
 Doesn't match the JSON above\.
 
-##### JSON Special Considerations<a name="w3ab1c13c11b9c26b6b6b8"></a>
+##### JSON Special Considerations<a name="w4ab1c13c11b9c26b6b6b8"></a>
 
 The SELECTOR must point to a value node \(string or number\) in the JSON\. If it points to an array or object, the filter will not be applied because the log format doesn't match the filter\. For example, both \{$\.users = 1\} and \{$\.users \!= 1\} will fail to match a log event where users is an array:
 
@@ -227,7 +227,7 @@ The SELECTOR must point to a value node \(string or number\) in the JSON\. If it
 }
 ```
 
-##### Numeric Comparisons<a name="w3ab1c13c11b9c26b6b6c10"></a>
+##### Numeric Comparisons<a name="w4ab1c13c11b9c26b6b6c10"></a>
 
 The metric filter syntax supports precise matching on numeric comparisons\. The following numeric comparisons are supported: <, >, >=, <=, =, \!=
 

@@ -1,5 +1,11 @@
 # Document History<a name="DocumentHistory_cwl"></a>
 
+The following table describes important changes in each release of the CloudWatch Logs User Guide, beginning in June 2018\. For notification about updates to this documentation, you can subscribe to an RSS feed\. 
+
+| Change | Description | Date | 
+| --- |--- |--- |
+| Support for Amazon VPC endpoints | You can now establish a private connection between your VPC and CloudWatch Logs\. For more information, see [Using CloudWatch Logs with Interface VPC Endpoints](http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/cloudwatch-logs-and-interface-VPC.html) in the *Amazon CloudWatch Logs User Guide*\. | June 28, 2018 | 
+
 The following table describes the important changes to the Amazon CloudWatch Logs User's Guide\.
 
 

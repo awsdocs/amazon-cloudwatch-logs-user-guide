@@ -16,15 +16,11 @@ The CloudWatch Logs agent supports IAM roles and users\. If your instance alread
 
 1. Choose the role by selecting the role name \(do not select the check box next to the name\)\.
 
-1. On the **Permissions** tab, expand **Inline Policies** and choose the link to create an inline policy\.
+1. Choose **Attach Policies**, **Create Policy**\.
 
-1. On the **Set Permissions** page, choose **Custom Policy**, **Select**\.
+   A new browser tab or window opens\.
 
-   For more information about creating custom policies, see [IAM Policies for Amazon EC2](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-policies-for-amazon-ec2.html) in the *Amazon EC2 User Guide for Linux Instances*\.
-
-1. On the **Review Policy** page, for **Policy Name**, type a name for the policy\.
-
-1. For **Policy Document**, paste in the following policy:
+1. Choose the **JSON** tab and type the following JSON policy document\.
 
    ```
    {
@@ -46,7 +42,13 @@ The CloudWatch Logs agent supports IAM roles and users\. If your instance alread
    }
    ```
 
-1. Choose **Apply Policy**\.
+1. When you are finished, choose **Review policy**\. The Policy Validator reports any syntax errors\.
+
+1. On the **Review Policy** page, type a **Name** and a **Description** \(optional\) for the policy that you are creating\. Review the policy **Summary** to see the permissions that are granted by your policy\. Then choose **Create policy** to save your work\.
+
+1. Close the browser tab or window, and return to the **Add permissions** page for your role\. Choose **Refresh**, and then choose the new policy to attach it to your role\.
+
+1. Choose **Attach Policy**\.
 
 ## Step 2: Install and Configure CloudWatch Logs on an Existing Amazon EC2 Instance<a name="running-ec2-step-2"></a>
 

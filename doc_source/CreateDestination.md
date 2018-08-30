@@ -55,8 +55,8 @@ The steps in this procedure are to be done in the log data recipient account\. F
 
    ```
    aws iam create-role \
-         --role-name CWLtoKinesisRole \
-         --assume-role-policy-document file://~/TrustPolicyForCWL.json
+       --role-name CWLtoKinesisRole \
+       --assume-role-policy-document file://~/TrustPolicyForCWL.json
    
    {
        "Role": {
@@ -100,7 +100,10 @@ The steps in this procedure are to be done in the log data recipient account\. F
 1. Associate the permissions policy with the role using the **aws iam put\-role\-policy** command:
 
    ```
-   aws iam put-role-policy --role-name CWLtoKinesisRole --policy-name Permissions-Policy-For-CWL --policy-document file://~/PermissionsForCWL.json
+   aws iam put-role-policy 
+       --role-name CWLtoKinesisRole 
+       --policy-name Permissions-Policy-For-CWL 
+       --policy-document file://~/PermissionsForCWL.json
    ```
 
 1. After the Kinesis stream is in the active state and you have created the IAM role, you can create the CloudWatch Logs destination\.

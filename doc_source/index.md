@@ -50,6 +50,7 @@ Amazon's trademarks and trade dress may not be used in
       + [Create a Subscription Filter](CreateSubscriptionFilter.md)
       + [Validating the Flow of Log Events](ValidateLogEventFlow.md)
       + [Modifying Destination Membership at Runtime](ModifyDestinationMembership.md)
++ [Sending Logs Directly to Amazon S3](Sending-Logs-Directly-To-S3.md)
 + [Exporting Log Data to Amazon S3](S3Export.md)
    + [Export Log Data to Amazon S3 Using the Console](S3ExportTasksConsole.md)
    + [Export Log Data to Amazon S3 Using the AWS CLI](S3ExportTasks.md)

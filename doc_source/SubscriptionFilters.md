@@ -328,7 +328,7 @@ The actual log data, represented as an array of log event records\. The "id" pro
 In this example, you'll create a CloudWatch Logs subscription that sends any incoming log events that match your defined filters to your Amazon Kinesis Data Firehose delivery stream\. Data sent from CloudWatch Logs to Amazon Kinesis Data Firehose is already compressed with gzip level 6 compression, so you do not need to use compression within your Kinesis Data Firehose delivery stream\.
 
 **Note**  
-Before you create the Kinesis Firehose stream, calculate the volume of log data that will be generated\. Be sure to create a Kinesis Firehose stream that can handle this volume\. If the stream cannot handle the volume, the log stream will be throttled\. For more information about Kinesis Firehose stream volume limits, see [Amazon Kinesis Firehose Data Limits](http://docs.aws.amazon.com/firehose/latest/dev/limits.html)\. 
+Before you create the Kinesis Data Firehose stream, calculate the volume of log data that will be generated\. Be sure to create a Kinesis Data Firehose stream that can handle this volume\. If the stream cannot handle the volume, the log stream will be throttled\. For more information about Kinesis Data Firehose stream volume limits, see [Amazon Kinesis Data Firehose Data Limits](http://docs.aws.amazon.com/firehose/latest/dev/limits.html)\. 
 
 **To create a subscription filter for Kinesis Data Firehose**
 
@@ -424,9 +424,9 @@ Before you create the Kinesis Firehose stream, calculate the volume of log data 
 
    ```
    aws firehose create-delivery-stream \
-       --delivery-stream-name 'my-delivery-stream' \
-       --s3-destination-configuration \
-      RoleARN='arn:aws:iam::123456789012:role/FirehosetoS3Role',BucketARN='arn:aws:s3:::my-bucket'
+      --delivery-stream-name 'my-delivery-stream' \
+      --s3-destination-configuration \
+     RoleARN='arn:aws:iam::123456789012:role/FirehosetoS3Role',BucketARN='arn:aws:s3:::my-bucket'
    ```
 
    Note that Kinesis Data Firehose automatically uses a prefix in YYYY/MM/DD/HH UTC time format for delivered Amazon S3 objects\. You can specify an extra prefix to be added in front of the time format prefix\. If the prefix ends with a forward slash \(/\), it appears as a folder in the Amazon S3 bucket\.
@@ -480,8 +480,8 @@ Before you create the Kinesis Firehose stream, calculate the volume of log data 
 
    ```
    aws iam create-role \
-       --role-name CWLtoKinesisFirehoseRole \
-       --assume-role-policy-document file://~/TrustPolicyForCWL.json
+         --role-name CWLtoKinesisFirehoseRole \
+         --assume-role-policy-document file://~/TrustPolicyForCWL.json
    
    {
        "Role": {
@@ -525,10 +525,7 @@ Before you create the Kinesis Firehose stream, calculate the volume of log data 
 1. Associate the permissions policy with the role using the put\-role\-policy command:
 
    ```
-   aws iam put-role-policy \
-       --role-name CWLtoKinesisFirehoseRole \
-       --policy-name Permissions-Policy-For-CWL \
-       --policy-document file://~/PermissionsForCWL.json
+   aws iam put-role-policy --role-name CWLtoKinesisFirehoseRole --policy-name Permissions-Policy-For-CWL --policy-document file://~/PermissionsForCWL.json
    ```
 
 1. After the Amazon Kinesis Data Firehose delivery stream is in active state and you have created the IAM role, you can create the CloudWatch Logs subscription filter\. The subscription filter immediately starts the flow of real\-time log data from the chosen log group to your Amazon Kinesis Data Firehose delivery stream:

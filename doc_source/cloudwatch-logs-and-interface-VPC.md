@@ -43,12 +43,12 @@ After you create the endpoint, you can test the connection\.
 
 1. From the instance, use the AWS CLI to create a log entry in one of your existing log groups\.
 
-   First, create a JSON file with a log event:
+   First, create a JSON file with a log event\. The timestamp must be specified as the number of milliseconds after Jan 1, 1970 00:00:00 UTC\.
 
    ```
    [
      {
-       "timestamp": 1527787000,
+       "timestamp": 1533854071310,
        "message": "VPC Connection Test"
      }
    ]
@@ -57,7 +57,7 @@ After you create the endpoint, you can test the connection\.
    Then, use the `put-log-events` command to create the log entry:
 
    ```
-   aws logs put-log-events --log-group-name LogGroupName --log-stream-name LogStreamName --log-events JSONFileName
+   aws logs put-log-events --log-group-name LogGroupName --log-stream-name LogStreamName --log-events file://JSONFileName
    ```
 
    If the response to the command includes `nextSequenceToken`, the command has succeeded and your VPC endpoint is working\.
