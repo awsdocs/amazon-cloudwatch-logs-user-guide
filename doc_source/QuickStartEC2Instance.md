@@ -68,10 +68,11 @@ Do not update the CloudWatch Logs agent using the RPM installation method if you
    sudo yum update -y
    ```
 
-1. Install the `awslogs` package\. This is the recommended method for installing awslogs on Amazon Linux instances\.
+1. Install the `awslogs` package\. This is the recommended method for installing awslogs on Amazon Linux instances\. Additional package `polkit` is a dependency for `awslogs` package\.   
 
    ```
    sudo yum install -y awslogs
+   sudo yum install -y polkit
    ```
 
 1. Edit the `/etc/awslogs/awslogs.conf` file to configure the logs to track\. For more information about editing this file, see [CloudWatch Logs Agent Reference](AgentReference.md)\.
