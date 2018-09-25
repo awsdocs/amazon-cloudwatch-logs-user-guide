@@ -14,15 +14,18 @@ Metric filter terms that include characters other than alphanumeric or underscor
 
 To exclude a term, use a minus sign \(\-\) before the term\.
 
-**Example 1: Single term**  
+**Example 1: Match everything**
+The filter pattern "" matches everything.
+
+**Example 2: Single term**  
 The filter pattern "ERROR" matches log event messages that contain this term, such as the following:
 + \[ERROR\] A fatal exception has occurred
 + Exiting with ERRORCODE: \-1
 
-**Example 2: Include a term and exclude a term**  
+**Example 3: Include a term and exclude a term**  
 In the previous example, if you change the filter pattern to "ERROR" \- "Exiting", the log event message "Exiting with ERRORCODE: \-1" would be excluded\.
 
-**Example 3: Multiple terms**  
+**Example 4: Multiple terms**  
 The filter pattern "ERROR Exception" matches log event messages that contain both terms, such as the following:
 + \[ERROR\] Caught IllegalArgumentException
 + \[ERROR\] Unhandled Exception
