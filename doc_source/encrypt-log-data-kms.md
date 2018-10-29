@@ -14,7 +14,7 @@ After you disassociate a CMK from a log group, CloudWatch Logs stops encrypting 
 
 ## Step 1: Create an AWS KMS CMK<a name="create-cmk"></a>
 
-To create an AWS KMS CMK, use the following [create\-key](http://docs.aws.amazon.com/cli/latest/reference/kms/create-key.html) command:
+To create an AWS KMS CMK, use the following [create\-key](https://docs.aws.amazon.com/cli/latest/reference/kms/create-key.html) command:
 
 ```
 aws kms create-key
@@ -41,7 +41,7 @@ The output contains the key ID and Amazon Resource Name \(ARN\) of the CMK\. The
 
 By default, all AWS KMS CMKs are private; only the resource owner can use it to encrypt and decrypt data\. However, the resource owner can grant permissions to access the CMK to other users and resources\. With this step, you give the CloudWatch service principal permission to use the CMK\. This service principal must be in the same region as where the CMK is stored\.
 
-First, save the default policy for your CMK as `policy.json` using the following [get\-key\-policy](http://docs.aws.amazon.com/cli/latest/reference/kms/get-key-policy.html) command:
+First, save the default policy for your CMK as `policy.json` using the following [get\-key\-policy](https://docs.aws.amazon.com/cli/latest/reference/kms/get-key-policy.html) command:
 
 ```
 aws kms get-key-policy --key-id key-id --policy-name default --output text > ./policy.json
@@ -57,7 +57,7 @@ Open the `policy.json` file in a text editor and add the statement in bold, repl
       "Sid" : "Enable IAM User Permissions",
       "Effect" : "Allow",
       "Principal" : {
-        "AWS" : "arn:aws:iam::880185128111:root"
+        "AWS" : "arn:aws:iam::Your_account_ID:root"
       },
       "Action" : "kms:*",
       "Resource" : "*"
@@ -78,7 +78,7 @@ Open the `policy.json` file in a text editor and add the statement in bold, repl
 }
 ```
 
-Finally, add the updated policy using the following [put\-key\-policy](http://docs.aws.amazon.com/cli/latest/reference/kms/put-key-policy.html) command:
+Finally, add the updated policy using the following [put\-key\-policy](https://docs.aws.amazon.com/cli/latest/reference/kms/put-key-policy.html) command:
 
 ```
 aws kms put-key-policy --key-id key-id --policy-name default --policy file://policy.json
@@ -89,14 +89,14 @@ aws kms put-key-policy --key-id key-id --policy-name default --policy file://pol
 You can associate a CMK with a log group when you create it or afterwards\.
 
 **To associate the CMK with a log group when you create it**  
-Use the [create\-log\-group](http://docs.aws.amazon.com/cli/latest/reference/logs/create-log-group.html) command as follows:
+Use the [create\-log\-group](https://docs.aws.amazon.com/cli/latest/reference/logs/create-log-group.html) command as follows:
 
 ```
 aws logs create-log-group --log-group-name my-log-group --kms-key-id "key-arn"
 ```
 
 **To associate the CMK with an existing log group**  
-Use the [associate\-kms\-key](http://docs.aws.amazon.com/cli/latest/reference/logs/associate-kms-key.html) command as follows:
+Use the [associate\-kms\-key](https://docs.aws.amazon.com/cli/latest/reference/logs/associate-kms-key.html) command as follows:
 
 ```
 aws logs associate-kms-key --log-group-name my-log-group --kms-key-id "key-arn"
@@ -104,7 +104,7 @@ aws logs associate-kms-key --log-group-name my-log-group --kms-key-id "key-arn"
 
 ## Step 4: Disassociate a Log Group from a CMK<a name="disassociate-cmk"></a>
 
-To disassociate the CMK associated with a log group, use the following [disassociate\-kms\-key](http://docs.aws.amazon.com/cli/latest/reference/logs/disassociate-kms-key.html) command:
+To disassociate the CMK associated with a log group, use the following [disassociate\-kms\-key](https://docs.aws.amazon.com/cli/latest/reference/logs/disassociate-kms-key.html) command:
 
 ```
 aws logs disassociate-kms-key --log-group-name my-log-group

@@ -39,14 +39,14 @@ You can search for log entries that meet a specified criteria using the console\
 You can search for log entries that meet a specified criteria using the AWS CLI\.
 
 **To search log entries using the AWS CLI**  
-At a command prompt, run the following [filter\-log\-events](http://docs.aws.amazon.com/cli/latest/reference/logs/filter-log-events.html) command\. Use `--filter-pattern` to limit the results to the specified filter pattern and `--log-stream-names` to limit the results to the specified log group\.
+At a command prompt, run the following [filter\-log\-events](https://docs.aws.amazon.com/cli/latest/reference/logs/filter-log-events.html) command\. Use `--filter-pattern` to limit the results to the specified filter pattern and `--log-stream-names` to limit the results to the specified log group\.
 
 ```
 aws logs filter-log-events --log-group-name my-group [--log-stream-names LIST_OF_STREAMS_TO_SEARCH] --filter-pattern VALID_METRIC_FILTER_PATTERN]
 ```
 
 **To search log entries over a given time range using the AWS CLI**  
-At a command prompt, run the following [filter\-log\-events](http://docs.aws.amazon.com/cli/latest/reference/logs/filter-log-events.html) command:
+At a command prompt, run the following [filter\-log\-events](https://docs.aws.amazon.com/cli/latest/reference/logs/filter-log-events.html) command:
 
 ```
 aws logs filter-log-events --log-group-name my-group [--log-stream-names LIST_OF_STREAMS_TO_SEARCH] [--start-time 1482197400000] [--end-time 1482217558365] [--filter-pattern VALID_METRIC_FILTER_PATTERN]

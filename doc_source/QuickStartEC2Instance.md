@@ -1,12 +1,18 @@
 # Quick Start: Install and Configure the CloudWatch Logs Agent on a Running EC2 Linux Instance<a name="QuickStartEC2Instance"></a>
 
+**Tip**  
+CloudWatch includes a new unified agent that can collect both logs and metrics from EC2 instances and on\-premises servers\. If you are not already using the older CloudWatch Logs agent, we recommend that you use the newer unified CloudWatch agent\. For more information, see [Getting Started with CloudWatch Logs](CWL_GettingStarted.md)\.   
+The rest of this section explains the use of the older CloudWatch Logs agent\.
+
+## Configure the Older CloudWatch Logs Agent on a Running EC2 Linux Instance<a name="QuickStartEC2Instance-oldagent"></a>
+
 You can use the CloudWatch Logs agent installer on an existing EC2 instance to install and configure the CloudWatch Logs agent\. After installation is complete, logs automatically flow from the instance to the log stream you create while installing the agent\. The agent confirms that it has started and it stays running until you disable it\.
 
 In addition to using the agent, you can also publish log data using the AWS CLI, CloudWatch Logs SDK, or the CloudWatch Logs API\. The AWS CLI is best suited for publishing data at the command line or through scripts\. The CloudWatch Logs SDK is best suited for publishing log data directly from applications or building your own log publishing application\.
 
-## Step 1: Configure Your IAM Role or User for CloudWatch Logs<a name="running-ec2-step-1"></a>
+### Step 1: Configure Your IAM Role or User for CloudWatch Logs<a name="running-ec2-step-1"></a>
 
-The CloudWatch Logs agent supports IAM roles and users\. If your instance already has an IAM role associated with it, make sure that you include the IAM policy below\. If you don't already have an IAM role assigned to your instance, you can use your IAM credentials for the next steps or you can assign an IAM role to that instance\. For more information, see [Attaching an IAM Role to an Instance](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#attach-iam-role)\.<a name="cloudwatchlogs_iam_role_procedure"></a>
+The CloudWatch Logs agent supports IAM roles and users\. If your instance already has an IAM role associated with it, make sure that you include the IAM policy below\. If you don't already have an IAM role assigned to your instance, you can use your IAM credentials for the next steps or you can assign an IAM role to that instance\. For more information, see [Attaching an IAM Role to an Instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#attach-iam-role)\.<a name="cloudwatchlogs_iam_role_procedure"></a>
 
 **To configure your IAM role or user for CloudWatch Logs**
 
@@ -50,7 +56,7 @@ The CloudWatch Logs agent supports IAM roles and users\. If your instance alread
 
 1. Choose **Attach Policy**\.
 
-## Step 2: Install and Configure CloudWatch Logs on an Existing Amazon EC2 Instance<a name="running-ec2-step-2"></a>
+### Step 2: Install and Configure CloudWatch Logs on an Existing Amazon EC2 Instance<a name="running-ec2-step-2"></a>
 
 The process for installing the CloudWatch Logs agent differs depending on whether your Amazon EC2 instance is running Amazon Linux, Ubuntu, CentOS, or Red Hat\. Use the steps appropriate for the version of Linux on your instance\.
 
@@ -60,9 +66,9 @@ Starting with Amazon Linux AMI 2014\.09, the CloudWatch Logs agent is available 
 **Warning**  
 Do not update the CloudWatch Logs agent using the RPM installation method if you previously used the Python script to install the agent\. Doing so may cause configuration issues that prevent the CloudWatch Logs agent from sending your logs to CloudWatch\.
 
-1. Connect to your Amazon Linux instance\. For more information, see [Connect to Your Instance](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-connect-to-instance-linux.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+1. Connect to your Amazon Linux instance\. For more information, see [Connect to Your Instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-connect-to-instance-linux.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
-   For more information about connection issues, see [Troubleshooting Connecting to Your Instance](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+   For more information about connection issues, see [Troubleshooting Connecting to Your Instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
 1. Update your Amazon Linux instance to pick up the latest changes in the package repositories\.
 
@@ -114,9 +120,9 @@ Do not update the CloudWatch Logs agent using the RPM installation method if you
 
 If you're using an AMI running Ubuntu Server, CentOS, or Red Hat, use the following procedure to manually install the CloudWatch Logs agent on your instance\.
 
-1. Connect to your EC2 instance\. For more information, see [Connect to Your Instance](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-connect-to-instance-linux.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+1. Connect to your EC2 instance\. For more information, see [Connect to Your Instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-connect-to-instance-linux.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
-   For more information about connection issues, see [Troubleshooting Connecting to Your Instance](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+   For more information about connection issues, see [Troubleshooting Connecting to Your Instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
 1. Run the CloudWatch Logs agent installer using one of two options\. You can run it directly from the internet, or download the files and run it standalone\.
 **Note**  

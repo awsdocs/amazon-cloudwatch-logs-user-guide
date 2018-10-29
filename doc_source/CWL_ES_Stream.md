@@ -3,16 +3,16 @@
 You can configure a CloudWatch Logs log group to stream data it receives to your Amazon Elasticsearch Service \(Amazon ES\) cluster in near real\-time through a CloudWatch Logs subscription\. For more information, see [Real\-time Processing of Log Data with Subscriptions](Subscriptions.md)\.
 
 **Note**  
-Streaming large amounts of CloudWatch Logs data to Amazon ES might result in high usage charges\. We recommend that you monitor your AWS bill to help avoid higher\-than\-expected charges\. For more information, see [Monitor Your Estimated Charges Using CloudWatch](http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/gs_monitor_estimated_charges_with_cloudwatch.html)\.
+Streaming large amounts of CloudWatch Logs data to Amazon ES might result in high usage charges\. We recommend that you create a Budget in the Billing and Cost Management console\. For more information, see [Managing Your Costs with Budgets](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/budgets-managing-costs.html)\.
 
 ## Prerequisites<a name="CWL_ES_Domain"></a>
 
 Before you begin, create an Amazon ES domain\. The Amazon ES domain can have either public access or VPC access, but you cannot then modify the type of access after the domain is created\. You might want to review your Amazon ES domain settings later, and modify your cluster configuration based on the amount of data your cluster will be processing\.
 
-For more information about Amazon ES, see the [Amazon Elasticsearch Service Developer Guide](http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/)\.
+For more information about Amazon ES, see the [Amazon Elasticsearch Service Developer Guide](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/)\.
 
 **To create an Amazon ES domain**  
-At a command prompt, use the following [create\-elasticsearch\-domain](http://docs.aws.amazon.com/cli/latest/reference/es/create-elasticsearch-domain.html) command:
+At a command prompt, use the following [create\-elasticsearch\-domain](https://docs.aws.amazon.com/cli/latest/reference/es/create-elasticsearch-domain.html) command:
 
 ```
 aws es create-elasticsearch-domain --domain-name my-domain

@@ -4,7 +4,7 @@ The following table describes important changes in each release of the CloudWatc
 
 | Change | Description | Date | 
 | --- |--- |--- |
-| Support for Amazon VPC endpoints | You can now establish a private connection between your VPC and CloudWatch Logs\. For more information, see [Using CloudWatch Logs with Interface VPC Endpoints](http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/cloudwatch-logs-and-interface-VPC.html) in the *Amazon CloudWatch Logs User Guide*\. | June 28, 2018 | 
+| [Support for Amazon VPC endpoints](#DocumentHistory_cwl) | You can now establish a private connection between your VPC and CloudWatch Logs\. For more information, see [Using CloudWatch Logs with Interface VPC Endpoints](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/cloudwatch-logs-and-interface-VPC.html) in the *Amazon CloudWatch Logs User Guide*\. | June 28, 2018 | 
 
 The following table describes the important changes to the Amazon CloudWatch Logs User's Guide\.
 
@@ -12,7 +12,7 @@ The following table describes the important changes to the Amazon CloudWatch Log
 | Change | Description | Release Date | 
 | --- | --- | --- | 
 |  Interface VPC endpoints  |  In some regions, you can use an interface VPC endpoint to keep traffic between your Amazon VPC and CloudWatch Logs from leaving the Amazon network\. For more information see [Using CloudWatch Logs with Interface VPC Endpoints](cloudwatch-logs-and-interface-VPC.md)\.  | 7 March 2018 | 
-|  Route 53 DNS query logs  |  You can use CloudWatch Logs to store logs about the DNS queries received by Route 53\. For more information see [What is Amazon CloudWatch Logs?](WhatIsCloudWatchLogs.md) or [Logging DNS Queries](http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/query-logs.html) in the Amazon Route 53 Developer Guide\.  | 7 September 2017 | 
+|  Route 53 DNS query logs  |  You can use CloudWatch Logs to store logs about the DNS queries received by Route 53\. For more information see [What is Amazon CloudWatch Logs?](WhatIsCloudWatchLogs.md) or [Logging DNS Queries](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/query-logs.html) in the Amazon Route 53 Developer Guide\.  | 7 September 2017 | 
 |  Tag log groups  |  You can use tags to categorize your log groups\. For more information, see [Tag Log Groups in Amazon CloudWatch Logs](Working-with-log-groups-and-streams.md#log-group-tagging)\.  | 13 December 2016 | 
 |  Console improvements  |  You can navigate from metrics graphs to the associated log groups\. For more information, see [Pivot from Metrics to Logs](SearchDataFilterPattern.md#pivot-metrics-logs)\.  | 7 November 2016 | 
 |  Console usability improvements  |  Improved the experience to make it easier to search, filter, and troubleshoot\. For example, you can now filter your log data to a date and time range\. For more information, see [View Log Data Sent to CloudWatch Logs](Working-with-log-groups-and-streams.md#ViewingLogData)\.  | 29 August 2016 | 

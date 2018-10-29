@@ -4,7 +4,7 @@ Some AWS services can publish logs directly to Amazon S3\. This way, if your mai
 
 Logs published to Amazon S3 are published to an existing bucket that you specify\. One or more log files are created every five minutes in the specified bucket\.
 
-Even when logs are published directly to an S3 bucket, CloudWatch Logs charges apply\. For more information, see [Amazon CloudWatch Pricing](https://aws.amazon.com/cloudwatch/pricing/)\.
+Even when logs are published directly to an S3 bucket, CloudWatch Logs charges apply\. For more information, see *Deliver Logs to S3* on [Amazon CloudWatch Pricing](https://aws.amazon.com/cloudwatch/pricing/)\.
 
 The following logs can be published directly to Amazon S3:
-+ VPC flow logs\. For more information, see [Publishing Flow Logs to Amazon S3](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/flow-logs-s3.html) in the *Amazon VPC User Guide*\.
++ VPC flow logs\. For more information, see [Publishing Flow Logs to Amazon S3](https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs-s3.html) in the *Amazon VPC User Guide*\.

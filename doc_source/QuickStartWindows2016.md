@@ -1,6 +1,12 @@
 # Quick Start: Enable Your Amazon EC2 Instances Running Windows Server 2016 to Send Logs to CloudWatch Logs Using the CloudWatch Logs Agent<a name="QuickStartWindows2016"></a>
 
-There are multiple methods you can use to enable instances running Windows Server 2016 to send logs to CloudWatch Logs\. The steps in this section use Systems Manager Run Command\. For information about the other possible methods, see [Sending Logs, Events, and Performance Counters to Amazon CloudWatch](http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/send_logs_to_cwl.html)\.
+**Tip**  
+CloudWatch includes a new unified agent that can collect both logs and metrics from EC2 instances and on\-premises servers\. We recommend that you use the newer unified CloudWatch agent\. For more information, see [Getting Started with CloudWatch Logs](CWL_GettingStarted.md)\.   
+The rest of this section explains the use of the older CloudWatch Logs agent\.
+
+## Enable Your Amazon EC2 Instances Running Windows Server 2016 to Send Logs to CloudWatch Logs Using the older CloudWatch Logs Agent<a name="QuickStartWindows2016-olderagent"></a>
+
+There are multiple methods you can use to enable instances running Windows Server 2016 to send logs to CloudWatch Logs\. The steps in this section use Systems Manager Run Command\. For information about the other possible methods, see [Sending Logs, Events, and Performance Counters to Amazon CloudWatch](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/send_logs_to_cwl.html)\.
 
 **Topics**
 + [Download the Sample Configuration File](#configure_cwl_download)
@@ -10,11 +16,11 @@ There are multiple methods you can use to enable instances running Windows Serve
 + [Verify Internet Access](#send_logs_cwl_internet)
 + [Enable CloudWatch Logs Using Systems Manager Run Command](#remote-commands-cloudwatch)
 
-## Download the Sample Configuration File<a name="configure_cwl_download"></a>
+### Download the Sample Configuration File<a name="configure_cwl_download"></a>
 
 Download the following sample file to your computer: [AWS\.EC2\.Windows\.CloudWatch\.json](https://s3.amazonaws.com/ec2-downloads-windows/CloudWatchConfig/AWS.EC2.Windows.CloudWatch.json)\.
 
-## Configure the JSON File for CloudWatch<a name="send_logs_to_cwl_json"></a>
+### Configure the JSON File for CloudWatch<a name="send_logs_to_cwl_json"></a>
 
 You determine which logs to send to CloudWatch by specifying your choices in a configuration file\. The process of creating this file and specifying your choices can take 30 minutes or more to complete\. After you have completed this task once, you can reuse the configuration file on all of your instances\.
 
@@ -25,7 +31,7 @@ You determine which logs to send to CloudWatch by specifying your choices in a c
 + [Step 4: Configure Flow Control](#configure_log_flow)
 + [Step 5: Save JSON Content](#save_json_content)
 
-### Step 1: Enable CloudWatch Logs<a name="enable-CloudWatchLogs-in-JSON-file"></a>
+#### Step 1: Enable CloudWatch Logs<a name="enable-CloudWatchLogs-in-JSON-file"></a>
 
 At the top of the JSON file, change "false" to "true" for `IsEnabled`:
 
@@ -33,7 +39,7 @@ At the top of the JSON file, change "false" to "true" for `IsEnabled`:
 "IsEnabled": true,
 ```
 
-### Step 2: Configure Settings for CloudWatch<a name="configure_cwl_credentials"></a>
+#### Step 2: Configure Settings for CloudWatch<a name="configure_cwl_credentials"></a>
 
 Specify credentials, region, a log group name, and a log stream namespace\. This enables the instance to send log data to CloudWatch Logs\. To send the same log data to different locations, you can add additional sections with unique IDs \(for example, "CloudWatchLogs2" and CloudWatchLogs3"\) and a different region for each ID\.
 
@@ -67,7 +73,7 @@ Specify credentials, region, a log group name, and a log stream namespace\. This
 
    If you specify a log stream name that doesn't already exist, CloudWatch Logs automatically creates it for you\. You can define a log stream name using a literal string, the predefined variables `{instance_id}`, `{hostname}`, and `{ip_address}`, or a combination of these\.
 
-### Step 3: Configure the Data to Send<a name="configure_logs"></a>
+#### Step 3: Configure the Data to Send<a name="configure_logs"></a>
 
 You can send event log data, Event Tracing for Windows \(ETW\) data, and other log data to CloudWatch Logs\.
 
@@ -270,7 +276,7 @@ The `div`, `div-MV`, `hu`, and `hu-HU` values are not supported\.
 
 1. \(Optional\) For `LineCount`, type the number of lines in the header to identify the log file\. For example, IIS log files have virtually identical headers\. You could enter **5**, which would read the first five lines of the log file's header to identify it\. In IIS log files, the third line is the date and time stamp, but the time stamp is not always guaranteed to be different between log files\. For this reason, we recommend including at least one line of actual log data for uniquely fingerprinting the log file\.
 
-### Step 4: Configure Flow Control<a name="configure_log_flow"></a>
+#### Step 4: Configure Flow Control<a name="configure_log_flow"></a>
 
 Each data type must have a corresponding destination in the `Flows` section\. For example, to send the custom log, ETW log, and system log to CloudWatch Logs, add `(CustomLogs,ETW,SystemEventLog),CloudWatchLogs` to the `Flows` section\.
 
@@ -297,23 +303,23 @@ You can send the same log file to more than one destination\. For example, to se
 
 1. For `Flows`, add each data type that is to be uploaded \(for example, `ApplicationEventLog`\) and its destination \(for example, `CloudWatchLogs`\)\.
 
-### Step 5: Save JSON Content<a name="save_json_content"></a>
+#### Step 5: Save JSON Content<a name="save_json_content"></a>
 
 You are now finished editing the JSON file\. Save it, and paste the file contents into a text editor in another window\. You will need the file contents in a later step of this procedure\.
 
-## Create an IAM User and Role for Systems Manager<a name="iam_permissions"></a>
+### Create an IAM User and Role for Systems Manager<a name="iam_permissions"></a>
 
-An IAM role for instance credentials is required when you use Systems Manager Run Command\. This role enables Systems Manager to perform actions on the instance\. You can optionally create a unique IAM user account for configuring and running Systems Manager\. For more information, see [Configuring Security Roles for Systems Manager](http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-access.html) in the *AWS Systems Manager User Guide*\. For information about how to attach an IAM role to an existing instance, see [Attaching an IAM Role to an Instance](http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/iam-roles-for-amazon-ec2.html#attach-iam-role) in the *Amazon EC2 User Guide for Windows Instances*\.
+An IAM role for instance credentials is required when you use Systems Manager Run Command\. This role enables Systems Manager to perform actions on the instance\. You can optionally create a unique IAM user account for configuring and running Systems Manager\. For more information, see [Configuring Security Roles for Systems Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-access.html) in the *AWS Systems Manager User Guide*\. For information about how to attach an IAM role to an existing instance, see [Attaching an IAM Role to an Instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/iam-roles-for-amazon-ec2.html#attach-iam-role) in the *Amazon EC2 User Guide for Windows Instances*\.
 
-## Verify Systems Manager Prerequisites<a name="send_logs_cwl_syspre"></a>
+### Verify Systems Manager Prerequisites<a name="send_logs_cwl_syspre"></a>
 
-Before you use Systems Manager Run Command to configure integration with CloudWatch Logs, verify that your instances meet the minimum requirements\. For more information, see [Systems Manager Prerequisites](http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html) in the *AWS Systems Manager User Guide*\.
+Before you use Systems Manager Run Command to configure integration with CloudWatch Logs, verify that your instances meet the minimum requirements\. For more information, see [Systems Manager Prerequisites](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html) in the *AWS Systems Manager User Guide*\.
 
-## Verify Internet Access<a name="send_logs_cwl_internet"></a>
+### Verify Internet Access<a name="send_logs_cwl_internet"></a>
 
-Your Amazon EC2 Windows Server instances and managed instances must have outbound internet access in order to send log and event data to CloudWatch\. For more information about how to configure internet access, see [Internet Gateways](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Internet_Gateway.html) in the *Amazon VPC User Guide*\.
+Your Amazon EC2 Windows Server instances and managed instances must have outbound internet access in order to send log and event data to CloudWatch\. For more information about how to configure internet access, see [Internet Gateways](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html) in the *Amazon VPC User Guide*\.
 
-## Enable CloudWatch Logs Using Systems Manager Run Command<a name="remote-commands-cloudwatch"></a>
+### Enable CloudWatch Logs Using Systems Manager Run Command<a name="remote-commands-cloudwatch"></a>
 
 Run Command enables you to manage the configuration of your instances on demand\. You specify a Systems Manager document, specify parameters, and execute the command on one or more instances\. The SSM agent on the instance processes the command and configures the instance as specified\.
 
@@ -327,7 +333,7 @@ Run Command enables you to manage the configuration of your instances on demand\
 
 1. For **Command document**, choose **AWS\-ConfigureCloudWatch**\.
 
-1. For **Target instances**, choose the instances to integrate with CloudWatch Logs\. If you do not see an instance in this list, it might not be configured for Run Command\. For more information, see [Systems Manager Prerequisites](http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/systems-manager-setting-up.html) in the *Amazon EC2 User Guide for Windows Instances*\.
+1. For **Target instances**, choose the instances to integrate with CloudWatch Logs\. If you do not see an instance in this list, it might not be configured for Run Command\. For more information, see [Systems Manager Prerequisites](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/systems-manager-setting-up.html) in the *Amazon EC2 User Guide for Windows Instances*\.
 
 1. For **Status**, choose **Enabled**\.
 

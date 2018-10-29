@@ -116,7 +116,6 @@ The common datetime\_format codes are listed below\. You can also use any dateti
 **%p**: Locale's equivalent of either AM or PM\.  
 **%M**: Minute as a zero\-padded decimal number\. 00, 01, \.\.\., 59  
 **%S**: Second as a zero\-padded decimal number\. 00, 01, \.\.\., 59  
-**%L**: Period \(\.\) plus the number of milliseconds as a decimal number, zero\-padded on the left\. 000, \.\.\., 999  
 **%f**: Microsecond as a decimal number, zero\-padded on the left\. 000000, \.\.\., 999999  
 **%z**: UTC offset in the form \+HHMM or \-HHMM\. \+0000, \-0400, \+1030  
 **Example formats:**  
@@ -175,7 +174,7 @@ HTTP proxies are supported in awslogs\-agent\-setup\.py version 1\.3\.8 or later
       sudo python awslogs-agent-setup.py --region us-east-1 --http-proxy http://your/proxy --https-proxy http://your/proxy --no-proxy 169.254.169.254
       ```
 
-      In order to maintain access to the Amazon EC2 metadata service on EC2 instances, use **\-\-no\-proxy 169\.254\.169\.254** \(recommended\)\. For more information, see [Instance Metadata and User Data](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+      In order to maintain access to the Amazon EC2 metadata service on EC2 instances, use **\-\-no\-proxy 169\.254\.169\.254** \(recommended\)\. For more information, see [Instance Metadata and User Data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
       In the values for `http-proxy` and `https-proxy`, you specify the entire URL\.
 

@@ -2,7 +2,7 @@
 
 You can use subscriptions to get access to a real\-time feed of log events from CloudWatch Logs and have it delivered to other services such as an Amazon Kinesis stream, Amazon Kinesis Data Firehose stream, or AWS Lambda for custom processing, analysis, or loading to other systems\. To begin subscribing to log events, create the receiving source, such as a Kinesis stream, where the events will be delivered\. A subscription filter defines the filter pattern to use for filtering which log events get delivered to your AWS resource, as well as information about where to send matching log events to\.
 
-CloudWatch Logs also produces CloudWatch metrics about the forwarding of log events to subscriptions\. For more information, see [Amazon CloudWatch Logs Metrics and Dimensions](http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cwl-metricscollected.html)\.
+CloudWatch Logs also produces CloudWatch metrics about the forwarding of log events to subscriptions\. For more information, see [Amazon CloudWatch Logs Metrics and Dimensions](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cwl-metricscollected.html)\.
 
 **Topics**
 + [Concepts](#subscription-concepts)

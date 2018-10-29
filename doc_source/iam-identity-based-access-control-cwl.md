@@ -34,7 +34,7 @@ The following is an example of a permissions policy:
 
 This policy has one statement that grants permissions to create log groups and log streams, to upload log events to log streams, and to list details about log streams\.
 
-The wildcard character \(\*\) at the end of the `Resource` value means that the statement allows permission for the `logs:CreateLogGroup`, `logs:CreateLogStream`, `logs:PutLogEvents`, and `logs:DescribeLogStreams` actions on any log group\. To limit this permission to a specific log group, replace the wildcard character \(\*\) in the resource ARN with the specific log group ARN\. For more information about the sections within an IAM policy statement, see [IAM Policy Elements Reference](http://docs.aws.amazon.com/IAM/latest/UserGuide/AccessPolicyLanguage_ElementDescriptions.html) in *IAM User Guide*\. For a list showing all of the CloudWatch Logs actions, see [CloudWatch Logs Permissions Reference](permissions-reference-cwl.md)\.
+The wildcard character \(\*\) at the end of the `Resource` value means that the statement allows permission for the `logs:CreateLogGroup`, `logs:CreateLogStream`, `logs:PutLogEvents`, and `logs:DescribeLogStreams` actions on any log group\. To limit this permission to a specific log group, replace the wildcard character \(\*\) in the resource ARN with the specific log group ARN\. For more information about the sections within an IAM policy statement, see [IAM Policy Elements Reference](https://docs.aws.amazon.com/IAM/latest/UserGuide/AccessPolicyLanguage_ElementDescriptions.html) in *IAM User Guide*\. For a list showing all of the CloudWatch Logs actions, see [CloudWatch Logs Permissions Reference](permissions-reference-cwl.md)\.
 
 ## Permissions Required to Use the CloudWatch Console<a name="console-permissions-cwl"></a>
 
@@ -98,7 +98,7 @@ For a user who will also be using the console to manage log subscriptions, the f
 
 ## AWS Managed \(Predefined\) Policies for CloudWatch Logs<a name="managed-policies-cwl"></a>
 
-AWS addresses many common use cases by providing standalone IAM policies that are created and administered by AWS\. Managed policies grant necessary permissions for common use cases so you can avoid having to investigate what permissions are needed\. For more information, see [AWS Managed Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html#aws-managed-policies) in the *IAM User Guide*\.
+AWS addresses many common use cases by providing standalone IAM policies that are created and administered by AWS\. Managed policies grant necessary permissions for common use cases so you can avoid having to investigate what permissions are needed\. For more information, see [AWS Managed Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html#aws-managed-policies) in the *IAM User Guide*\.
 
 The following AWS managed policies, which you can attach to users in your account, are specific to CloudWatch Logs:
 + **CloudWatchLogsFullAccess** – Grants full access to CloudWatch Logs\.
@@ -114,10 +114,10 @@ You can also create your own custom IAM policies to allow permissions for CloudW
 In this section, you can find example user policies that grant permissions for various CloudWatch Logs actions\. These policies work when you are using the CloudWatch Logs API, AWS SDKs, or the AWS CLI\.
 
 **Topics**
-+ [Example 1: Allow Full Access to CloudWatch Logs](#w4ab1c23c13c23b7)
-+ [Example 2: Allow Read\-Only Access to CloudWatch Logs](#w4ab1c23c13c23b9)
++ [Example 1: Allow Full Access to CloudWatch Logs](#w4aac23c13c23b7)
++ [Example 2: Allow Read\-Only Access to CloudWatch Logs](#w4aac23c13c23b9)
 
-### Example 1: Allow Full Access to CloudWatch Logs<a name="w4ab1c23c13c23b7"></a>
+### Example 1: Allow Full Access to CloudWatch Logs<a name="w4aac23c13c23b7"></a>
 
 The following policy allows a user to access all CloudWatch Logs actions\.
 
@@ -136,7 +136,7 @@ The following policy allows a user to access all CloudWatch Logs actions\.
 }
 ```
 
-### Example 2: Allow Read\-Only Access to CloudWatch Logs<a name="w4ab1c23c13c23b9"></a>
+### Example 2: Allow Read\-Only Access to CloudWatch Logs<a name="w4aac23c13c23b9"></a>
 
 The following policy allows a user read\-only access to CloudWatch Logs data\.
 

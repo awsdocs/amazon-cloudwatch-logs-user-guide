@@ -153,4 +153,4 @@ The steps in this procedure are to be done in the log data recipient account\. F
 
       This access policy allows the root user of the AWS Account with ID 111111111111 to call **PutSubscriptionFilter** against the destination with ARN arn:aws:logs:*region*:999999999999:destination:testDestination\. Any other user's attempt to call PutSubscriptionFilter against this destination will be rejected\.
 
-      To validate a user's privileges against an access policy, see [Using Policy Validator](http://docs.aws.amazon.com/IAM/latest/UserGuide/policies_policy-validator.html) in the *IAM User Guide*\.
+      To validate a user's privileges against an access policy, see [Using Policy Validator](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies_policy-validator.html) in the *IAM User Guide*\.

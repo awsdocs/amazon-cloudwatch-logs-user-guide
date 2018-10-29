@@ -6,7 +6,7 @@ The Chef recipes examples below show how to monitor one log file on each EC2 ins
 
 ## Step 1: Create Custom Recipes<a name="opsworks-step-1"></a>
 
-Create a repository to store your recipes\. AWS OpsWorks supports Git and Subversion, or you can store an archive in Amazon S3\. The structure of your cookbook repository is described in [Cookbook Repositories](http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-installingcustom-repo.html) in the *AWS OpsWorks User Guide*\. The examples below assume that the cookbook is named `logs`\. The install\.rb recipe installs the CloudWatch Logs agent\. You can also download the cookbook example \([CloudWatchLogs\-Cookbooks\.zip](https://s3.amazonaws.com/aws-cloudwatch/downloads/CloudWatchLogs-Cookbooks.zip)\)\.
+Create a repository to store your recipes\. AWS OpsWorks supports Git and Subversion, or you can store an archive in Amazon S3\. The structure of your cookbook repository is described in [Cookbook Repositories](https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-installingcustom-repo.html) in the *AWS OpsWorks User Guide*\. The examples below assume that the cookbook is named `logs`\. The install\.rb recipe installs the CloudWatch Logs agent\. You can also download the cookbook example \([CloudWatchLogs\-Cookbooks\.zip](https://s3.amazonaws.com/aws-cloudwatch/downloads/CloudWatchLogs-Cookbooks.zip)\)\.
 
 Create a file named metadata\.rb that contains the following code:
 
@@ -131,7 +131,7 @@ To use CloudWatch Logs with your AWS OpsWorks instances, you need to extend the 
 
 1. In the navigation pane, choose **Policies**, **Create Policy**\.
 
-1. On the **Create Policy** page, under **Create Your Own Policy**, choose **Select**\. For more information about creating custom policies, see [IAM Policies for Amazon EC2](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-policies-for-amazon-ec2.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+1. On the **Create Policy** page, under **Create Your Own Policy**, choose **Select**\. For more information about creating custom policies, see [IAM Policies for Amazon EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-policies-for-amazon-ec2.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
 1. On the **Review Policy** page, for **Policy Name**, type a name for the policy\.
 
@@ -169,7 +169,7 @@ Choose the role name, not the check box\.
 
 1. For **Customer Managed Policies**, select the IAM policy that you created above and choose **Attach Policy**\.
 
-   For more information about IAM users and policies, see [IAM Users and Groups](http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_WorkingWithGroupsAndUsers.html) and [Managing IAM Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/ManagingPolicies.html) in the *IAM User Guide*\.
+   For more information about IAM users and policies, see [IAM Users and Groups](https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_WorkingWithGroupsAndUsers.html) and [Managing IAM Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/ManagingPolicies.html) in the *IAM User Guide*\.
 
 ## Step 4: Add a Layer<a name="opsworks-step-4"></a>
 

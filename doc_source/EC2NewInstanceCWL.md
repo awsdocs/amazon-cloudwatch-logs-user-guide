@@ -1,5 +1,11 @@
 # Quick Start: Install and Configure the CloudWatch Logs Agent on an EC2 Linux Instance at Launch<a name="EC2NewInstanceCWL"></a>
 
+**Tip**  
+CloudWatch includes a new unified agent that can collect both logs and metrics from EC2 instances and on\-premises servers\. If you are not already using the older CloudWatch Logs agent, we recommend that you use the newer unified CloudWatch agent\. For more information, see [Getting Started with CloudWatch Logs](CWL_GettingStarted.md)\.   
+The rest of this section explains the use of the older CloudWatch Logs agent\.
+
+## Installing the older CloudWatch Logs Agent on an EC2 Linux Instance at Launch<a name="EC2NewInstanceCWL-oldagent"></a>
+
 You can use Amazon EC2 user data, a feature of Amazon EC2 that allows parametric information to be passed to the instance on launch, to install and configure the CloudWatch Logs agent on that instance\. To pass the CloudWatch Logs agent installation and configuration information to Amazon EC2, you can provide the configuration file in a network location such as an Amazon S3 bucket\.
 
 Configuring multiple log sources to send data to a single log stream is not supported\.
@@ -39,7 +45,7 @@ datetime_format = %b %d %H:%M:%S
 
 1. In the navigation pane, choose **Policies**, **Create Policy**\.
 
-1. On the **Create Policy** page, for **Create Your Own Policy**, choose **Select**\. For more information about creating custom policies, see [IAM Policies for Amazon EC2](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-policies-for-amazon-ec2.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+1. On the **Create Policy** page, for **Create Your Own Policy**, choose **Select**\. For more information about creating custom policies, see [IAM Policies for Amazon EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-policies-for-amazon-ec2.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
 1. On the **Review Policy** page, for **Policy Name**, type a name for the policy\.
 
@@ -88,7 +94,7 @@ datetime_format = %b %d %H:%M:%S
 
 1. Choose **Create Role**\.
 
-   For more information about IAM users and policies, see [IAM Users and Groups](http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_WorkingWithGroupsAndUsers.html) and [Managing IAM Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/ManagingPolicies.html) in the *IAM User Guide*\.
+   For more information about IAM users and policies, see [IAM Users and Groups](https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_WorkingWithGroupsAndUsers.html) and [Managing IAM Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/ManagingPolicies.html) in the *IAM User Guide*\.
 
 **To launch a new instance and enable CloudWatch Logs**
 
@@ -96,7 +102,7 @@ datetime_format = %b %d %H:%M:%S
 
 1. Choose **Launch Instance**\.
 
-   For more information, see [Launching an Instance](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/launching-instance.html) in *Amazon EC2 User Guide for Linux Instances*\.
+   For more information, see [Launching an Instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/launching-instance.html) in *Amazon EC2 User Guide for Linux Instances*\.
 
 1. On the **Step 1: Choose an Amazon Machine Image \(AMI\)** page, select the Linux instance type to launch, and then on the **Step 2: Choose an Instance Type** page, choose **Next: Configure Instance Details**\.
 

@@ -84,7 +84,7 @@ You can use tags to categorize your log groups\. For example, you can categorize
 
 ### Tracking Costs Using Tagging<a name="tagging-billing"></a>
 
-You can use tags to categorize and track your AWS costs\. When you apply tags to your AWS resources, including log groups, your AWS cost allocation report includes usage and costs aggregated by tags\. You can apply tags that represent business categories \(such as cost centers, application names, or owners\) to organize your costs across multiple services\. For more information, see [Use Cost Allocation Tags for Custom Billing Reports](http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html) in the *AWS Billing and Cost Management User Guide*\.
+You can use tags to categorize and track your AWS costs\. When you apply tags to your AWS resources, including log groups, your AWS cost allocation report includes usage and costs aggregated by tags\. You can apply tags that represent business categories \(such as cost centers, application names, or owners\) to organize your costs across multiple services\. For more information, see [Use Cost Allocation Tags for Custom Billing Reports](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html) in the *AWS Billing and Cost Management User Guide*\.
 
 ### Tag Restrictions<a name="tagging-restrictions"></a>
 
@@ -109,30 +109,30 @@ The following restrictions apply to tags\.
 
 You can add, list, and remove tags using the AWS CLI\. For examples, see the following documentation:
 
-[create\-log\-group](http://docs.aws.amazon.com/cli/latest/reference/logs/create-log-group.html)  
+[create\-log\-group](https://docs.aws.amazon.com/cli/latest/reference/logs/create-log-group.html)  
 Creates a log group\. You can optionally add tags when you create the log group\.
 
-[tag\-log\-group](http://docs.aws.amazon.com/cli/latest/reference/logs/tag-log-group.html)  
+[tag\-log\-group](https://docs.aws.amazon.com/cli/latest/reference/logs/tag-log-group.html)  
 Adds or updates tags for the specified log group\.
 
-[list\-tags\-log\-group](http://docs.aws.amazon.com/cli/latest/reference/logs/list-tags-log-group.html)  
+[list\-tags\-log\-group](https://docs.aws.amazon.com/cli/latest/reference/logs/list-tags-log-group.html)  
 Lists the tags for the specified log group\.
 
-[untag\-log\-group](http://docs.aws.amazon.com/cli/latest/reference/logs/untag-log-group.html)  
+[untag\-log\-group](https://docs.aws.amazon.com/cli/latest/reference/logs/untag-log-group.html)  
 Removes tags from the specified log group\.
 
 ### Tagging Log Groups Using the CloudWatch Logs API<a name="log-group-tagging-api"></a>
 
 You can add, list, and remove tags using the CloudWatch Logs API\. For examples, see the following documentation:
 
-[CreateLogGroup](http://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogGroup.html)  
+[CreateLogGroup](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogGroup.html)  
 Creates a log group\. You can optionally add tags when you create the log group\.
 
-[TagLogGroup](http://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_TagLogGroup.html)  
+[TagLogGroup](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_TagLogGroup.html)  
 Adds or updates tags for the specified log group\.
 
-[ListTagsLogGroup](http://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsLogGroup.html)  
+[ListTagsLogGroup](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsLogGroup.html)  
 Lists the tags for the specified log group\.
 
-[UntagLogGroup](http://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UntagLogGroup.html)  
+[UntagLogGroup](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UntagLogGroup.html)  
 Removes tags from the specified log group\.

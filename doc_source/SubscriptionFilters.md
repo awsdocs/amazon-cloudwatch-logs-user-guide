@@ -9,10 +9,10 @@ You can use a subscription filter with Kinesis, Lambda, or Kinesis Data Firehose
 
 ## Example 1: Subscription Filters with Kinesis<a name="DestinationKinesisExample"></a>
 
-The following example associates a subscription filter with a log group containing AWS CloudTrail events to have every logged activity made by "Root" AWS credentials delivered to an Kinesis stream called "RootAccess\." For more information about how to send AWS CloudTrail events to CloudWatch Logs, see [Sending CloudTrail Events to CloudWatch Logs](http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cw_send_ct_events.html) in the *AWS CloudTrail User Guide*\.
+The following example associates a subscription filter with a log group containing AWS CloudTrail events to have every logged activity made by "Root" AWS credentials delivered to an Kinesis stream called "RootAccess\." For more information about how to send AWS CloudTrail events to CloudWatch Logs, see [Sending CloudTrail Events to CloudWatch Logs](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cw_send_ct_events.html) in the *AWS CloudTrail User Guide*\.
 
 **Note**  
-Before you create the Kinesis stream, calculate the volume of log data that will be generated\. Be sure to create a Kinesis stream with enough shards to handle this volume\. If the stream does not have enough shards, the log stream will be throttled\. For more information about Kinesis stream volume limits, see [Amazon Kinesis Data Streams Limits](http://docs.aws.amazon.com/streams/latest/dev/service-sizes-and-limits.html)\. 
+Before you create the Kinesis stream, calculate the volume of log data that will be generated\. Be sure to create a Kinesis stream with enough shards to handle this volume\. If the stream does not have enough shards, the log stream will be throttled\. For more information about Kinesis stream volume limits, see [Amazon Kinesis Data Streams Limits](https://docs.aws.amazon.com/streams/latest/dev/service-sizes-and-limits.html)\. 
 
 **To create a subscription filter for Kinesis**
 
@@ -22,7 +22,7 @@ Before you create the Kinesis stream, calculate the volume of log data that will
    $ C:\>  aws kinesis create-stream --stream-name "RootAccess" --shard-count 1
    ```
 
-1. Wait until the Kinesis stream becomes Active \(this might take a minute or two\)\. You can use the following Kinesis [describe\-stream](http://docs.aws.amazon.com/cli/latest/reference/kinesis/describe-stream.html) command to check the **StreamDescription\.StreamStatus** property\. In addition, note the **StreamDescription\.StreamARN** value, as you will need it in a later step:
+1. Wait until the Kinesis stream becomes Active \(this might take a minute or two\)\. You can use the following Kinesis [describe\-stream](https://docs.aws.amazon.com/cli/latest/reference/kinesis/describe-stream.html) command to check the **StreamDescription\.StreamStatus** property\. In addition, note the **StreamDescription\.StreamARN** value, as you will need it in a later step:
 
    ```
    aws kinesis describe-stream --stream-name "RootAccess"
@@ -111,7 +111,7 @@ Before you create the Kinesis stream, calculate the volume of log data that will
    }
    ```
 
-1. Associate the permissions policy with the role using the following [put\-role\-policy](http://docs.aws.amazon.com/cli/latest/reference/iam/put-role-policy.html) command:
+1. Associate the permissions policy with the role using the following [put\-role\-policy](https://docs.aws.amazon.com/cli/latest/reference/iam/put-role-policy.html) command:
 
    ```
    aws iam put-role-policy --role-name CWLtoKinesisRole --policy-name Permissions-Policy-For-CWL --policy-document file://~/PermissionsForCWL.json
@@ -203,13 +203,13 @@ The actual log data, represented as an array of log event records\. The "id" pro
 In this example, you'll create a CloudWatch Logs subscription filter that sends log data to your AWS Lambda function\.
 
 **Note**  
-Before you create the Lambda function, calculate the volume of log data that will be generated\. Be sure to create a function that can handle this volume\. If the function does not have enough volume, the log stream will be throttled\. For more information about Lambda limits, see [AWS Lambda Limits](http://docs.aws.amazon.com/lambda/latest/dg/limits.html)\. 
+Before you create the Lambda function, calculate the volume of log data that will be generated\. Be sure to create a function that can handle this volume\. If the function does not have enough volume, the log stream will be throttled\. For more information about Lambda limits, see [AWS Lambda Limits](https://docs.aws.amazon.com/lambda/latest/dg/limits.html)\. 
 
 **To create a subscription filter for Lambda**
 
 1. Create the AWS Lambda function\.
 
-   Ensure that you have set up the Lambda execution role\. For more information, see [Step 2\.2: Create an IAM Role \(execution role\)](http://docs.aws.amazon.com/lambda/latest/dg/walkthrough-custom-events-create-test-function.html) in the *AWS Lambda Developer Guide*\.
+   Ensure that you have set up the Lambda execution role\. For more information, see [Step 2\.2: Create an IAM Role \(execution role\)](https://docs.aws.amazon.com/lambda/latest/dg/walkthrough-custom-events-create-test-function.html) in the *AWS Lambda Developer Guide*\.
 
 1. Open a text editor and create a file named `helloWorld.js` with the following contents:
 
@@ -328,7 +328,7 @@ The actual log data, represented as an array of log event records\. The "id" pro
 In this example, you'll create a CloudWatch Logs subscription that sends any incoming log events that match your defined filters to your Amazon Kinesis Data Firehose delivery stream\. Data sent from CloudWatch Logs to Amazon Kinesis Data Firehose is already compressed with gzip level 6 compression, so you do not need to use compression within your Kinesis Data Firehose delivery stream\.
 
 **Note**  
-Before you create the Kinesis Data Firehose stream, calculate the volume of log data that will be generated\. Be sure to create a Kinesis Data Firehose stream that can handle this volume\. If the stream cannot handle the volume, the log stream will be throttled\. For more information about Kinesis Data Firehose stream volume limits, see [Amazon Kinesis Data Firehose Data Limits](http://docs.aws.amazon.com/firehose/latest/dev/limits.html)\. 
+Before you create the Kinesis Data Firehose stream, calculate the volume of log data that will be generated\. Be sure to create a Kinesis Data Firehose stream that can handle this volume\. If the stream cannot handle the volume, the log stream will be throttled\. For more information about Kinesis Data Firehose stream volume limits, see [Amazon Kinesis Data Firehose Data Limits](https://docs.aws.amazon.com/firehose/latest/dev/limits.html)\. 
 
 **To create a subscription filter for Kinesis Data Firehose**
 
@@ -350,7 +350,7 @@ Before you create the Kinesis Data Firehose stream, calculate the volume of log 
 
 1. Create the IAM role that will grant Amazon Kinesis Data Firehose permission to put data into your Amazon S3 bucket\.
 
-   For more information, see [Controlling Access with Amazon Kinesis Data Firehose](http://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html) in the *Amazon Kinesis Data Firehose Developer Guide*\.
+   For more information, see [Controlling Access with Amazon Kinesis Data Firehose](https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html) in the *Amazon Kinesis Data Firehose Developer Guide*\.
 
    First, use a text editor to create a trust policy in a file `~/TrustPolicyForFirehose.json` as follows, replacing *account\-id* with your AWS account ID:
 
