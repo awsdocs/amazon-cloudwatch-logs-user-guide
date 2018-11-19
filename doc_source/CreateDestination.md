@@ -100,9 +100,9 @@ The steps in this procedure are to be done in the log data recipient account\. F
 1. Associate the permissions policy with the role using the **aws iam put\-role\-policy** command:
 
    ```
-   aws iam put-role-policy 
-       --role-name CWLtoKinesisRole 
-       --policy-name Permissions-Policy-For-CWL 
+   aws iam put-role-policy \
+       --role-name CWLtoKinesisRole \
+       --policy-name Permissions-Policy-For-CWL \
        --policy-document file://~/PermissionsForCWL.json
    ```
 
