@@ -114,7 +114,7 @@ Before you create the Kinesis stream, calculate the volume of log data that will
 1. Associate the permissions policy with the role using the following [put\-role\-policy](https://docs.aws.amazon.com/cli/latest/reference/iam/put-role-policy.html) command:
 
    ```
-   aws iam put-role-policy --role-name CWLtoKinesisRole --policy-name Permissions-Policy-For-CWL --policy-document file://~/PermissionsForCWL.json
+   aws iam put-role-policy  --role-name CWLtoKinesisRole  --policy-name Permissions-Policy-For-CWL  --policy-document file://~/PermissionsForCWL.json
    ```
 
 1. After the Kinesis stream is in **Active** state and you have created the IAM role, you can create the CloudWatch Logs subscription filter\. The subscription filter immediately starts the flow of real\-time log data from the chosen log group to your Kinesis stream:

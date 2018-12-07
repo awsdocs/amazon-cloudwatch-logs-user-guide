@@ -46,7 +46,7 @@ Look at the three log event examples below\. `ERROR` matches examples 1 and 2\. 
 
 1. `WARN message`
 
-You can match terms using OR pattern matching in space\-delimited filters\. For the examples patterns below, \[w1=ERROR, w2\] matches ERROR \(pattern 2\), \[w1=ERROR \|\| w1=WARN, w2\] matches lines containing ERROR or WARN \(patterns 2 and 3\), \[w1=\!ERROR&&w1=\!WARN, w2\] matches lines containing both ERROR and WARN \(pattern 1\)\.
+You can match terms using OR pattern matching in space\-delimited filters\. With space\-delimited filters, `w1` means the first word in the log event, `w2` means the second word, and so on\. For the example patterns below, \[w1=ERROR, w2\] matches pattern 2 because ERROR is the first word, and \[w1=ERROR \|\| w1=WARN, w2\] matches patterns 2 and 3\. \[w1\!=ERROR&&w1\!=WARN, w2\] matches lines containing both ERROR and WARN \(pattern 1\)\.
 
 1. ERROR WARN message
 
@@ -194,7 +194,7 @@ You can combine multiple conditions into a compound expression using OR \(\|\|\)
 }
 ```
 
-##### Examples<a name="w4aac13c11b9c28b6b6b6"></a>
+##### Examples<a name="w4aac15c11b9c28b6b6b6"></a>
 
 ```
 { ($.user.id = 1) && ($.users[0].email = "John.Doe@example.com") }
@@ -220,7 +220,7 @@ Matches the JSON above\.
 
 Doesn't match the JSON above\.
 
-##### JSON Special Considerations<a name="w4aac13c11b9c28b6b6b8"></a>
+##### JSON Special Considerations<a name="w4aac15c11b9c28b6b6b8"></a>
 
 The SELECTOR must point to a value node \(string or number\) in the JSON\. If it points to an array or object, the filter will not be applied because the log format doesn't match the filter\. For example, both \{$\.users = 1\} and \{$\.users \!= 1\} will fail to match a log event where users is an array:
 
@@ -230,7 +230,7 @@ The SELECTOR must point to a value node \(string or number\) in the JSON\. If it
 }
 ```
 
-##### Numeric Comparisons<a name="w4aac13c11b9c28b6b6c10"></a>
+##### Numeric Comparisons<a name="w4aac15c11b9c28b6b6c10"></a>
 
 The metric filter syntax supports precise matching on numeric comparisons\. The following numeric comparisons are supported: <, >, >=, <=, =, \!=
 

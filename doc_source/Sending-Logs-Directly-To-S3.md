@@ -8,3 +8,4 @@ Even when logs are published directly to an S3 bucket, CloudWatch Logs charges a
 
 The following logs can be published directly to Amazon S3:
 + VPC flow logs\. For more information, see [Publishing Flow Logs to Amazon S3](https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs-s3.html) in the *Amazon VPC User Guide*\.
++ AWS Global Accelerator flow logs\. For more information, see [ Publishing Flow Logs to Amazon S3](https://docs.aws.amazon.com/global-accelerator/latest/dg/monitoring-global-accelerator.flow-logs.html#monitoring-global-accelerator.flow-logs-publishing-S3) in the *AWS Global Accelerator Developer Guide*\.

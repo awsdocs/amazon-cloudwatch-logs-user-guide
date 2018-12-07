@@ -29,7 +29,7 @@ CloudWatch Logs currently supports VPC endpoints in the following Regions:
 
 ## Create a VPC Endpoint for CloudWatch Logs<a name="create-VPC-endpoint-for-CloudWatchLogs"></a>
 
-To start using CloudWatch Logs with your VPC, create an interface VPC endpoint for CloudWatch Logs\. For more information, see [Creating an Interface Endpoint](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#create-interface-endpoint.html) in the *Amazon VPC User Guide*\.
+To start using CloudWatch Logs with your VPC, create an interface VPC endpoint for CloudWatch Logs\. The endpoint name will be `com.amazonaws.Region.logs`\. For more information, see [Creating an Interface Endpoint](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#create-interface-endpoint.html) in the *Amazon VPC User Guide*\.
 
 You do not need to change the settings for CloudWatch Logs\. CloudWatch Logs calls other AWS services using either public endpoints or private interface VPC endpoints, whichever are in use\. For example, if you create an interface VPC endpoint for CloudWatch Logs, and you already have a CloudWatch Logs subscription filter for Kinesis Data Streams and an interface VPC endpoint for Kinesis Data Streams, calls between CloudWatch Logs and Kinesis Data Streams begin to flow through the interface VPC endpoint\.
 
