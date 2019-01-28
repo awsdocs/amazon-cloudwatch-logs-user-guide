@@ -58,7 +58,7 @@ stats sum(packets) as packetsTransferred by srcAddr, dstAddr
 | limit 15
 ```
 
-Find the top 20 byte transfers for a given host: 
+Find the top 15 byte transfers for a given host: 
 
 ```
 filter srcAddr= "192.0.2.0/24"
