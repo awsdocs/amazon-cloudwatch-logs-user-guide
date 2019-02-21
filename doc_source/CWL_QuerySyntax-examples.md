@@ -44,7 +44,7 @@ filter @type = "REPORT"
 Create a latency report:
 
 ```
-filter type = "REPORT" |
+filter @type = "REPORT" |
 stats avg(@duration), max(@duration), min(@duration) by bin(5m)
 ```
 
@@ -61,9 +61,9 @@ stats sum(packets) as packetsTransferred by srcAddr, dstAddr
 Find the top 15 byte transfers for a given host: 
 
 ```
-filter srcAddr= "192.0.2.0/24"
+filter srcAddr LIKE "192.0.2."
 | stats sum(bytes) as bytesTransferred by dstAddr
-| sort bytesTransferred  desc
+| sort bytesTransferred desc
 | limit 15
 ```
 

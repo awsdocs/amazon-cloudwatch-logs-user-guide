@@ -61,3 +61,7 @@ After you create the endpoint, you can test the connection\.
    ```
 
    If the response to the command includes `nextSequenceToken`, the command has succeeded and your VPC endpoint is working\.
+
+## Support for VPC Context Keys<a name="Support-VPC-Context-Keys"></a>
+
+CloudWatch Logs supports the `aws:SourceVpc` and `aws:SourceVpce` context keys that can be used to limit access to specific VPCs or specific VPC endpoints\. These keys work only when the user is using VPC endpoints\. For more information, see [https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-service-available.html](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-service-available.html)\.

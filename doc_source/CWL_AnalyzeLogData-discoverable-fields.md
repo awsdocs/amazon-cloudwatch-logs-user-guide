@@ -5,6 +5,8 @@ CloudWatch Logs Insights supports all types of logs\. For every log sent to Clou
 + `@timestamp` contains the time at which the log event was added to the CloudWatch Logs\.
 + `@logStream` contains the name of the log stream to which the log event was added\.
 
+CloudWatch Logs Insights inserts the **@** symbol at the start of fields that it generates\.
+
 For many log types, CloudWatch Logs also automatically discovers the log fields contained in the logs\. These automatic discovery fields are shown in the following table\.
 
 For other types of logs with fields that CloudWatch Logs Insights does not automatically discover, you can use the `parse` command to extract and create ephemeral fields for use in that query\. For more information, see [CloudWatch Logs Insights Query Syntax](CWL_QuerySyntax.md)

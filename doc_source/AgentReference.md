@@ -148,10 +148,10 @@ Below are some common encodings:
 Specifies the time duration for the batching of log events\. The minimum value is 5000ms and default value is 5000ms\.
 
 **batch\_count**  
-Specifies the max number of log events in a batch, up to 10000\. The default value is 1000\.
+Specifies the max number of log events in a batch, up to 10000\. The default value is 10000\.
 
 **batch\_size**  
-Specifies the max size of log events in a batch, in bytes, up to 1048576 bytes\. The default value is 32768 bytes\. This size is calculated as the sum of all event messages in UTF\-8, plus 26 bytes for each log event\.
+Specifies the max size of log events in a batch, in bytes, up to 1048576 bytes\. The default value is 1048576 bytes\. This size is calculated as the sum of all event messages in UTF\-8, plus 26 bytes for each log event\.
 
 ## Using the CloudWatch Logs Agent with HTTP Proxies<a name="agent-http-proxies"></a>
 

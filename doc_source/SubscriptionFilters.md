@@ -426,7 +426,7 @@ Before you create the Kinesis Data Firehose stream, calculate the volume of log 
    aws firehose create-delivery-stream \
       --delivery-stream-name 'my-delivery-stream' \
       --s3-destination-configuration \
-     RoleARN='arn:aws:iam::123456789012:role/FirehosetoS3Role',BucketARN='arn:aws:s3:::my-bucket'
+     '{"RoleARN": "arn:aws:iam::123456789012:role/FirehosetoS3Role", "BucketARN": "arn:aws:s3:::my-bucket"}'
    ```
 
    Note that Kinesis Data Firehose automatically uses a prefix in YYYY/MM/DD/HH UTC time format for delivered Amazon S3 objects\. You can specify an extra prefix to be added in front of the time format prefix\. If the prefix ends with a forward slash \(/\), it appears as a folder in the Amazon S3 bucket\.
