@@ -72,7 +72,11 @@ Open the `policy.json` file in a text editor and add the statement in bold, repl
         "kms:GenerateDataKey*",
         "kms:Describe*"
       ],
-      "Resource": "*"
+      "Resource": "*",
+      "StringLike": {
+          "kms:EncryptionContext:aws:logs:arn": "arn:aws:logs:region:Your_account_ID:log-group:*"
+        }
+      }
     }  
   ]
 }
