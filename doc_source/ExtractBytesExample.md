@@ -37,7 +37,7 @@ At a command prompt, run the following command
 aws logs put-metric-filter \
 --log-group-name MyApp/access.log \
 --filter-name BytesTransferred \
---filter-pattern '[ip, id, user, timestamp, request, status_code=4*, size]' \
+--filter-pattern '[ip, id, user, timestamp, request, status_code, size]' \
 --metric-transformations \
 metricName=BytesTransferred,metricNamespace=MyNamespace,metricValue=$size,defaultValue=0
 ```
