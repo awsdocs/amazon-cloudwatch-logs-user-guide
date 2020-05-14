@@ -292,11 +292,11 @@ You can also add conditions to your fields so that only log events that match al
 [ip, user, username, timestamp, request = *html*, status_code = 4*, bytes]
 ```
 
-You can use `&&` as an AND operator, as in the following examples:
+You can use `&&` as a logical AND operator and `||` as a logical OR operator, as in the following examples:
 
 ```
 [ip, user, username, timestamp, request, status_code = 4* && bytes > 1000]
-[ip, user, username, timestamp, request, status_code = 4* && status_code != 403, bytes]
+[ip, user, username, timestamp, request, status_code = 403 || status_code = 404, bytes]
 ```
 
 CloudWatch Logs supports both string and numeric conditional fields\. For string fields, you can use = or \!= operators with an asterisk \(\*\)\.
