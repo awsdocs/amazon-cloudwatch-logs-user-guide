@@ -7,7 +7,7 @@ After you associate a CMK with a log group, all newly ingested data for the log 
 After you disassociate a CMK from a log group, CloudWatch Logs stops encrypting newly ingested data for the log group\. All previously ingested data remains encrypted\.
 
 ## Limits<a name="encryption-limits"></a>
-+ To associate a CMK with a log group and perform the following steps, you must have the following permissions: `kms:CreateKey`, `kms:GetKeyPolicy`, and `kms:PutKeyPolicy`\.
++ To perform the following steps, you must have the following permissions: `kms:CreateKey`, `kms:GetKeyPolicy`, and `kms:PutKeyPolicy`\.
 + After you associate or disassociate a CMK from a log group, it can take up to five minutes for the operation to take effect\.
 + If you revoke CloudWatch Logs access to an associated CMK or delete an associated CMK, your encrypted data in CloudWatch Logs can no longer be retrieved\.
 + You cannot associate a CMK with a log group using the CloudWatch console\.
