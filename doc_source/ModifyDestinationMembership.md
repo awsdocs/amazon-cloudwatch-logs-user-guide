@@ -12,10 +12,10 @@ You might encounter situations where you have to add or remove membership of som
     "Destinations": [
       {
         "DestinationName": "testDestination",
-        "RoleArn": "arn:aws:iam::123456789012:role/CWLtoKinesisRole",
-        "DestinationArn": "arn:aws:logs:region:123456789012:destination:testDestination",
-        "TargetArn": "arn:aws:kinesis:region:123456789012:stream/RecipientStream",
-        "AccessPolicy": "{\"Version\": \"2012-10-17\", \"Statement\": [{\"Sid\": \"\", \"Effect\": \"Allow\", \"Principal\": {\"AWS\": \"111111111111\"}, \"Action\": \"logs:PutSubscriptionFilter\", \"Resource\": \"arn:aws:logs:region:123456789012:destination:testDestination\"}] }"
+        "RoleArn": "arn:aws:iam::222222222222:role/CWLtoKinesisRole",
+        "DestinationArn": "arn:aws:logs:region:222222222222:destination:testDestination",
+        "TargetArn": "arn:aws:kinesis:region:222222222222:stream/RecipientStream",
+        "AccessPolicy": "{\"Version\": \"2012-10-17\", \"Statement\": [{\"Sid\": \"\", \"Effect\": \"Allow\", \"Principal\": {\"AWS\": \"111111111111\"}, \"Action\": \"logs:PutSubscriptionFilter\", \"Resource\": \"arn:aws:logs:region:222222222222:destination:testDestination\"}] }"
       }
     ]
    }
@@ -34,7 +34,7 @@ You might encounter situations where you have to add or remove membership of som
            "AWS" : "222222222222"
          },
          "Action" : "logs:PutSubscriptionFilter",
-         "Resource" : "arn:aws:logs:region:123456789012:destination:testDestination"
+         "Resource" : "arn:aws:logs:region:222222222222:destination:testDestination"
        }
      ]
    }
