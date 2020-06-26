@@ -4,12 +4,14 @@ You can export log data from your log groups to an Amazon S3 bucket and use this
 
 To begin the export process, you must create an S3 bucket to store the exported log data\. You can store the exported files in your Amazon S3 bucket and define Amazon S3 lifecycle rules to archive or delete exported files automatically\.
 
-**Note**  
-Starting on February 15, 2019, the export to Amazon S3 feature requires callers to have `s3:PutObject` access to the destination bucket\.
+Exporting to S3 buckets that are encrypted with AES\-256 is supported\. Exporting to S3 buckets encrypted with SSE\-KMS is not supported\. For more information, see [ How Do I Enable Default Encryption for an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/default-bucket-encryption.html)\.
 
 You can export logs from multiple log groups or multiple time ranges to the same S3 bucket\. To separate log data for each export task, you can specify a prefix that will be used as the Amazon S3 key prefix for all exported objects\.
 
-Log data can take up to 12 hours to become available for export\. For near real\-time analysis of log data, see [Analyze Log Data with CloudWatch Logs Insights](AnalyzingLogData.md) or [Real\-time Processing of Log Data with Subscriptions](Subscriptions.md) instead\.
+Log data can take up to 12 hours to become available for export\. For near real\-time analysis of log data, see [Analyzing Log Data with CloudWatch Logs Insights](AnalyzingLogData.md) or [Real\-time Processing of Log Data with Subscriptions](Subscriptions.md) instead\.
+
+**Note**  
+Starting on February 15, 2019, the export to Amazon S3 feature requires callers to have `s3:PutObject` access to the destination bucket\.
 
 **Topics**
 + [Concepts](#S3concepts)

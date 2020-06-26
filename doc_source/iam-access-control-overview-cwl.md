@@ -48,13 +48,20 @@ This section discusses using IAM in the context of CloudWatch Logs\. It doesn't 
 Policies attached to an IAM identity are referred to as identity\-based policies \(IAM polices\) and policies attached to a resource are referred to as resource\-based policies\. CloudWatch Logs supports identity\-based policies, and resource\-based policies for destinations, which are used to enable cross account subscriptions\. For more information, see [Cross\-Account Log Data Sharing with Subscriptions](CrossAccountSubscriptions.md)\.
 
 **Topics**
++ [Log Group Permissions and Contributor Insights](#cloudwatch-logs-permissions-and-contributor-insights)
 + [Identity\-Based Policies \(IAM Policies\)](#identity-based-policies-cwl)
 + [Resource\-Based Policies](#resource-based-policies-cwl)
+
+### Log Group Permissions and Contributor Insights<a name="cloudwatch-logs-permissions-and-contributor-insights"></a>
+
+Contributor Insights is a feature of CloudWatch that enables you to analyze data from log groups and create time series that display contributor data\. You can see metrics about the top\-N contributors, the total number of unique contributors, and their usage\. For more information, see [ Using Contributor Insights to Analyze High\-Cardinality Data](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights.html)\.
+
+When you grant a user the `cloudwatch:PutInsightRule` and `cloudwatch:GetInsightRuleReport` permissions, that user can create a rule that evaluates any log group in CloudWatch Logs and then see the results\. The results can contain contributor data for those log groups\. Be sure to grant these permissions only to users who should be able to view this data\.
 
 ### Identity\-Based Policies \(IAM Policies\)<a name="identity-based-policies-cwl"></a>
 
 You can attach policies to IAM identities\. For example, you can do the following: 
-+ **Attach a permissions policy to a user or a group in your account** – To grant a user permissions to view logs in the CloudWatch Logs, console you can attach a permissions policy to a user or group that the user belongs to\.
++ **Attach a permissions policy to a user or a group in your account** – To grant a user permissions to view logs in the CloudWatch Logs console, you can attach a permissions policy to a user or group that the user belongs to\.
 + **Attach a permissions policy to a role \(grant cross\-account permissions\)** – You can attach an identity\-based permissions policy to an IAM role to grant cross\-account permissions\. For example, the administrator in Account A can create a role to grant cross\-account permissions to another AWS account \(for example, Account B\) or an AWS service as follows:
 
   1. Account A administrator creates an IAM role and attaches a permissions policy to the role that grants permissions on resources in Account A\.
@@ -74,9 +81,6 @@ The following is an example policy that grants permissions for the `logs:PutLogE
       {
          "Sid":"",
          "Effect":"Allow",
-         "Principal":{
-            "AWS":"234567890123"
-         },
          "Action":[
             "logs:PutLogEvents",
             "logs:CreateLogGroup",

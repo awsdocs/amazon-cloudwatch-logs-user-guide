@@ -8,12 +8,12 @@ In this tutorial, you run a query that returns the results of executing aggregat
 
 1. In the navigation pane, choose **Insights**\.
 
-1. Choose a log group\.
+1. Select one or more log groups above the query editor\. To help find your log groups, enter text in the search bar and CloudWatch Logs displays matching log groups in the search bar\.
 
-1. In the query editor, delete the query that is currently shown, then type the following and choose **Run query**\. Replace *fieldname* with the name of a field that appears in the **Discovered fields** area on the right of the screen\.
+1. In the query editor, delete the query that is currently shown, enter the following, and then choose **Run**\. Replace *fieldname* with the name of a field that appears in the **Fields** area on the right of the page\.
 
    ```
    stats count(*) by fieldname
    ```
 
-   The results show the number of log events in the log group that were received by CloudWatch Logs that contain each different value for the field name you chose\.
+   The results show the number of log events in the log group that were received by CloudWatch Logs that contain each different value for the field name that you chose\.

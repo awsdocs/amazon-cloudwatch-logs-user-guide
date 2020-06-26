@@ -1,6 +1,9 @@
-# Searching and Filtering Log Data<a name="MonitoringLogData"></a>
+# Creating Metrics From Log Events Using Filters<a name="MonitoringLogData"></a>
 
-After the CloudWatch Logs agent begins publishing log data to Amazon CloudWatch, you can begin searching and filtering the log data by creating one or more metric filters\. Metric filters define the terms and patterns to look for in log data as it is sent to CloudWatch Logs\. CloudWatch Logs uses these metric filters to turn log data into numerical CloudWatch metrics that you can graph or set an alarm on\.
+After the CloudWatch Logs agent begins publishing log data to Amazon CloudWatch, you can begin searching and filtering the log data by creating one or more metric filters\. Metric filters define the terms and patterns to look for in log data as it is sent to CloudWatch Logs\. CloudWatch Logs uses these metric filters to turn log data into numerical CloudWatch metrics that you can graph or set an alarm on\. You can use any type of CloudWatch statistic, including percentile statistics, when viewing these metrics or setting alarms\.
+
+**Note**  
+Percentile statistics are supported for a metric only if none of the metric's values are negative\. If you set up your metric filter so that it can report negative numbers, percentile statistics will not be available for that metric when it has negative numbers as values\. For more information, see [Percentiles](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Percentiles)\.
 
 Filters do not retroactively filter data\. Filters only publish the metric data points for events that happen after the filter was created\. Filtered results return the first 50 lines, which will not be displayed if the timestamp on the filtered results is earlier than the metric creation time\.
 
@@ -10,7 +13,6 @@ Filters do not retroactively filter data\. Filters only publish the metric data 
 + [Creating Metric Filters](MonitoringPolicyExamples.md)
 + [Listing Metric Filters](ListingMetricFilters.md)
 + [Deleting a Metric Filter](DeletingMetricFilter.md)
-+ [Search Log Data Using Filter Patterns](SearchDataFilterPattern.md)
 
 ## Concepts<a name="search-filter-concepts"></a>
 

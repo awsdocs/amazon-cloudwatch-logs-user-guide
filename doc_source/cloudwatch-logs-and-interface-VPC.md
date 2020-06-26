@@ -15,21 +15,24 @@ CloudWatch Logs currently supports VPC endpoints in the following Regions:
 + US East \(N\. Virginia\)
 + US West \(N\. California\)
 + US West \(Oregon\)
++ Asia Pacific \(Hong Kong\)
 + Asia Pacific \(Mumbai\)
 + Asia Pacific \(Seoul\)
 + Asia Pacific \(Singapore\)
 + Asia Pacific \(Sydney\)
 + Asia Pacific \(Tokyo\)
 + Canada \(Central\)
-+ EU \(Frankfurt\)
-+ EU \(Ireland\)
-+ EU \(London\)
-+ EU \(Paris\)
++ Europe \(Frankfurt\)
++ Europe \(Ireland\)
++ Europe \(London\)
++ Europe \(Paris\)
 + South America \(São Paulo\)
++ AWS GovCloud \(US\-East\)
++ AWS GovCloud \(US\-West\)
 
-## Create a VPC Endpoint for CloudWatch Logs<a name="create-VPC-endpoint-for-CloudWatchLogs"></a>
+## Creating a VPC Endpoint for CloudWatch Logs<a name="create-VPC-endpoint-for-CloudWatchLogs"></a>
 
-To start using CloudWatch Logs with your VPC, create an interface VPC endpoint for CloudWatch Logs\. The endpoint name will be `com.amazonaws.Region.logs`\. For more information, see [Creating an Interface Endpoint](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#create-interface-endpoint.html) in the *Amazon VPC User Guide*\.
+To start using CloudWatch Logs with your VPC, create an interface VPC endpoint for CloudWatch Logs\. The service to choose is **com\.amazonaws\.*Region*\.logs**\. For more information, see [Creating an Interface Endpoint](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#create-interface-endpoint.html) in the *Amazon VPC User Guide*\.
 
 You do not need to change the settings for CloudWatch Logs\. CloudWatch Logs calls other AWS services using either public endpoints or private interface VPC endpoints, whichever are in use\. For example, if you create an interface VPC endpoint for CloudWatch Logs, and you already have a CloudWatch Logs subscription filter for Kinesis Data Streams and an interface VPC endpoint for Kinesis Data Streams, calls between CloudWatch Logs and Kinesis Data Streams begin to flow through the interface VPC endpoint\.
 
@@ -62,6 +65,45 @@ After you create the endpoint, you can test the connection\.
 
    If the response to the command includes `nextSequenceToken`, the command has succeeded and your VPC endpoint is working\.
 
+## Controlling Access to Your CloudWatch Logs VPC Endpoint<a name="CloudWatchLogs-VPC-endpoint-policy"></a>
+
+A VPC endpoint policy is an IAM resource policy that you attach to an endpoint when you create or modify the endpoint\. If you don't attach a policy when you create an endpoint, we attach a default policy for you that allows full access to the service\. An endpoint policy doesn't override or replace IAM user policies or service\-specific policies\. It's a separate policy for controlling access from the endpoint to the specified service\. 
+
+Endpoint policies must be written in JSON format\. 
+
+For more information, see [Controlling Access to Services with VPC Endpoints](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints-access.html) in the *Amazon VPC User Guide*\.
+
+The following is an example of an endpoint policy for CloudWatch Logs\. This policy enables users connecting to CloudWatch Logs through the VPC to create log streams and send logs to CloudWatch Logs, and prevents them from performing other CloudWatch Logs actions\.
+
+```
+{
+  "Statement": [
+    {
+      "Sid": "PutOnly",
+      "Principal": "*",
+      "Action": [
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}
+```
+
+**To modify the VPC endpoint policy for CloudWatch Logs**
+
+1. Open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc/](https://console.aws.amazon.com/vpc/)\.
+
+1. In the navigation pane, choose **Endpoints**\.
+
+1. If you have not already created the endpoint for CloudWatch Logs, choose **Create Endpoint**\. Then select **com\.amazonaws\.*Region*\.logs** and choose **Create endpoint**\.
+
+1. Select the **com\.amazonaws\.*Region*\.logs** endpoint, and choose the **Policy** tab in the lower half of the screen\.
+
+1. Choose **Edit Policy** and make the changes to the policy\.
+
 ## Support for VPC Context Keys<a name="Support-VPC-Context-Keys"></a>
 
-CloudWatch Logs supports the `aws:SourceVpc` and `aws:SourceVpce` context keys that can be used to limit access to specific VPCs or specific VPC endpoints\. These keys work only when the user is using VPC endpoints\. For more information, see [https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-service-available.html](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-service-available.html)\.
+CloudWatch Logs supports the `aws:SourceVpc` and `aws:SourceVpce` context keys that can limit access to specific VPCs or specific VPC endpoints\. These keys work only when the user is using VPC endpoints\. For more information, see [Keys Available for Some Services](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-service-available) in the *IAM User Guide*\.

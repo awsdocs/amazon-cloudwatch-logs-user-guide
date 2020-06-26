@@ -41,7 +41,7 @@ directory "/opt/aws/cloudwatch" do
 end
 
 remote_file "/opt/aws/cloudwatch/awslogs-agent-setup.py" do
-  source "https://s3.amazonaws.com//aws-cloudwatch/downloads/latest/awslogs-agent-setup.py"
+  source "https://s3.amazonaws.com/aws-cloudwatch/downloads/latest/awslogs-agent-setup.py"
   mode "0755"
 end
  
@@ -119,7 +119,7 @@ default[:cwlogs][:logfile] = '/var/log/aws/opsworks/opsworks-agent.statistics.lo
 
 1. For **Repository type**, select the repository type that you use\. If you're using the above example, choose **Http Archive**\.
 
-1. For **Repository URL**, enter the repository where you stored the cookbook that you created in the previous step\. If you're using the above example, enter **https://s3\.amazonaws\.com//aws\-cloudwatch/downloads/CloudWatchLogs\-Cookbooks\.zip**\.
+1. For **Repository URL**, enter the repository where you stored the cookbook that you created in the previous step\. If you're using the above example, enter **https://s3\.amazonaws\.com/aws\-cloudwatch/downloads/CloudWatchLogs\-Cookbooks\.zip**\.
 
 1. Choose **Add Stack** to create the stack\.
 

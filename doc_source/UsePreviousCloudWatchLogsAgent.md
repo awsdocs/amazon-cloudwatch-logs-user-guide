@@ -16,7 +16,7 @@ Using the CloudWatch Logs agent, you can publish log data from Amazon EC2 instan
 ## CloudWatch Logs Agent Prerequisites<a name="CWL_Prerequisites"></a>
 
 The CloudWatch Logs agent requires Python version 2\.7, 3\.0, or 3\.3, and any of the following versions of Linux:
-+ Amazon Linux version 2014\.03\.02 or later
++ Amazon Linux version 2014\.03\.02 or later\. Amazon Linux 2 is not supported
 + Ubuntu Server version 12\.04, 14\.04, or 16\.04
 + CentOS version 6, 6\.3, 6\.4, 6\.5, or 7\.0
 + Red Hat Enterprise Linux \(RHEL\) version 6\.5 or 7\.0

@@ -327,7 +327,9 @@ Run Command enables you to manage the configuration of your instances on demand\
 
 1. Open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
 
-1. In the navigation pane, choose **Systems Manager Services**, **Run Command**\.
+1. Open the SSM console at [https://console\.aws\.amazon\.com/systems\-manager/](https://console.aws.amazon.com/systems-manager/)\.
+
+1. In the navigation pane, choose **Run Command**\.
 
 1. Choose **Run a command**\.
 

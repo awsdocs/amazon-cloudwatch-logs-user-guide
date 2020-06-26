@@ -41,7 +41,7 @@ The CloudWatch Logs agent supports IAM roles and users\. If your instance alread
            "logs:DescribeLogStreams"
        ],
          "Resource": [
-           "arn:aws:logs:*:*:*"
+           "*"
        ]
      }
     ]
@@ -166,7 +166,7 @@ On Ubuntu, run `apt-get update` before running the commands below\.
 
    You can install the CloudWatch Logs agent by specifying the us\-east\-1, us\-west\-1, us\-west\-2, ap\-south\-1, ap\-northeast\-2, ap\-southeast\-1, ap\-southeast\-2, ap\-northeast\-1, eu\-central\-1, eu\-west\-1, or sa\-east\-1 regions\.
 **Note**  
-For more information about the current version and the version history of `awslogs-agent-setup`, see [CHANGELOG\.txt](https://s3.amazonaws.com//aws-cloudwatch/downloads/latest/CHANGELOG.txt)\.
+For more information about the current version and the version history of `awslogs-agent-setup`, see [CHANGELOG\.txt](https://s3.amazonaws.com/aws-cloudwatch/downloads/latest/CHANGELOG.txt)\.
 
    The CloudWatch Logs agent installer requires certain information during setup\. Before you start, you need to know which log file to monitor and its time stamp format\. You should also have the following information ready\.    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/QuickStartEC2Instance.html)

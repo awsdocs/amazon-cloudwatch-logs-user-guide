@@ -166,7 +166,7 @@ After you create the export task for exporting logs from a log group, the export
 At a command prompt, use the following [create\-export\-task](https://docs.aws.amazon.com/cli/latest/reference/logs/create-export-task.html) command to create the export task\.
 
 ```
-aws logs create-export-task --profile CWLExportUser create-export-task --task-name "my-log-group-09-10-2015" --log-group-name "my-log-group" --from 1441490400000 --to 1441494000000 --destination "my-exported-logs" --destination-prefix "export-task-output"
+aws logs create-export-task --profile CWLExportUser --task-name "my-log-group-09-10-2015" --log-group-name "my-log-group" --from 1441490400000 --to 1441494000000 --destination "my-exported-logs" --destination-prefix "export-task-output"
 ```
 
 The following is example output\.
@@ -194,20 +194,20 @@ The following is example output\.
 {
    "exportTasks": [
    {
-      "Destination": "my-exported-logs",
-      "DestinationPrefix": "export-task-output",
-      "ExecutionInfo": {
-         "CreationTime": 1441495400000
+      "destination": "my-exported-logs",
+      "destinationPrefix": "export-task-output",
+      "executionInfo": {
+         "creationTime": 1441495400000
       },
-      "From": 1441490400000,
-      "LogGroupName": "my-log-group",
-      "Status": {
-         "Code": "RUNNING",
-         "Message": "Started Successfully"
+      "from": 1441490400000,
+      "logGroupName": "my-log-group",
+      "status": {
+         "code": "RUNNING",
+         "message": "Started Successfully"
       },
-      "TaskId": "cda45419-90ea-4db5-9833-aade86253e66",
-      "TaskName": "my-log-group-09-10-2015",
-      "To": 1441494000000
+      "taskId": "cda45419-90ea-4db5-9833-aade86253e66",
+      "taskName": "my-log-group-09-10-2015",
+      "tTo": 1441494000000
    }]
 }
 ```
@@ -229,21 +229,21 @@ The following is example output\.
 {
    "exportTasks": [
    {
-      "Destination": "my-exported-logs",
-      "DestinationPrefix": "export-task-output",
-      "ExecutionInfo": {
-         "CompletionTime": 1441498600000
-         "CreationTime": 1441495400000
+      "destination": "my-exported-logs",
+      "destinationPrefix": "export-task-output",
+      "executionInfo": {
+         "completionTime": 1441498600000
+         "creationTime": 1441495400000
       },
-      "From": 1441490400000,
-      "LogGroupName": "my-log-group",
-      "Status": {
-         "Code": "FAILED",
-         "Message": "FAILED"
+      "from": 1441490400000,
+      "logGroupName": "my-log-group",
+      "status": {
+         "code": "FAILED",
+         "message": "FAILED"
       },
-      "TaskId": "cda45419-90ea-4db5-9833-aade86253e66",
-      "TaskName": "my-log-group-09-10-2015",
-      "To": 1441494000000
+      "taskId": "cda45419-90ea-4db5-9833-aade86253e66",
+      "taskName": "my-log-group-09-10-2015",
+      "to": 1441494000000
    }]
 }
 ```

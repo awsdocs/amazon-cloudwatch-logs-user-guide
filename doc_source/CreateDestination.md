@@ -1,8 +1,11 @@
 # Create a Destination<a name="CreateDestination"></a>
 
-The steps in this procedure are to be done in the log data recipient account\. For this example, the log data recipient account has an AWS account ID of 999999999999, while the log data sender AWS account ID is 111111111111\.
+**Important**  
+All steps in this procedure are to be done in the log data recipient account\.
 
- This example creates a destination using an Kinesis stream called RecipientStream, and a role that enables CloudWatch Logs to write data to it\. 
+For this example, the log data recipient account has an AWS account ID of 999999999999, while the log data sender AWS account ID is 111111111111\.
+
+ This example creates a destination using a Kinesis stream called RecipientStream, and a role that enables CloudWatch Logs to write data to it\. 
 
 **To create a destination**
 
@@ -142,6 +145,8 @@ The steps in this procedure are to be done in the log data recipient account\. F
         ]
       }
       ```
+**Note**  
+If multiple accounts are sending logs to this destination, each sender account must be listed separately in the policy\. This policy does not support specifying `*` as the `Principal` or the use of the `aws:PrincipalOrgId` global key\.
 
    1. This creates a policy that defines who has write access to the destination\. This policy must specify the **logs:PutSubscriptionFilter** action to access the destination\. Cross\-account users will use the **PutSubscriptionFilter** action to send log events to the destination:
 
@@ -151,6 +156,6 @@ The steps in this procedure are to be done in the log data recipient account\. F
           --access-policy file://~/AccessPolicy.json
       ```
 
-      This access policy allows the root user of the AWS Account with ID 111111111111 to call **PutSubscriptionFilter** against the destination with ARN arn:aws:logs:*region*:999999999999:destination:testDestination\. Any other user's attempt to call PutSubscriptionFilter against this destination will be rejected\.
+      This access policy enables users in the AWS Account with ID 111111111111 to call **PutSubscriptionFilter** against the destination with ARN arn:aws:logs:*region*:999999999999:destination:testDestination\. Any other user's attempt to call PutSubscriptionFilter against this destination will be rejected\.
 
       To validate a user's privileges against an access policy, see [Using Policy Validator](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies_policy-validator.html) in the *IAM User Guide*\.

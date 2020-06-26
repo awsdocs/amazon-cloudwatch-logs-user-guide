@@ -8,27 +8,25 @@ The following example demonstrates how to create a metric that includes all 400\
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. In the navigation pane, choose **Logs**\.
+1. In the navigation pane, choose **Log groups**\.
 
-1. In the contents pane, select a log group, and then choose **Create Metric Filter**\.
+1. Choose `Actions`, **Create metric filter**\.
 
-1. On the **Define Logs Metric Filter** screen, for **Filter Pattern**, type **\[ip, id, user, timestamp, request, status\_code=4\*, size\]**\.
+1. For **Filter Pattern**, type **\[ip, id, user, timestamp, request, status\_code=4\*, size\]**\.
 
-1. To test your filter pattern, for **Select Log Data to Test**, select the log group to test the metric filter against, and then choose **Test Pattern**\.
+1. To test your filter pattern, choose **Test Pattern**\.
 
-1. Under **Results**, CloudWatch Logs displays a message showing how many occurrences of the filter pattern were found in the log file\.
+1. Choose **Next**, and then for **Filter Name**, type **HTTP4xxErrors**\.
 
-   To see detailed results, click **Show test results**\.
+1. Under **Metric Details**, for **Metric Namespace**, enter **MyNameSpace**\.
 
-1. Choose **Assign Metric**, and then on the **Create Metric Filter and Assign a Metric** screen, for **Filter Name**, type **HTTP4xxErrors**\.
+1. For **Metric Name**, enter **HTTP4xxErrors**\.
 
-1. Under **Metric Details**, for **Metric Namespace**, type **MyNameSpace**\.
+1. Confirm that **Metric Value** is 1\. This specifies that the count is incremented by 1 for every log containing a 4xx error\.
 
-1. For **Metric Name**, type **HTTP4xxErrors**\.
+1. For **Default Value** enter 0, and then choose **Next**\. 
 
-1. Choose **Show advanced metric settings** and confirm that **Metric Value** is 1\. This specifies that the count is incremented by 1 for every log containing a 4xx error\.
-
-1. For **Default Value** type 0, and then choose **Create Filter**\. 
+1. Choose **Create metric filter**\.
 
 **To create a metric filter using the AWS CLI**  
 At a command prompt, run the following command:

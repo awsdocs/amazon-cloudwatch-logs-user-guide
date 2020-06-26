@@ -6,7 +6,7 @@ A policy is identified by its name and the log group it belongs to\.
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. In the navigation pane, choose **Logs**\.
+1. In the navigation pane, choose **Log groups**\.
 
 1. In the contents pane, in the **Metric Filter** column, choose the metric filter\.
 

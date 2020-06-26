@@ -61,16 +61,19 @@ The full set of permissions required to work with the CloudWatch console for a u
 + logs:deleteLogGroup
 + logs:deleteLogStream
 + logs:deleteMetricFilter
++ logs:deleteQueryDefinition
 + logs:deleteRetentionPolicy
 + logs:deleteSubscriptionFilter
 + logs:describeExportTasks
 + logs:describeLogGroups
 + logs:describeLogStreams
 + logs:describeMetricFilters
++ logs:describeQueryDefinitions
 + logs:describeSubscriptionFilters
 + logs:filterLogEvents
 + logs:getLogEvents
 + logs:putMetricFilter
++ logs:putQueryDefinition
 + logs:putRetentionPolicy
 + logs:putSubscriptionFilter
 + logs:testMetricFilter
@@ -114,10 +117,11 @@ You can also create your own custom IAM policies to allow permissions for CloudW
 In this section, you can find example user policies that grant permissions for various CloudWatch Logs actions\. These policies work when you are using the CloudWatch Logs API, AWS SDKs, or the AWS CLI\.
 
 **Topics**
-+ [Example 1: Allow Full Access to CloudWatch Logs](#w4aac26c13c23b7)
-+ [Example 2: Allow Read\-Only Access to CloudWatch Logs](#w4aac26c13c23b9)
++ [Example 1: Allow Full Access to CloudWatch Logs](#w21aac27c15c15c23b7)
++ [Example 2: Allow Read\-Only Access to CloudWatch Logs](#w21aac27c15c15c23b9)
++ [Example 3: Allow Access to One Log Group](#w21aac27c15c15c23c11)
 
-### Example 1: Allow Full Access to CloudWatch Logs<a name="w4aac26c13c23b7"></a>
+### Example 1: Allow Full Access to CloudWatch Logs<a name="w21aac27c15c15c23b7"></a>
 
 The following policy allows a user to access all CloudWatch Logs actions\.
 
@@ -136,24 +140,79 @@ The following policy allows a user to access all CloudWatch Logs actions\.
 }
 ```
 
-### Example 2: Allow Read\-Only Access to CloudWatch Logs<a name="w4aac26c13c23b9"></a>
+### Example 2: Allow Read\-Only Access to CloudWatch Logs<a name="w21aac27c15c15c23b9"></a>
 
-The following policy allows a user read\-only access to CloudWatch Logs data\.
+AWS provides a **CloudWatchLogsReadOnlyAccess** policy that enables read\-only access to CloudWatch Logs data\. This policy includes the following permissions\.
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": [
+                "logs:Describe*",
+                "logs:Get*",
+                "logs:List*",
+                "logs:StartQuery",
+                "logs:StopQuery",
+                "logs:TestMetricFilter",
+                "logs:FilterLogEvents"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
+        }
+    ]
+}
+```
+
+### Example 3: Allow Access to One Log Group<a name="w21aac27c15c15c23c11"></a>
+
+The following policy allows a user to read and write log events in one specified log group\.
 
 ```
 {
    "Version":"2012-10-17",
    "Statement":[
       {
-         "Action":[
-            "logs:Describe*",
-            "logs:Get*",
-            "logs:TestMetricFilter",
-            "logs:FilterLogEvents"
-         ],
-         "Effect":"Allow",
-         "Resource":"*"
+      "Action": [
+        "logs:CreateLogStream",
+        "logs:DescribeLogStreams",
+        "logs:PutLogEvents",
+        "logs:GetLogEvents"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:aws:logs:us-west-2:123456789012:log-group:SampleLogGroupName:*"
       }
    ]
 }
 ```
+
+## Use Tagging and IAM Policies for Control at the Log Group Level<a name="cwl-IAM-policy-tagging"></a>
+
+You can grant users access to certain log groups while preventing them from accessing other log groups\. To do so, tag your log groups and use IAM policies that refer to those tags\.
+
+For more information about tagging log groups, see [Tag Log Groups in Amazon CloudWatch Logs](Working-with-log-groups-and-streams.md#log-group-tagging)\.
+
+When you tag log groups, you can then grant an IAM policy to a user to allow access to only the log groups with a particular tag\. For example, the following policy statement grants access to only log groups with the value of `Green` for the tag key `Team`\.
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": [
+                "logs:*"
+            ],
+            "Effect": "Allow",
+            "Resource": "*",
+            "Condition": {
+                "StringLike": {
+                    "logs:ResourceTag/Team": "Green"
+                }
+            }
+        }
+    ]
+}
+```
+
+For more information about using IAM policy statements, see [Controlling Access Using Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_controlling.html) in the *IAM User Guide*\.

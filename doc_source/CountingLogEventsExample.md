@@ -8,21 +8,25 @@ In the following CLI example, a metric filter called MyAppAccessCount is applied
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. In the navigation pane, choose **Logs**\.
+1. In the navigation pane, choose **Log groups**\.
 
-1. In the contents pane, select a log group, and then choose **Create Metric Filter**\.
+1. Choose the name of a log group\.
 
-1. On the **Define Logs Metric Filter** screen, leave **Filter Pattern** blank\.
+1. Choose `Actions`, **Create metric filter**\.
 
-1. Choose **Assign Metric**, and then on the **Create Metric Filter and Assign a Metric** screen, for **Filter Name**, type **EventCount**\.
+1. Leave **Filter Pattern** and **Select Log Data to Test** blank\.
+
+1. Choose **Next**, and then for **Filter Name**, type **EventCount**\.
 
 1. Under **Metric Details**, for **Metric Namespace**, type **MyNameSpace**\.
 
 1. For **Metric Name**, type **MyAppEventCount**\.
 
-1. Choose **Show advanced metric settings** and confirm that **Metric Value** is 1\. This specifies that the count is incremented by 1 for every log event\.
+1. Confirm that **Metric Value** is 1\. This specifies that the count is incremented by 1 for every log event\.
 
-1. For **Default Value** type 0, and then choose **Create Filter**\. Specifying a default value ensures that data is reported even during periods when no log events occur, preventing spotty metrics where data sometimes does not exist\.
+1. For **Default Value** enter 0, and then choose **Next**\. Specifying a default value ensures that data is reported even during periods when no log events occur, preventing spotty metrics where data sometimes does not exist\.
+
+1. Choose **Create metric filter**\.
 
 **To create a metric filter using the AWS CLI**  
 At a command prompt, run the following command:

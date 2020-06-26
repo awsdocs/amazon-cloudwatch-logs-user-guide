@@ -9,7 +9,7 @@ You can use a subscription filter with Kinesis, Lambda, or Kinesis Data Firehose
 
 ## Example 1: Subscription Filters with Kinesis<a name="DestinationKinesisExample"></a>
 
-The following example associates a subscription filter with a log group containing AWS CloudTrail events to have every logged activity made by "Root" AWS credentials delivered to an Kinesis stream called "RootAccess\." For more information about how to send AWS CloudTrail events to CloudWatch Logs, see [Sending CloudTrail Events to CloudWatch Logs](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cw_send_ct_events.html) in the *AWS CloudTrail User Guide*\.
+The following example associates a subscription filter with a log group containing AWS CloudTrail events to have every logged activity made by "Root" AWS credentials delivered to a Kinesis stream called "RootAccess\." For more information about how to send AWS CloudTrail events to CloudWatch Logs, see [Sending CloudTrail Events to CloudWatch Logs](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cw_send_ct_events.html) in the *AWS CloudTrail User Guide*\.
 
 **Note**  
 Before you create the Kinesis stream, calculate the volume of log data that will be generated\. Be sure to create a Kinesis stream with enough shards to handle this volume\. If the stream does not have enough shards, the log stream will be throttled\. For more information about Kinesis stream volume limits, see [Amazon Kinesis Data Streams Limits](https://docs.aws.amazon.com/streams/latest/dev/service-sizes-and-limits.html)\. 
@@ -128,7 +128,7 @@ Before you create the Kinesis stream, calculate the volume of log data that will
        --role-arn "arn:aws:iam::123456789012:role/CWLtoKinesisRole"
    ```
 
-1. After you set up the subscription filter, CloudWatch Logs forwards all the incoming log events that match the filter pattern to your Kinesis stream\. You can verify that this is happening by grabbing an Kinesis shard iterator and using the Kinesis get\-records command to fetch some Kinesis records:
+1. After you set up the subscription filter, CloudWatch Logs forwards all the incoming log events that match the filter pattern to your Kinesis stream\. You can verify that this is happening by grabbing a Kinesis shard iterator and using the Kinesis get\-records command to fetch some Kinesis records:
 
    ```
    aws kinesis get-shard-iterator --stream-name RootAccess --shard-id shardId-000000000000 --shard-iterator-type TRIM_HORIZON
@@ -147,7 +147,7 @@ Before you create the Kinesis stream, calculate the volume of log data that will
 
    Note that you might need to make this call a few times before Kinesis starts to return data\.
 
-   You should expect to see a response with an array of records\. The **Data** attribute in an Kinesis record is Base64 encoded and compressed with the gzip format\. You can examine the raw data from the command line using the following Unix commands:
+   You should expect to see a response with an array of records\. The **Data** attribute in a Kinesis record is Base64 encoded and compressed with the gzip format\. You can examine the raw data from the command line using the following Unix commands:
 
    ```
    echo -n "<Content of Data>" | base64 -d | zcat
@@ -216,7 +216,7 @@ Before you create the Lambda function, calculate the volume of log data that wil
    ```
    var zlib = require('zlib');
    exports.handler = function(input, context) {
-       var payload = new Buffer(input.awslogs.data, 'base64');
+       var payload = Buffer.from(input.awslogs.data, 'base64');
        zlib.gunzip(payload, function(e, result) {
            if (e) { 
                context.fail(e);
@@ -236,10 +236,10 @@ Before you create the Lambda function, calculate the volume of log data that wil
    ```
    aws lambda create-function \
        --function-name helloworld \
-       --zip-file file://file-path/helloWorld.zip \
+       --zip-file fileb://file-path/helloWorld.zip \
        --role lambda-execution-role-arn \
        --handler helloWorld.handler \
-       --runtime nodejs4.3
+       --runtime nodejs8.10
    ```
 
 1. Grant CloudWatch Logs the permission to execute your function\. Use the following command, replacing the placeholder account with your own account and the placeholder log group with the log group to process:

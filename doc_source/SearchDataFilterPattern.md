@@ -14,25 +14,25 @@ You can search for log entries that meet a specified criteria using the console\
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. In the navigation pane, choose **Logs**\.
+1. In the navigation pane, choose **Log groups**\.
 
 1. For **Log Groups**, choose the name of the log group containing the log stream to search\.
 
 1. For **Log Streams**, choose the name of the log stream to search\.
 
-1. For **Filter**, type the metric filter syntax to use and then press Enter\.
+1. Under **Log events**, enter the filter syntax to use\.
 
 **To search all log entries for a time range using the console**
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. In the navigation pane, choose **Logs**\.
+1. In the navigation pane, choose **Log groups**\.
 
 1. For **Log Groups**, choose the name of the log group containing the log stream to search\.
 
-1. Choose **Search Events**\.
+1. Choose **Search log group**\.
 
-1. For **Filter**, type the metric filter syntax to use, select the date and time range, and then press Enter\.
+1. For **Log events**, select the date and time range, and enter the filter syntax\.
 
 ## Search Log Entries Using the AWS CLI<a name="search-log-entries-cli"></a>
 

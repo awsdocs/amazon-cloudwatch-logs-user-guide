@@ -1,7 +1,7 @@
 # Amazon CloudWatch Logs User Guide
 
 -----
-*****Copyright &copy; 2019 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; 2020 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -14,7 +14,7 @@ Amazon's trademarks and trade dress may not be used in
 
 -----
 ## Contents
-+ [What is Amazon CloudWatch Logs?](WhatIsCloudWatchLogs.md)
++ [What Is Amazon CloudWatch Logs?](WhatIsCloudWatchLogs.md)
    + [Amazon CloudWatch Logs Concepts](CloudWatchLogsConcepts.md)
 + [Getting Set Up](GettingSetup_cwl.md)
 + [Getting Started with CloudWatch Logs](CWL_GettingStarted.md)
@@ -29,19 +29,23 @@ Amazon's trademarks and trade dress may not be used in
       + [Start the CloudWatch Logs Agent](StartTheCWLAgent.md)
       + [Stop the CloudWatch Logs Agent](StopTheCWLAgent.md)
    + [Quick Start: Use AWS CloudFormation to Get Started With CloudWatch Logs](QuickStartCloudFormation.md)
-+ [Analyze Log Data with CloudWatch Logs Insights](AnalyzingLogData.md)
++ [Analyzing Log Data with CloudWatch Logs Insights](AnalyzingLogData.md)
    + [Supported Logs and Discovered Fields](CWL_AnalyzeLogData-discoverable-fields.md)
    + [Tutorial: Run and Modify a Sample Query](CWL_AnalyzeLogData_RunSampleQuery.md)
    + [Tutorial: Run a Query with an Aggregation Function](CWL_AnalyzeLogData_AggregationQuery.md)
-   + [Tutorial: Run a Query That Produces a Visualization](CWL_AnalyzeLogData_VisualizationQuery.md)
+   + [Tutorial: Run a Query That Produces a Visualization Grouped by Log Fields](CWL_AnalyzeLogData_VisualizationFieldQuery.md)
+   + [Tutorial: Run a Query That Produces a Time Series Visualization](CWL_AnalyzeLogData_VisualizationQuery.md)
    + [CloudWatch Logs Insights Query Syntax](CWL_QuerySyntax.md)
-   + [Visualizing Time Series Data](CWL_Insights-Visualizing-TimeSeries.md)
+   + [Visualizing Log Data in Graphs](CWL_Insights-Visualizing-Log-Data.md)
+   + [Saving and Re-running CloudWatch Logs Insights Queries](CWL_Insights-Saving-Queries.md)
    + [Sample Queries](CWL_QuerySyntax-examples.md)
    + [Add Query to Dashboard or Export Query Results](CWL_ExportQueryResults.md)
    + [View Running Queries or Query History](CloudWatchLogs-Insights-Query-History.md)
 + [Working with Log Groups and Log Streams](Working-with-log-groups-and-streams.md)
+   + [Search Log Data Using Filter Patterns](SearchDataFilterPattern.md)
    + [Encrypt Log Data in CloudWatch Logs Using AWS KMS](encrypt-log-data-kms.md)
-+ [Searching and Filtering Log Data](MonitoringLogData.md)
+   + [Enabling Logging from Certain AWS Services](AWS-logs-and-resource-policy.md)
++ [Creating Metrics From Log Events Using Filters](MonitoringLogData.md)
    + [Filter and Pattern Syntax](FilterAndPatternSyntax.md)
    + [Creating Metric Filters](MonitoringPolicyExamples.md)
       + [Example: Count Log Events](CountingLogEventsExample.md)
@@ -51,7 +55,6 @@ Amazon's trademarks and trade dress may not be used in
       + [Example: Extract Fields from an Apache Log](ExtractBytesExample.md)
    + [Listing Metric Filters](ListingMetricFilters.md)
    + [Deleting a Metric Filter](DeletingMetricFilter.md)
-   + [Search Log Data Using Filter Patterns](SearchDataFilterPattern.md)
 + [Real-time Processing of Log Data with Subscriptions](Subscriptions.md)
    + [Using CloudWatch Logs Subscription Filters](SubscriptionFilters.md)
    + [Cross-Account Log Data Sharing with Subscriptions](CrossAccountSubscriptions.md)
@@ -64,14 +67,20 @@ Amazon's trademarks and trade dress may not be used in
    + [Export Log Data to Amazon S3 Using the Console](S3ExportTasksConsole.md)
    + [Export Log Data to Amazon S3 Using the AWS CLI](S3ExportTasks.md)
 + [Streaming CloudWatch Logs Data to Amazon Elasticsearch Service](CWL_ES_Stream.md)
-+ [Authentication and Access Control for Amazon CloudWatch Logs](auth-and-access-control-cwl.md)
-   + [Overview of Managing Access Permissions to Your CloudWatch Logs Resources](iam-access-control-overview-cwl.md)
-   + [Using Identity-Based Policies (IAM Policies) for CloudWatch Logs](iam-identity-based-access-control-cwl.md)
-   + [CloudWatch Logs Permissions Reference](permissions-reference-cwl.md)
-+ [Using CloudWatch Logs with Interface VPC Endpoints](cloudwatch-logs-and-interface-VPC.md)
++ [AWS Services That Publish Logs to CloudWatch Logs](aws-services-sending-logs.md)
++ [Security in Amazon CloudWatch Logs](security.md)
+   + [Data Protection in Amazon CloudWatch Logs](data-protection.md)
+   + [Identity and Access Management for Amazon CloudWatch Logs](auth-and-access-control-cwl.md)
+      + [Overview of Managing Access Permissions to Your CloudWatch Logs Resources](iam-access-control-overview-cwl.md)
+      + [Using Identity-Based Policies (IAM Policies) for CloudWatch Logs](iam-identity-based-access-control-cwl.md)
+      + [CloudWatch Logs Permissions Reference](permissions-reference-cwl.md)
+   + [Compliance Validation for Amazon CloudWatch Logs](compliance-validation.md)
+   + [Resilience in Amazon CloudWatch Logs](disaster-recovery-resiliency.md)
+   + [Infrastructure Security in Amazon CloudWatch Logs](infrastructure-security.md)
+   + [Using CloudWatch Logs with Interface VPC Endpoints](cloudwatch-logs-and-interface-VPC.md)
 + [Logging Amazon CloudWatch Logs API Calls in AWS CloudTrail](logging_cw_api_calls_cwl.md)
 + [CloudWatch Logs Agent Reference](AgentReference.md)
 + [Monitoring Usage with CloudWatch Metrics](CloudWatch-Logs-Monitoring-CloudWatch-Metrics.md)
-+ [CloudWatch Logs Limits](cloudwatch_limits_cwl.md)
++ [CloudWatch Logs quotas](cloudwatch_limits_cwl.md)
 + [Document History](DocumentHistory_cwl.md)
 + [AWS Glossary](glossary.md)

@@ -1,6 +1,6 @@
 # CloudWatch Logs Agent Reference<a name="AgentReference"></a>
 
-The CloudWatch Logs agent provides an automated way to send log data to CloudWatch Logs from Amazon EC2 instances\. The agent is comprised of the following components:
+The CloudWatch Logs agent provides an automated way to send log data to CloudWatch Logs from Amazon EC2 instances\. The agent includes the following components:
 + A plug\-in to the AWS CLI that pushes log data to CloudWatch Logs\.
 + A script \(daemon\) that initiates the process to push data to CloudWatch Logs\.
 + A cron job that ensures that the daemon is always running\.
@@ -288,7 +288,8 @@ The CloudWatch Logs agent requires the `CreateLogGroup`, `CreateLogStream`, `Des
 ```
 
 **I don't want the CloudWatch Logs agent to create either log groups or log streams automatically\. How can I prevent the agent from recreating both log groups and log streams?**  
-In your IAM policy, you can restrict the agent to only the following operations: `DescribeLogStreams`, `PutLogEvents`\.
+In your IAM policy, you can restrict the agent to only the following operations: `DescribeLogStreams`, `PutLogEvents`\.  
+Before you revoke the `CreateLogGroup` and `CreateLogStream` permissions from the agent, be sure to create both the log groups and log streams that you want the agent to use\. The logs agent cannot create log streams in a log group that you have created unless it has both the `CreateLogGroup` and `CreateLogStream` permissions\.
 
 **What logs should I look at when troubleshooting?**  
 The agent installation log is at `/var/log/awslogs-agent-setup.log` and the agent log is at `/var/log/awslogs.log`\.

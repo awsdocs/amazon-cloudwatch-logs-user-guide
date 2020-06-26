@@ -1,6 +1,6 @@
 # Working with Log Groups and Log Streams<a name="Working-with-log-groups-and-streams"></a>
 
-A log stream is a sequence of log events that share the same source\. Each separate source of logs into CloudWatch Logs makes up a separate log stream\.
+A log stream is a sequence of log events that share the same source\. Each separate source of logs in CloudWatch Logs makes up a separate log stream\.
 
 A log group is a group of log streams that share the same retention, monitoring, and access control settings\. You can define log groups and specify which streams to put into each group\. There is no limit on the number of log streams that can belong to one log group\.
 
@@ -14,11 +14,11 @@ When you install the CloudWatch Logs agent on an Amazon EC2 instance using the s
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. In the navigation pane, choose **Logs**\.
+1. In the navigation pane, choose **Log groups**\.
 
-1. Choose **Actions**, **Create log group**\. 
+1. Choose **Actions**, and then choose **Create log group**\. 
 
-1. Type a name for the log group, and choose **Create log group**\.
+1. Enter a name for the log group, and then choose **Create log group**\.
 
 ## View Log Data Sent to CloudWatch Logs<a name="ViewingLogData"></a>
 
@@ -28,33 +28,35 @@ You can view and scroll through log data on a stream\-by\-stream basis as sent t
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. In the navigation pane, choose **Logs**\.
+1. In the navigation pane, choose **Log groups**\.
 
 1. For **Log Groups**, choose the log group to view the streams\.
 
-1. For **Log Streams**, choose the log stream name to view the log data\.
+1. In the list of log groups, choose the name of the log group that you want to view\.
+
+1. In the list of log streams, choose the name of the log stream that you want to view\.
 
 1. To change how the log data is displayed, do one of the following:
-   + To expand all log events, above the list of log events, choose **Expand all**\.
+   + To expand a single log event, choose the arrow next to that log event\.
    + To expand all log events and view them as plain text, above the list of log events, choose **Text**\.
-   + To filter the log events, type the desired search filter in the search field\. For more information, see [Searching and Filtering Log Data](MonitoringLogData.md)\.
-   + To view log data for a specified date and time range, above the list of log events, choose **custom**\. You can choose **Absolute** to specify a date and time range or **Relative** to choose a predefined number of minutes, hours, days, or weeks\. You can also switch between **UTC** and **Local timezone**\.
+   + To filter the log events, enter the desired search filter in the search field\. For more information, see [Creating Metrics From Log Events Using Filters](MonitoringLogData.md)\.
+   + To view log data for a specified date and time range, next to the search filter, choose the arrow next to the date and time\. To specify a date and time range, choose **Absolute**\. To choose a predefined number of minutes, hours, days, or weeks, choose **Relative**\. You can also switch between UTC and local time zone\.
 
 ## Change Log Data Retention in CloudWatch Logs<a name="SettingLogRetention"></a>
 
-By default, log data is stored in CloudWatch Logs indefinitely\. However, you can configure how long to store log data in a log group\. Any data older than the current retention setting is automatically deleted\. You can change the log retention for each log group at any time\.
+By default, log data is stored in CloudWatch Logs indefinitely\. However, you can configure how long to store log data in a log group\. Any data older than the current retention setting is deleted automatically\. You can change the log retention for each log group at any time\.
 
 **To change the logs retention setting**
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. In the navigation pane, choose **Logs**\.
+1. In the navigation pane, choose **Log groups**\.
 
 1. Find the log group to update\.
 
 1. In the **Expire Events After** column for that log group, choose the current retention setting, such as **Never Expire**\.
 
-1. In the **Edit Retention** dialog box, for **Retention**, choose a log retention value, and then choose **Ok**\.
+1. In **Edit Retention**, for **Retention**, choose a log retention value, and then choose **Ok**\.
 
 ## Tag Log Groups in Amazon CloudWatch Logs<a name="log-group-tagging"></a>
 
@@ -70,10 +72,10 @@ You can assign your own metadata to the log groups you create in Amazon CloudWat
 ### Tag Basics<a name="tagging-basics"></a>
 
 You use the AWS CLI or CloudWatch Logs API to complete the following tasks:
-+ Add tags to a log group when you create it
-+ Add tags to an existing log group
-+ List the tags for a log group
-+ Remove tags from a log group
++ Add tags to a log group when you create it\.
++ Add tags to an existing log group\.
++ List the tags for a log group\.
++ Remove tags from a log group\.
 
 You can use tags to categorize your log groups\. For example, you can categorize them by purpose, owner, or environment\. Because you define the key and value for each tag, you can create a custom set of categories to meet your specific needs\. For example, you might define a set of tags that helps you track log groups by owner and associated application\. Here are several examples of tags:
 + Project: Project name
@@ -92,7 +94,7 @@ The following restrictions apply to tags\.
 
 **Basic restrictions**
 + The maximum number of tags per log group is 50\.
-+ Tag keys and values are case\-sensitive\.
++ Tag keys and values are case sensitive\.
 + You can't change or edit tags for a deleted log group\.
 
 **Tag key restrictions**

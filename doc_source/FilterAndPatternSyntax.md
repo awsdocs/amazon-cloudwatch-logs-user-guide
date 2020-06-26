@@ -194,7 +194,7 @@ You can combine multiple conditions into a compound expression using OR \(\|\|\)
 }
 ```
 
-##### Examples<a name="w4aac15c11b9c28b6b6b6"></a>
+##### Examples<a name="w21aac15c13b9c28b6b6b6"></a>
 
 ```
 { ($.user.id = 1) && ($.users[0].email = "John.Doe@example.com") }
@@ -220,7 +220,7 @@ Matches the JSON above\.
 
 Doesn't match the JSON above\.
 
-##### JSON Special Considerations<a name="w4aac15c11b9c28b6b6b8"></a>
+##### JSON Special Considerations<a name="w21aac15c13b9c28b6b6b8"></a>
 
 The SELECTOR must point to a value node \(string or number\) in the JSON\. If it points to an array or object, the filter will not be applied because the log format doesn't match the filter\. For example, both \{$\.users = 1\} and \{$\.users \!= 1\} will fail to match a log event where users is an array:
 
@@ -230,7 +230,7 @@ The SELECTOR must point to a value node \(string or number\) in the JSON\. If it
 }
 ```
 
-##### Numeric Comparisons<a name="w4aac15c11b9c28b6b6c10"></a>
+##### Numeric Comparisons<a name="w21aac15c13b9c28b6b6c10"></a>
 
 The metric filter syntax supports precise matching on numeric comparisons\. The following numeric comparisons are supported: <, >, >=, <=, =, \!=
 
@@ -351,19 +351,19 @@ Instead of just counting the number of matching items found in logs, you can als
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. In the navigation pane, choose **Logs**\.
+1. In the navigation pane, choose **Log groups**\.
 
-1. In the contents pane, select a log group, and then choose **Create Metric Filter**\.
+1. Choose `Actions`, **Create metric filter**\.
 
-1. On the **Define Logs Metric Filter** screen, for **Filter Pattern**, type **\{ $\.latency = \* \}**, and then choose **Assign Metric**\.
-
-1. On the **Create Metric Filter and Assign a Metric** screen, choose **Show advanced metric settings**\.
+1. For **Filter Pattern**, type **\{ $\.latency = \* \}**, and then choose **Next**\.
 
 1. For **Metric Name**, type **myMetric**\.
 
 1. For **Metric Value**, enter **$\.latency**\.
 
-1. For **Default Value** type 0, and then choose **Create Filter**\. Specifying a default value ensures that data is reported even during periods when no log events occur, preventing spotty metrics where data sometimes does not exist\.
+1. For **Default Value** enter 0, and then choose **Next**\. Specifying a default value ensures that data is reported even during periods when no log events match the filter\. This prevents spotty or missing metrics when logs are ingested but don't match the filter\.
+
+1. Choose **Create metric filter**\.
 
 The following log event would publish a value of 50 to the metric **myMetric** following filter creation\.
 

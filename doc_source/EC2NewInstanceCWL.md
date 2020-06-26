@@ -1,7 +1,7 @@
 # Quick Start: Install and Configure the CloudWatch Logs Agent on an EC2 Linux Instance at Launch<a name="EC2NewInstanceCWL"></a>
 
 **Tip**  
-CloudWatch includes a new unified agent that can collect both logs and metrics from EC2 instances and on\-premises servers\. If you are not already using the older CloudWatch Logs agent, we recommend that you use the newer unified CloudWatch agent\. For more information, see [Getting Started with CloudWatch Logs](CWL_GettingStarted.md)\.   
+The older CloudWatch Logs agent discussed in this section is on the path to deprecation\. We strongly recommend that you instead use the new unified CloudWatch agent that can collect both logs and metrics\. Additionally, the older CloudWatch Logs agent requires Python 3\.3 or earlier, and these versions are not installed on new EC2 instances by default\. For more information about the unified CloudWatch agent, see [Installing the CloudWatch Agent](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/install-CloudWatch-Agent-on-EC2-Instance.html)\.   
 The rest of this section explains the use of the older CloudWatch Logs agent\.
 
 ## Installing the older CloudWatch Logs Agent on an EC2 Linux Instance at Launch<a name="EC2NewInstanceCWL-oldagent"></a>
@@ -114,9 +114,9 @@ datetime_format = %b %d %H:%M:%S
 
    ```
    #!/bin/bash
-   curl https://s3.amazonaws.com//aws-cloudwatch/downloads/latest/awslogs-agent-setup.py -O
+   curl https://s3.amazonaws.com/aws-cloudwatch/downloads/latest/awslogs-agent-setup.py -O
    chmod +x ./awslogs-agent-setup.py
-   ./awslogs-agent-setup.py -n -r us-east-1 -c s3://myawsbucket/my-config-file
+   ./awslogs-agent-setup.py -n -r us-east-1 -c s3://aws-s3-bucket1/my-config-file
    ```
 
 1. Make any other changes to the instance, review your launch settings, and then choose **Launch**\.

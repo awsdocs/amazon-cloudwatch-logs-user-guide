@@ -1,6 +1,6 @@
 # Validating the Flow of Log Events<a name="ValidateLogEventFlow"></a>
 
-After you create the subscription filter, CloudWatch Logs forwards all the incoming log events that match the filter pattern to the Kinesis stream that is encapsulated within the destination stream called "**RecipientStream**"\. The destination owner can verify that this is happening by using the **aws kinesis get\-shard\-iterator** command to grab an Kinesis shard, and using the **aws kinesis get\-records** command to fetch some Kinesis records:
+After you create the subscription filter, CloudWatch Logs forwards all the incoming log events that match the filter pattern to the Kinesis stream that is encapsulated within the destination stream called "**RecipientStream**"\. The destination owner can verify that this is happening by using the **aws kinesis get\-shard\-iterator** command to grab a Kinesis shard, and using the **aws kinesis get\-records** command to fetch some Kinesis records:
 
 ```
 aws kinesis get-shard-iterator \
@@ -22,7 +22,7 @@ aws kinesis get-records \
 **Note**  
 You may need to rerun the get\-records command a few times before Kinesis starts to return data\.
 
-You should see a response with an array of Kinesis records\. The data attribute in the Kinesis record is Base64 encoded and compressed in gzip format\. You can examine the raw data from the command line using the following Unix command:
+You should see a response with an array of Kinesis records\. The data attribute in the Kinesis record is compressed in gzip format and then Base64 encoded\. You can examine the raw data from the command line using the following Unix command:
 
 ```
 echo -n "<Content of Data>" | base64 -d | zcat
