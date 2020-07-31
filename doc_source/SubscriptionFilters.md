@@ -70,6 +70,8 @@ Before you create the Kinesis stream, calculate the volume of log data that will
    ```
    aws iam create-role --role-name CWLtoKinesisRole --assume-role-policy-document file://~/TrustPolicyForCWL.json
    ```
+   
+The following is an example of the output:
 
    ```
    {
