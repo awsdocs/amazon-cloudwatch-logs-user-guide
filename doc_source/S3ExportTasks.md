@@ -140,7 +140,10 @@ By default, all Amazon S3 buckets and objects are private\. Only the resource ow
                "Principal": { "Service": "logs.us-west-2.amazonaws.com" }
            },
            {
-               "Action": "s3:PutObject" ,
+               "Action": [
+                "s3:PutObject",
+                "s3:PutObjectAcl"
+               ],
                "Effect": "Allow",
                "Resource": "arn:aws:s3:::my-exported-logs/random-string/*",
                "Condition": { "StringEquals": { "s3:x-amz-acl": "bucket-owner-full-control" } },
