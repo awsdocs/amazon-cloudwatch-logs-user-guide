@@ -26,7 +26,7 @@ The filter pattern "ERROR" matches log event messages that contain this term, su
 In the previous example, if you change the filter pattern to "ERROR" \- "Exiting", the log event message "Exiting with ERRORCODE: \-1" would be excluded\.
 
 **Example 4: Multiple terms**  
-The filter pattern "ERROR Exception" matches log event messages that contain both terms, such as the following:
+The filter pattern "ERROR" "Exception" matches log event messages that contain both terms, such as the following:
 + \[ERROR\] Caught IllegalArgumentException
 + \[ERROR\] Unhandled Exception
 
