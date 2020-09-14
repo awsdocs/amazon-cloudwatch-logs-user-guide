@@ -1,5 +1,8 @@
 # CloudWatch Logs Agent Reference<a name="AgentReference"></a>
 
+**Important**  
+This reference is for the older CloudWatch Logs agent, which is on the path to deprecation\. We strongly recommend that you use the unified CloudWatch agent instead\. For more information about that agent, see [ Collecting metrics and logs from Amazon EC2 instance and on\-premises servers with the CloudWatch agent](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Install-CloudWatch-Agent.html)\.
+
 The CloudWatch Logs agent provides an automated way to send log data to CloudWatch Logs from Amazon EC2 instances\. The agent includes the following components:
 + A plug\-in to the AWS CLI that pushes log data to CloudWatch Logs\.
 + A script \(daemon\) that initiates the process to push data to CloudWatch Logs\.

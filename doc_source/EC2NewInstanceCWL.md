@@ -116,7 +116,7 @@ datetime_format = %b %d %H:%M:%S
    #!/bin/bash
    curl https://s3.amazonaws.com/aws-cloudwatch/downloads/latest/awslogs-agent-setup.py -O
    chmod +x ./awslogs-agent-setup.py
-   ./awslogs-agent-setup.py -n -r us-east-1 -c s3://aws-s3-bucket1/my-config-file
+   ./awslogs-agent-setup.py -n -r us-east-1 -c s3://AWSDOC-EXAMPLE-BUCKET1/my-config-file
    ```
 
 1. Make any other changes to the instance, review your launch settings, and then choose **Launch**\.

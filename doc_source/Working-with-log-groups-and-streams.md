@@ -20,6 +20,13 @@ When you install the CloudWatch Logs agent on an Amazon EC2 instance using the s
 
 1. Enter a name for the log group, and then choose **Create log group**\.
 
+## Send Logs to a Log Group<a name="SendingLogData"></a>
+
+CloudWatch Logs automatically receives log events from several AWS services\. You can also send other log events to CloudWatch Logs using one of the following methods:
++ **CloudWatch agent**— The unified CloudWatch agent can send both metrics and logs to CloudWatch Logs\. For information about installing and using the CloudWatch agent, see [ Collecting Metrics and Logs from Amazon EC2 Instances and On\-Premises Servers with the CloudWatch Agent](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Install-CloudWatch-Agent.html) in the *Amazon CloudWatch User Guide*\.
++ **AWS CLI**—The [put\-log\-events](https://docs.aws.amazon.com/cli/latest/reference/logs/put-log-events.html) uploads batches of log events to CloudWatch Logs\.
++ **Programmatically**— The [PutLogEvents](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html) API enables you to programmatically upload batches of log events to CloudWatch Logs\. 
+
 ## View Log Data Sent to CloudWatch Logs<a name="ViewingLogData"></a>
 
 You can view and scroll through log data on a stream\-by\-stream basis as sent to CloudWatch Logs by the CloudWatch Logs agent\. You can specify the time range for the log data to view\.

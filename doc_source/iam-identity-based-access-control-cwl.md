@@ -117,11 +117,11 @@ You can also create your own custom IAM policies to allow permissions for CloudW
 In this section, you can find example user policies that grant permissions for various CloudWatch Logs actions\. These policies work when you are using the CloudWatch Logs API, AWS SDKs, or the AWS CLI\.
 
 **Topics**
-+ [Example 1: Allow Full Access to CloudWatch Logs](#w21aac27c15c15c23b7)
-+ [Example 2: Allow Read\-Only Access to CloudWatch Logs](#w21aac27c15c15c23b9)
-+ [Example 3: Allow Access to One Log Group](#w21aac27c15c15c23c11)
++ [Example 1: Allow Full Access to CloudWatch Logs](#w28aac27c15c15c23b7)
++ [Example 2: Allow Read\-Only Access to CloudWatch Logs](#w28aac27c15c15c23b9)
++ [Example 3: Allow Access to One Log Group](#w28aac27c15c15c23c11)
 
-### Example 1: Allow Full Access to CloudWatch Logs<a name="w21aac27c15c15c23b7"></a>
+### Example 1: Allow Full Access to CloudWatch Logs<a name="w28aac27c15c15c23b7"></a>
 
 The following policy allows a user to access all CloudWatch Logs actions\.
 
@@ -140,7 +140,7 @@ The following policy allows a user to access all CloudWatch Logs actions\.
 }
 ```
 
-### Example 2: Allow Read\-Only Access to CloudWatch Logs<a name="w21aac27c15c15c23b9"></a>
+### Example 2: Allow Read\-Only Access to CloudWatch Logs<a name="w28aac27c15c15c23b9"></a>
 
 AWS provides a **CloudWatchLogsReadOnlyAccess** policy that enables read\-only access to CloudWatch Logs data\. This policy includes the following permissions\.
 
@@ -165,7 +165,7 @@ AWS provides a **CloudWatchLogsReadOnlyAccess** policy that enables read\-only a
 }
 ```
 
-### Example 3: Allow Access to One Log Group<a name="w21aac27c15c15c23c11"></a>
+### Example 3: Allow Access to One Log Group<a name="w28aac27c15c15c23c11"></a>
 
 The following policy allows a user to read and write log events in one specified log group\.
 

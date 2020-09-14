@@ -61,7 +61,7 @@ Specify credentials, region, a log group name, and a log stream namespace\. This
    },
    ```
 
-1.  Leave the `AccessKey` and `SecretKey` field blank\. Youconfigure credentials using an IAM role\.
+1.  Leave the `AccessKey` and `SecretKey` field blank\. You configure credentials using an IAM role\.
 
 1. For `Region`, type the region to which to send log data \(for example, `us-east-2`\)\.
 

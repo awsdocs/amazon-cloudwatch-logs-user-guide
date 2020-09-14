@@ -2,6 +2,8 @@
 
 You can export log data from your log groups to an Amazon S3 bucket and use this data in custom processing and analysis, or to load onto other systems\.
 
+Exporting log data to Amazon S3 buckets that are encrypted by AWS KMS is not supported\.
+
 To begin the export process, you must create an S3 bucket to store the exported log data\. You can store the exported files in your Amazon S3 bucket and define Amazon S3 lifecycle rules to archive or delete exported files automatically\.
 
 Exporting to S3 buckets that are encrypted with AES\-256 is supported\. Exporting to S3 buckets encrypted with SSE\-KMS is not supported\. For more information, see [ How Do I Enable Default Encryption for an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/default-bucket-encryption.html)\.

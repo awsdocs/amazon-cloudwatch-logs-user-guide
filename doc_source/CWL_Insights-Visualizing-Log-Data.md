@@ -14,7 +14,7 @@ Time series visualizations work for queries with the following characteristics:
 + The query contains one or more aggregation functions\. For more information, see [Aggregation Functions in the Stats Command](CWL_QuerySyntax.md#CWL_Insights_Aggregation_Functions)\.
 + The query uses the `bin()` function to group the data by one field\. 
 
-These queries can produce line charts, stacked area charts, and bar charts\. 
+These queries can produce line charts, stacked area charts, bar charts, and pie charts\. 
 
 **Examples**
 

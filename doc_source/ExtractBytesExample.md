@@ -14,19 +14,19 @@ This extraction rule matches the seven fields of the log event\. The metric valu
 
 1. Choose `Actions`, **Create metric filter**\.
 
-1. For **Filter Pattern**, type **\[ip, id, user, timestamp, request, status\_code, size\]**\.
+1. For **Filter pattern**, enter **\[ip, id, user, timestamp, request, status\_code, size\]**\.
 
 1. To test your filter pattern, choose **Test Pattern**\.
 
-1. Choose **Assign Metric**, and then for **Filter Name**, type **size**\.
+1. Choose **Next**, and then for **Filter name**, type **size**\.
 
-1. Under **Metric Details**, for **Metric Namespace**, type **MyNameSpace**\.
+1. Under **Metric details**, for **Metric namespace**, enter **MyNameSpace**\. Because this is a new namespace, be sure that **Create new** is selected\.
 
-1. For **Metric Name**, type **BytesTransferred**
+1. For **Metric name**, enter **BytesTransferred**
 
-1. For **Metric Value**, enter **$size**\.
+1. For **Metric value**, enter **$size**\.
 
-1. For **Default Value** enter 0, and then choose **Next**\.
+1. For **Default value** enter 0, and then choose **Next**\.
 
 1. Choose **Create metric filter**\.
 

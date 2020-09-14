@@ -1,6 +1,6 @@
 # Using CloudWatch Logs Subscription Filters<a name="SubscriptionFilters"></a>
 
-You can use a subscription filter with Kinesis, Lambda, or Kinesis Data Firehose\.
+You can use a subscription filter with Kinesis, Lambda, or Kinesis Data Firehose\. Logs that are sent to a receiving service through a subscription filter are Base64 encoded and compressed with the gzip format\.
 
 **Topics**
 + [Example 1: Subscription Filters with Kinesis](#DestinationKinesisExample)
@@ -70,8 +70,8 @@ Before you create the Kinesis stream, calculate the volume of log data that will
    ```
    aws iam create-role --role-name CWLtoKinesisRole --assume-role-policy-document file://~/TrustPolicyForCWL.json
    ```
-   
-The following is an example of the output:
+
+   The following is an example of the output\.
 
    ```
    {
@@ -103,11 +103,6 @@ The following is an example of the output:
          "Effect": "Allow",
          "Action": "kinesis:PutRecord",
          "Resource": "arn:aws:kinesis:region:123456789012:stream/RootAccess"
-       },
-       {
-         "Effect": "Allow",
-         "Action": "iam:PassRole",
-         "Resource": "arn:aws:iam::123456789012:role/CWLtoKinesisRole"
        }
      ]
    }
@@ -241,7 +236,7 @@ Before you create the Lambda function, calculate the volume of log data that wil
        --zip-file fileb://file-path/helloWorld.zip \
        --role lambda-execution-role-arn \
        --handler helloWorld.handler \
-       --runtime nodejs8.10
+       --runtime nodejs12.x
    ```
 
 1. Grant CloudWatch Logs the permission to execute your function\. Use the following command, replacing the placeholder account with your own account and the placeholder log group with the log group to process:
@@ -514,11 +509,6 @@ Before you create the Kinesis Data Firehose stream, calculate the volume of log 
            "Effect":"Allow",
            "Action":["firehose:*"],
            "Resource":["arn:aws:firehose:region:123456789012:*"]
-         },
-         {
-           "Effect":"Allow",
-           "Action":["iam:PassRole"],
-           "Resource":["arn:aws:iam::123456789012:role/CWLtoKinesisFirehoseRole"]
          }
        ]
    }

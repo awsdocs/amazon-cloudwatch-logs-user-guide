@@ -19,7 +19,7 @@ The following AWS services publish logs to CloudWatch Logs\. For information abo
 |  AWS Glue  |  [ Continuous Logging for AWS Glue Jobs](https://docs.aws.amazon.com/glue/latest/dg/monitor-continuous-logging.html)  | 
 |  AWS IoT  |  [Monitoring with CloudWatch Logs](https://docs.aws.amazon.com/iot/latest/developerguide/cloud-watch-logs.html)  | 
 |  AWS Lambda  |  [ Accessing Amazon CloudWatch Logs for AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/monitoring-cloudwatchlogs.html)  | 
-|  Amazon MQ  |  [ Configuring Amazon MQ to Publish General and Audit Logs to Amazon CloudWatch Logs](https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/amazon-mq-configuring-cloudwatch-logs.html)  | 
+|  Amazon MQ  |  [ Configuring Amazon MQ to Publish General and Audit Logs to Amazon CloudWatch Logs](https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/security-logging-monitoring-configure-cloudwatch)  | 
 |  AWS OpsWorks  |  [ Using Amazon CloudWatch Logs with AWS OpsWorks Stacks](https://docs.aws.amazon.com/opsworks/latest/userguide/monitoring-cloudwatch-logs.html)  | 
 |  Amazon Relational Database Service  |  [ Publishing PostgreSQL Logs to CloudWatch Logs](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.Concepts.PostgreSQL.html#USER_LogAccess.PostgreSQL.PublishtoCloudWatchLogs)  | 
 |  AWS RoboMaker  |  [ AWS RoboMaker’s CloudWatch ROS nodes with offline support](https://aws.amazon.com/blogs/opensource/robomaker-cloudwatch-ros-nodes-offline-support/)  | 

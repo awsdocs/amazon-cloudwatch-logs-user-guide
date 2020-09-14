@@ -1,6 +1,6 @@
 # Tutorial: Run a Query That Produces a Visualization Grouped by Log Fields<a name="CWL_AnalyzeLogData_VisualizationFieldQuery"></a>
 
-When you run a query that uses the `stats` function to group the returned results by the values of one or more fields in the log entries, you can view the results as a bar chart\. This helps you more efficiently visualize trends in your logs\.
+When you run a query that uses the `stats` function to group the returned results by the values of one or more fields in the log entries, you can view the results as a bar chart, pie chart, line graph or stacked area graph\. This helps you more efficiently visualize trends in your logs\.
 
 **To run a query for visualization**
 
@@ -14,7 +14,7 @@ When you run a query that uses the `stats` function to group the returned result
 
    ```
    stats count(*) by @logStream 
-   | limit 100
+       | limit 100
    ```
 
    The results show the number of log events in the log group for each log stream\. The results are limited to only 100 rows\.

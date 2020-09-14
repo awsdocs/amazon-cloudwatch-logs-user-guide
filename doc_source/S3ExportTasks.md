@@ -2,6 +2,8 @@
 
 In the following example, you use an export task to export all data from a CloudWatch Logs log group named `my-log-group` to an Amazon S3 bucket named `my-exported-logs`\. This example assumes that you have already created a log group called `my-log-group`\.
 
+Exporting log data to Amazon S3 buckets that are encrypted by AWS KMS is not supported\.
+
 ## Step 1: Create an Amazon S3 Bucket<a name="CreateS3Bucket"></a>
 
 We recommend that you use a bucket that was created specifically for CloudWatch Logs\. However, if you want to use an existing bucket, you can skip to step 2\.

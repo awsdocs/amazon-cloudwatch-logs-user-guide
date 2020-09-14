@@ -1,6 +1,6 @@
 # Tutorial: Run a Query That Produces a Time Series Visualization<a name="CWL_AnalyzeLogData_VisualizationQuery"></a>
 
-When you run a query that uses the `bin()` function to group the returned results by a time period, you can view the results as a line graph, stacked area graph, or bar chart\. This helps you more effiiciently visualize trends in log events over time\.
+When you run a query that uses the `bin()` function to group the returned results by a time period, you can view the results as a line graph, stacked area graph, pie chart, or bar chart\. This helps you more efficiently visualize trends in log events over time\.
 
 **To run a query for visualization**
 
@@ -20,4 +20,4 @@ When you run a query that uses the `bin()` function to group the returned result
 
 1. Choose the **Visualization** tab\.
 
-   The results are shown as a line graph\. To switch to a stacked area chart or bar chart, choose the arrow next to **Line** at the upper right of the graph\.
+   The results are shown as a line graph\. To switch to a bar chart, pie chart, or stacked area chart, choose the arrow next to **Line** at the upper left of the graph\.

@@ -10,21 +10,25 @@ The following example demonstrates how to create a metric that includes all 400\
 
 1. In the navigation pane, choose **Log groups**\.
 
+1. Choose the name of the log group for the Apache server\.
+
 1. Choose `Actions`, **Create metric filter**\.
 
-1. For **Filter Pattern**, type **\[ip, id, user, timestamp, request, status\_code=4\*, size\]**\.
+1. For **Filter name**, enter **HTTP4xxErrors**\.
+
+1. For **Filter pattern**, enter **\[ip, id, user, timestamp, request, status\_code=4\*, size\]**\.
 
 1. To test your filter pattern, choose **Test Pattern**\.
 
-1. Choose **Next**, and then for **Filter Name**, type **HTTP4xxErrors**\.
+1. Choose **Next**, and then for **Filter name**, type **HTTP4xxErrors**\.
 
-1. Under **Metric Details**, for **Metric Namespace**, enter **MyNameSpace**\.
+1. Under **Metric details**, for **Metric namespace**, enter **MyNameSpace**\.
 
-1. For **Metric Name**, enter **HTTP4xxErrors**\.
+1. For **Metric name**, enter **HTTP4xxErrors**\.
 
-1. Confirm that **Metric Value** is 1\. This specifies that the count is incremented by 1 for every log containing a 4xx error\.
+1. For **Metric value**, enter 1\. This specifies that the count is incremented by 1 for every log containing a 4xx error\.
 
-1. For **Default Value** enter 0, and then choose **Next**\. 
+1. For **Default value** enter 0, and then choose **Next**\. 
 
 1. Choose **Create metric filter**\.
 

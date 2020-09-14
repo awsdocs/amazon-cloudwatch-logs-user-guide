@@ -90,11 +90,6 @@ For this example, the log data recipient account has an AWS account ID of 999999
          "Effect": "Allow",
          "Action": "kinesis:PutRecord",
          "Resource": "arn:aws:kinesis:region:999999999999:stream/RecipientStream"
-       },
-       {
-         "Effect": "Allow",
-         "Action": "iam:PassRole",
-         "Resource": "arn:aws:iam::999999999999:role/CWLtoKinesisRole"
        }
      ]
    }
