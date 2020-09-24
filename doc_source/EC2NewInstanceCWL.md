@@ -114,7 +114,7 @@ datetime_format = %b %d %H:%M:%S
 
    ```
    #!/bin/bash
-   curl https://s3.amazonaws.com/aws-cloudwatch/downloads/latest/awslogs-agent-setup.py -O
+   curl https://aws-cloudwatch.s3.amazonaws.com/downloads/latest/awslogs-agent-setup.py -O
    chmod +x ./awslogs-agent-setup.py
    ./awslogs-agent-setup.py -n -r us-east-1 -c s3://AWSDOC-EXAMPLE-BUCKET1/my-config-file
    ```
