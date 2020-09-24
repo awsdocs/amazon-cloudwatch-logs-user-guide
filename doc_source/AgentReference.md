@@ -170,7 +170,7 @@ HTTP proxies are supported in awslogs\-agent\-setup\.py version 1\.3\.8 or later
    1. For a new installation of the CloudWatch Logs agent, run the following commands:
 
       ```
-      curl https://s3.amazonaws.com/aws-cloudwatch/downloads/latest/awslogs-agent-setup.py -O
+      curl https://aws-cloudwatch.s3.amazonaws.com/downloads/latest/awslogs-agent-setup.py -O
       ```
 
       ```

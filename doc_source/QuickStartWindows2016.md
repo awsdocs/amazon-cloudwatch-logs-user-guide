@@ -18,7 +18,7 @@ There are multiple methods you can use to enable instances running Windows Serve
 
 ### Download the Sample Configuration File<a name="configure_cwl_download"></a>
 
-Download the following sample file to your computer: [AWS\.EC2\.Windows\.CloudWatch\.json](https://s3.amazonaws.com/ec2-downloads-windows/CloudWatchConfig/AWS.EC2.Windows.CloudWatch.json)\.
+Download the following sample file to your computer: [AWS\.EC2\.Windows\.CloudWatch\.json](https://ec2-downloads-windows.s3.amazonaws.com/CloudWatchConfig/AWS.EC2.Windows.CloudWatch.json)\.
 
 ### Configure the JSON File for CloudWatch<a name="send_logs_to_cwl_json"></a>
 
