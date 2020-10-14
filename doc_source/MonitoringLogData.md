@@ -31,4 +31,4 @@ The destination namespace of the new CloudWatch metric\.
 The numerical value to publish to the metric each time a matching log is found\. For example, if you're counting the occurrences of a particular term like "Error", the value will be "1" for each occurrence\. If you're counting the bytes transferred, you can increment by the actual number of bytes found in the log event\.
 
 **default value**  
-The value reported to the metric filter during a period when no matching logs are found\. By setting this to 0, you ensure that data is reported during every period, preventing "spotty" metrics with periods of no data\.
+The value reported to the metric filter during a period when logs are ingested but no matching logs are found\. By setting this to 0, you ensure that data is reported during every such period, preventing "spotty" metrics with periods of no matching data\. Note that if no log events are ingested during a one-minute period, then no value is reported\.  
