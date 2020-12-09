@@ -27,3 +27,4 @@ The following AWS services publish logs to CloudWatch Logs\. For information abo
 |  Amazon SageMaker  |  [ Log Amazon SageMaker Events with Amazon CloudWatch](https://docs.aws.amazon.com/sagemaker/latest/dg/logging-cloudwatch.html)  | 
 |  Amazon Simple Notification Service  |  [ Viewing CloudWatch Logs](https://docs.aws.amazon.com/sns/latest/dg/sms_stats_cloudwatch.html#sns-viewing-cloudwatch-logs)  | 
 |  Amazon VPC  |  [VPC Flow Logs](https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html)  | 
+|  Amazon Managed Streaming for Apache Kafka  |  [Logging](https://docs.aws.amazon.com/msk/latest/developerguide/msk-logging.html)  | 
