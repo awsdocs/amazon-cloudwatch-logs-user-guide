@@ -339,7 +339,7 @@ If logs are ingested during a one\-minute time period but no matches are found, 
 
 Specifying a Default Value, even if that value is 0, helps ensure that data is reported more often, helping prevent spotty metrics when matches are not found\.
 
-For example, suppose there is a log group that publishes two records every minute and the Metric Value is 1 and the Default Value is 0\. If matches are found in the both log records in the first minute, the metric value for that minute is 2\. If there are no matches in the log records published in the second minute, the Default Value of 0 is used for both log records and the metric value for that minute is 0\.
+For example, suppose there is a log group that publishes two records every minute and the Metric Value is 1 and the Default Value is 0\. If matches are found in both of the log records in the first minute, the metric value for that minute is 2\. If there are no matches in the log records published in the second minute, the Default Value of 0 is used for both log records and the metric value for that minute is 0\.
 
 If you don't specify a Default Value, then no data is reported for any periods where no pattern matches are found\.
 
