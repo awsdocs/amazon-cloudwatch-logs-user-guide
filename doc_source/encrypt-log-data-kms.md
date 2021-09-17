@@ -79,8 +79,8 @@ The `Condition` section in this example restricts the key to a single log group 
                 "Service": "logs.region.amazonaws.com"
             },
             "Action": [
-                "kms:Encrypt*",
-                "kms:Decrypt*",
+                "kms:Encrypt",
+                "kms:Decrypt",
                 "kms:ReEncrypt*",
                 "kms:GenerateDataKey*",
                 "kms:Describe*"
