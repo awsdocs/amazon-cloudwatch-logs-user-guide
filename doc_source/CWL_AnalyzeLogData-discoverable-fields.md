@@ -33,7 +33,8 @@ JSON arrays are flattened into a list of field names and values\. For example, t
 CloudWatch Logs Insights can extract a maximum of 100 log event fields from a JSON log\. For extra fields that are not extracted, you can use the **parse** command to parse these fields from the raw unparsed log event in the message field\.
 
 ```
-{ "eventVersion": "1.0",
+{
+    "eventVersion": "1.0",
     "userIdentity": {
         "type": "IAMUser",
         "principalId": "EX_PRINCIPAL_ID",
@@ -74,4 +75,5 @@ CloudWatch Logs Insights can extract a maximum of 100 log event fields from a JS
             ]
         }
     }
+}
 ```
