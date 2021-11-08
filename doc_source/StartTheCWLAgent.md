@@ -19,3 +19,7 @@ If the CloudWatch Logs agent on your EC2 instance did not start automatically af
    ```
    sudo service awslogsd start
    ```
+   Alternatively, you can manually start the application with the following command:
+   ```
+   sudo /opt/aws/amazon-cloudwatch-agent/bin/start-amazon-cloudwatch-agent
+   ```
