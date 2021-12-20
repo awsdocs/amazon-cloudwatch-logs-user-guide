@@ -14,7 +14,7 @@ Start by running a sample query\.
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. In the navigation pane, choose **Insights**\.
+1. In the navigation pane, choose **Logs Insights**\.
 
    Near the top of the page is the query editor\. When you first open CloudWatch Logs Insights, this box contains a default query that returns the 20 most recent log events\.
 
