@@ -6,7 +6,7 @@ The Chef recipes examples below show how to monitor one log file on each EC2 ins
 
 ## Step 1: Create Custom Recipes<a name="opsworks-step-1"></a>
 
-Create a repository to store your recipes\. AWS OpsWorks supports Git and Subversion, or you can store an archive in Amazon S3\. The structure of your cookbook repository is described in [Cookbook Repositories](https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-installingcustom-repo.html) in the *AWS OpsWorks User Guide*\. The examples below assume that the cookbook is named `logs`\. The install\.rb recipe installs the CloudWatch Logs agent\. You can also download the cookbook example \([CloudWatchLogs\-Cookbooks\.zip](https://s3.amazonaws.com/aws-cloudwatch/downloads/CloudWatchLogs-Cookbooks.zip)\)\.
+Create a repository to store your recipes\. AWS OpsWorks supports Git and Subversion, or you can store an archive in Amazon S3\. The structure of your cookbook repository is described in [Cookbook Repositories](https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-installingcustom-repo.html) in the *AWS OpsWorks User Guide*\. The examples below assume that the cookbook is named `logs`\. The install\.rb recipe installs the CloudWatch Logs agent\. You can also download the cookbook example \([CloudWatchLogs\-Cookbooks\.zip](https://aws-cloudwatch.s3.amazonaws.com/downloads/CloudWatchLogs-Cookbooks.zip)\)\.
 
 Create a file named metadata\.rb that contains the following code:
 
@@ -41,7 +41,7 @@ directory "/opt/aws/cloudwatch" do
 end
 
 remote_file "/opt/aws/cloudwatch/awslogs-agent-setup.py" do
-  source "https://s3.amazonaws.com/aws-cloudwatch/downloads/latest/awslogs-agent-setup.py"
+  source "https://aws-cloudwatch.s3.amazonaws.com/downloads/latest/awslogs-agent-setup.py"
   mode "0755"
 end
  
