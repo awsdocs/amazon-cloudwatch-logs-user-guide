@@ -1,14 +1,14 @@
-# Saving and Re\-running CloudWatch Logs Insights Queries<a name="CWL_Insights-Saving-Queries"></a>
+# Saving and re\-running CloudWatch Logs Insights queries<a name="CWL_Insights-Saving-Queries"></a>
 
-After you have created a query, you can save it so that you can run it again later\. Your saved queries are kept in a folder structure to help you keep them organized\. You can save as many as 1000 CloudWatch Logs Insights queries, per Region per account\.
+After you create a query, you can save it, and run it again later\. Queries are saved in a folder structure, so you can organized them\. You can save as many as 1000 queries per region and per account\.
 
-To save a query, you must be logged in to a role that has the `logs:PutQueryDefinition` permission\. To see a list of saved queries, you must be logged in to a role that has the `logs:DescribeQueryDefinitions ` permission\.
+To save a query, you must be logged into a role that has the permission `logs:PutQueryDefinition`\. To see a list of your saved queries, you must be logged into a role that has the permission`logs:DescribeQueryDefinitions`\.
 
 **To save a query**
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. In the navigation pane, choose **Insights**\.
+1. In the navigation pane, choose **Logs**, and then choose **Logs Insights**\.
 
 1. In the query editor, create a query\.
 
@@ -34,7 +34,7 @@ To save a query, you must be logged in to a role that has the `logs:PutQueryDefi
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. In the navigation pane, choose **Insights**\.
+1. In the navigation pane, choose **Logs**, and then choose **Logs Insights**\.
 
 1. On the right, choose **Queries**\.
 
@@ -46,7 +46,7 @@ To save a query, you must be logged in to a role that has the `logs:PutQueryDefi
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. In the navigation pane, choose **Insights**\.
+1. In the navigation pane, choose **Logs**, and then choose **Logs Insights**\.
 
 1. On the right, choose **Queries**\.
 
@@ -70,7 +70,7 @@ To delete a query, you must be logged in to a role that has the `logs:DeleteQuer
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. In the navigation pane, choose **Insights**\.
+1. In the navigation pane, choose **Logs**, and then choose **Logs Insights**\.
 
 1. On the right, choose **Queries**\.
 

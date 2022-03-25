@@ -1,8 +1,8 @@
-# Sample Queries<a name="CWL_QuerySyntax-examples"></a>
+# Sample queries<a name="CWL_QuerySyntax-examples"></a>
 
-This section includes example queries that show the power of CloudWatch Logs Insights\.
+This section contains a list of general and useful query commands that you can run in the [CloudWatch console](https://console.aws.amazon.com/cloudwatch/)\. For information about how to run a query command, see [Tutorial: Run and modify a sample query](https://docs.aws.amazon.com/en_us/AmazonCloudWatch/latest/logs/CWL_AnalyzeLogData_RunSampleQuery.html) in the *Amazon CloudWatch Logs User Guide*\.
 
-**General Queries**
+**General queries**
 
 Find the 25 most recently added log events\.
 
@@ -24,16 +24,16 @@ Get a list of log events that aren't exceptions\.
 fields @message | filter @message not like /Exception/
 ```
 
-**Queries for Lambda Logs**
+**Queries for Lambda logs**
 
 Determine the amount of overprovisioned memory\.
 
 ```
 filter @type = "REPORT"
-    | stats max(@memorySize / 1024 / 1024) as provisonedMemoryMB,
-        min(@maxMemoryUsed / 1024 / 1024) as smallestMemoryRequestMB,
-        avg(@maxMemoryUsed / 1024 / 1024) as avgMemoryUsedMB,
-        max(@maxMemoryUsed / 1024 / 1024) as maxMemoryUsedMB,
+    | stats max(@memorySize / 1000 / 1000) as provisonedMemoryMB,
+        min(@maxMemoryUsed / 1000 / 1000) as smallestMemoryRequestMB,
+        avg(@maxMemoryUsed / 1000 / 1000) as avgMemoryUsedMB,
+        max(@maxMemoryUsed / 1000 / 1000) as maxMemoryUsedMB,
         provisonedMemoryMB - maxMemoryUsedMB as overProvisionedMB
 ```
 
@@ -77,7 +77,7 @@ filter logStatus="SKIPDATA"
     | sort t
 ```
 
-**Queries for Route 53 Logs**
+**Queries for Route 53 logs**
 
 Find the distribution of records per hour by query type\.
 
@@ -99,7 +99,7 @@ Find the number of records by domain and subdomain where the server failed to co
 filter responseCode="SERVFAIL" | stats count(*) by queryName
 ```
 
-**Queries for CloudTrail Logs**
+**Queries for CloudTrail logs**
 
 Find the number of log entries for each service, event type, and AWS Region\.
 
@@ -110,7 +110,7 @@ stats count(*) by eventSource, eventName, awsRegion
 Find the Amazon EC2 hosts that were started or stopped in a given AWS Region\.
 
 ```
-filter (eventName="StartInstances" or eventName="StopInstances") and region="us-east-2"
+filter (eventName="StartInstances" or eventName="StopInstances") and awsRegion="us-east-2"
 ```
 
 Find the AWS Regions, user names, and ARNs of newly created IAM users\.
@@ -127,6 +127,81 @@ filter eventName="UpdateTrail" and ispresent(errorCode)
     | stats count(*) by errorCode, errorMessage
 ```
 
+**Queries for NAT gateway**
+
+If you notice higher than normal costs in your AWS bill, you can use CloudWatch Logs Insights to find the top contributors\. For more information about the following query commands, see [How can I find the top contributors to traffic through the NAT gateway in my VPC?](https://aws.amazon.com/premiumsupport/knowledge-center/vpc-find-traffic-sources-nat-gateway/) at the AWS premium support page\.
+
+Find the instances that are sending the most traffic through you NAT gateway\.
+
+**Note**  
+In the following query commands, replace "x\.x\.x\.x" with the private IP of your NAT gateway, and replace "y\.y" with the first two octets of your VPC CIDR range\.
+
+```
+filter (dstAddr like 'x.x.x.x' and srcAddr like 'y.y.') 
+| stats sum(bytes) as bytesTransferred by srcAddr, dstAddr
+| sort bytesTransferred desc
+| limit 10
+```
+
+Determine the traffic that's going to and from the instances in your NAT gateways\.
+
+```
+filter (dstAddr like 'x.x.x.x' and srcAddr like 'y.y.') or (srcAddr like 'xxx.xx.xx.xx' and dstAddr like 'y.y.')
+| stats sum(bytes) as bytesTransferred by srcAddr, dstAddr
+| sort bytesTransferred desc
+| limit 10
+```
+
+Determine the internet destinations that the instances in your VPC communicate with most often for uploads and downloads\.
+
+***For uploads***
+
+```
+filter (srcAddr like 'x.x.x.x' and dstAddr not like 'y.y.') 
+| stats sum(bytes) as bytesTransferred by srcAddr, dstAddr
+| sort bytesTransferred desc
+| limit 10
+```
+
+***For downloads***
+
+```
+filter (dstAddr like 'x.x.x.x' and srcAddr not like 'y.y.') 
+| stats sum(bytes) as bytesTransferred by srcAddr, dstAddr
+| sort bytesTransferred desc
+| limit 10
+```
+
+**Queries for Apache server logs**
+
+You can use CloudWatch Logs Insights to query Apache server logs\. For more information about the following queries, see [Simplifying Apache server logs with CloudWatch Logs Insights](https://aws.amazon.com/blogs/mt/simplifying-apache-server-logs-with-amazon-cloudwatch-logs-insights/) at the AWS Cloud Operations & Migrations Blog\.
+
+Find the most relevant fields, so you can review your access logs and check for traffic in the */admin* path of your application\.
+
+```
+fields @timestamp, remoteIP, request, status, filename| sort @timestamp desc
+| filter filename="/var/www/html/admin"
+| limit 20
+```
+
+Find the number unique GET requests that accessed your main page with status code "200" \(success\)\.
+
+```
+fields @timestamp, remoteIP, method, status
+| filter status="200" and referrer= http://34.250.27.141/ and method= "GET"
+| stats count_distinct(remoteIP) as UniqueVisits
+| limit 10
+```
+
+Find the number of times your Apache service restarted\.
+
+```
+fields @timestamp, function, process, message
+| filter message like "resuming normal operations"
+| sort @timestamp desc
+| limit 20
+```
+
 **Examples of the parse command**
 
 Use a glob expression to extract the ephemeral fields `@user`, `@method`, and `@latency` from the log field `@message` and return the average latency for each unique combination of `@method` and `@user`\.
@@ -141,7 +216,7 @@ Use a regular expression to extract the ephemeral fields `@user2`, `@method2`, a
 
 ```
 parse @message /user=(?<user2>.*?), method:(?<method2>.*?),
-    latency := (?<latency2>.*?)/ | stats avg(@latency2) by @method2, 
+    latency := (?<latency2>.*?)/ | stats avg(latency2) by @method2, 
     @user2
 ```
 

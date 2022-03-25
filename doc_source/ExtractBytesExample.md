@@ -1,8 +1,10 @@
-# Example: Extract Fields from an Apache Log<a name="ExtractBytesExample"></a>
+# Example: Extract fields from an Apache log and assign dimensions<a name="ExtractBytesExample"></a>
 
 Sometimes, instead of counting, it is helpful to use values within individual log events for metric values\. This example shows how you can create an extraction rule to create a metric that measures the bytes transferred by an Apache webserver\.
 
 This extraction rule matches the seven fields of the log event\. The metric value is the value of the seventh matched token\. You can see the reference to the token as "$7" in the `metricValue` field of the extraction rule\.
+
+This example also shows how to assign dimensions to the metric that you are creating\.
 
 **To create a metric filter using the CloudWatch console**
 
@@ -16,7 +18,7 @@ This extraction rule matches the seven fields of the log event\. The metric valu
 
 1. For **Filter pattern**, enter **\[ip, id, user, timestamp, request, status\_code, size\]**\.
 
-1. To test your filter pattern, choose **Test Pattern**\.
+1. \(Optional\) To test your filter pattern, under **Test Pattern**, enter one or more log events to use to test the pattern\. Each log event must be within one line, because line breaks are used to separate log events in the **Log event messages** box\.
 
 1. Choose **Next**, and then for **Filter name**, type **size**\.
 
@@ -26,20 +28,45 @@ This extraction rule matches the seven fields of the log event\. The metric valu
 
 1. For **Metric value**, enter **$size**\.
 
-1. For **Default value** enter 0, and then choose **Next**\.
+1. For **Unit**, select **Bytes**\.
+
+1. For **Dimension Name**, type **IP**\.
+
+1. For **Dimension Value**, type **$\.ip** and then choose **Next**\.
 
 1. Choose **Create metric filter**\.
 
-**To create a metric filter using the AWS CLI**  
+**To create this metric filter using the AWS CLI**  
 At a command prompt, run the following command
 
 ```
 aws logs put-metric-filter \
 --log-group-name MyApp/access.log \
+ --filter-name BytesTransferred \
+ --filter-pattern '[ip, id, user, timestamp, request, status_code, size]' \ 
+ --metric-transformation  \
+ metricName=BytesTransferred,metricNamespace=MyNamespace,metricValue=$size
+```
+
+```
+aws logs put-metric-filter \
+--log-group-name MyApp/access.log \
 --filter-name BytesTransferred \
---filter-pattern '[ip, id, user, timestamp, request, status_code, size]' \
---metric-transformations \
-metricName=BytesTransferred,metricNamespace=MyNamespace,metricValue=$size,defaultValue=0
+--filter-pattern '[ip, id, user, timestamp, request, status_code, size]' \ 
+--metric-transformation  \
+metricName=BytesTransferred,metricNamespace=MyNamespace,metricValue=$size,unit=Bytes,dimensions='{EventType=$eventtype}'
+```
+
+**Note**  
+In this command, use this format to specify multiple dimensions\.  
+
+```
+aws logs put-metric-filter \
+--log-group-name my-log-group-name \
+--filter-name my-filter-name \
+--filter-pattern 'my-filter-pattern' \ 
+--metric-transformation  \
+metricName=my-metric-name,metricNamespace=my-metric-namespace,metricValue=my-token,unit=unit,dimensions='{dimension1=$dim,dimension2=$dim2,dim3=$dim3}''
 ```
 
 You can use the following data in put\-log\-event calls to test this rule\. This generates two different metrics if you did not remove monitoring rule in the previous example\.

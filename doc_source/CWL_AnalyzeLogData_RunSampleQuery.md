@@ -1,38 +1,40 @@
-# Tutorial: Run and Modify a Sample Query<a name="CWL_AnalyzeLogData_RunSampleQuery"></a>
+# Tutorial: Run and modify a sample query<a name="CWL_AnalyzeLogData_RunSampleQuery"></a>
 
 The following tutorial helps you get started with CloudWatch Logs Insights\. You run a sample query, and then see how to modify and rerun it\.
 
-To run a query, you must already have logs stored in CloudWatch Logs\. If you are already using CloudWatch Logs and have log groups and log streams set up, you are ready to start\. You may also already have logs if you use services such as AWS CloudTrail, Amazon Route 53, or Amazon VPC and you have set up logs from those services to go to CloudWatch Logs\. For more information about sending logs to CloudWatch Logs, see [Getting Started with CloudWatch Logs](CWL_GettingStarted.md)\.
+To run a query, you must already have logs stored in CloudWatch Logs\. If you are already using CloudWatch Logs and have log groups and log streams set up, you are ready to start\. You may also already have logs if you use services such as AWS CloudTrail, Amazon Route 53, or Amazon VPC and you have set up logs from those services to go to CloudWatch Logs\. For more information about sending logs to CloudWatch Logs, see [Getting started with CloudWatch Logs](CWL_GettingStarted.md)\.
 
 Queries in CloudWatch Logs Insights return either a set of fields from log events or the result of a mathematical aggregation or other operation performed on log events\. This tutorial demonstrates a query that returns a list of log events\.
 
-## Run a Sample Query<a name="CWL_AnalyzeLogData_RunQuerySample"></a>
-
-Start by running a sample query\.
+## Run a sample query<a name="CWL_AnalyzeLogData_RunQuerySample"></a>
 
 **To run a CloudWatch Logs Insights sample query**
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. In the navigation pane, choose **Logs Insights**\.
+1. In the navigation pane, choose **Logs**, and then choose **Logs Insights**\.
 
-   Near the top of the page is the query editor\. When you first open CloudWatch Logs Insights, this box contains a default query that returns the 20 most recent log events\.
+   On the **Logs Insights** page, the query editor contains a default query that returns the 20 most recent log events\.
 
-1. Select one or more log groups to query, above the query editor\. To help find your log groups, you can enter text in the search bar and CloudWatch Logs displays matching log groups in the search bar\.
+1. In the **Select log group\(s\)** drop down, choose one or more log groups to query\.
 
-   When you select a log group, CloudWatch Logs Insights automatically detects fields in the data in the log group\. To see these discovered fields, select **Fields** on the right of the page\. 
+   You can type the name of log groups you want to query in the search bar\.
 
-1. \(Optional\) Use the time selector at the upper right to select the time period that you want to query\.
+   When you select a log group, CloudWatch Logs Insights automatically detects data fields in the group\. To see discovered fields, select the **Fields** menu near the top right of the page\.
 
-1. Choose **Run**\.
+1. \(Optional\) Use the time interval selector to select a time period that you want to query\.
 
-   The results of the query appear\. In this example, the results are the most recent 20 log events of any type\.
+   You can choose between 5 and 30\-minute intervals; 1, 3, and 12\-hour intervals; or a custom time frame\.
 
-   CloudWatch Logs also displays a bar graph of log events in this log group over time\. This bar graph shows the distribution of events in the log group that matches your query and time range, not just the events displayed in the table\.
+1. Choose **Run** to view the results\.
 
-1. To see all fields of one of the returned log events, choose the icon to the left of that log event\.
+   For this tutorial, the results include the 20 most recently added log events\.
 
-## Modify the Sample Query<a name="CWL_AnalyzeLogData_ModifySampleQuery"></a>
+   CloudWatch Logs displays a bar graph of log events in the log group over time\. The bar graph shows not only the events in the table, but also the distribution of events in the log group that match the query and timeframe\.
+
+1. To see all fields for a returned log event, choose the triangular dropdown icon left of the numbered event\.
+
+## Modify the sample query<a name="CWL_AnalyzeLogData_ModifySampleQuery"></a>
 
 In this tutorial, you modify the sample query to show the 50 most recent log events\.
 
@@ -47,9 +49,9 @@ Some sample queries provided with CloudWatch Logs Insights use `head` or `tail` 
 
    The results of the new query appear\. Assuming there is enough data in the log group in the default time range, there are now 50 log events listed\.
 
-1. \(Optional\) You can save queries that you have created\. To save this query, choose **Save**\. For more information, see [Saving and Re\-running CloudWatch Logs Insights Queries](CWL_Insights-Saving-Queries.md)\.
+1. \(Optional\) You can save queries that you have created\. To save this query, choose **Save**\. For more information, see [Saving and re\-running CloudWatch Logs Insights queries](CWL_Insights-Saving-Queries.md)\.
 
-## Add a Filter Command to the Sample Query<a name="CWL_AnalyzeLogData_FilterQuery"></a>
+## Add a filter command to the sample query<a name="CWL_AnalyzeLogData_FilterQuery"></a>
 
 This tutorial shows how to make a more powerful change to the query in the query editor\. In this tutorial, you filter the results of the previous query based on a field in the retrieved log events\.
 
@@ -77,4 +79,4 @@ If you haven't already run the previous tutorials, do that now\. This tutorial s
 
    You must use the backtick characters for field names that contain non\-alphanumeric characters, but not for values\. Values are always contained in quotation marks \("\)\.
 
-CloudWatch Logs Insights includes powerful query abilities, including several commands and support for regular expressions, mathematical, and statistical operations\. For more information, see [CloudWatch Logs Insights Query Syntax](CWL_QuerySyntax.md)\.
+CloudWatch Logs Insights includes powerful query abilities, including several commands and support for regular expressions, mathematical, and statistical operations\. For more information, see [CloudWatch Logs Insights query syntax](CWL_QuerySyntax.md)\.

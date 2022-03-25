@@ -1,15 +1,15 @@
-# Using CloudWatch Logs Subscription Filters<a name="SubscriptionFilters"></a>
+# Using CloudWatch Logs subscription filters<a name="SubscriptionFilters"></a>
 
-You can use a subscription filter with Kinesis, Lambda, or Kinesis Data Firehose\. Logs that are sent to a receiving service through a subscription filter are Base64 encoded and compressed with the gzip format\.
+You can use a subscription filter with Kinesis, Lambda, or Kinesis Data Firehose\. Logs that are sent to a receiving service through a subscription filter are base64 encoded and compressed with the gzip format\.
 
 **Topics**
-+ [Example 1: Subscription Filters with Kinesis](#DestinationKinesisExample)
-+ [Example 2: Subscription Filters with AWS Lambda](#LambdaFunctionExample)
-+ [Example 3: Subscription Filters with Amazon Kinesis Data Firehose](#FirehoseExample)
++ [Example 1: Subscription filters with Kinesis](#DestinationKinesisExample)
++ [Example 2: Subscription filters with AWS Lambda](#LambdaFunctionExample)
++ [Example 3: Subscription filters with Amazon Kinesis Data Firehose](#FirehoseExample)
 
-## Example 1: Subscription Filters with Kinesis<a name="DestinationKinesisExample"></a>
+## Example 1: Subscription filters with Kinesis<a name="DestinationKinesisExample"></a>
 
-The following example associates a subscription filter with a log group containing AWS CloudTrail events to have every logged activity made by "Root" AWS credentials delivered to a Kinesis stream called "RootAccess\." For more information about how to send AWS CloudTrail events to CloudWatch Logs, see [Sending CloudTrail Events to CloudWatch Logs](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cw_send_ct_events.html) in the *AWS CloudTrail User Guide*\.
+The following example associates a subscription filter with a log group containing AWS CloudTrail events\. The subscription filter delivers every logged activity made by "Root" AWS credentials to a Kinesis stream called "RootAccess\." For more information about how to send AWS CloudTrail events to CloudWatch Logs, see [Sending CloudTrail Events to CloudWatch Logs](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cw_send_ct_events.html) in the *AWS CloudTrail User Guide*\.
 
 **Note**  
 Before you create the Kinesis stream, calculate the volume of log data that will be generated\. Be sure to create a Kinesis stream with enough shards to handle this volume\. If the stream does not have enough shards, the log stream will be throttled\. For more information about Kinesis stream volume limits, see [Amazon Kinesis Data Streams Limits](https://docs.aws.amazon.com/streams/latest/dev/service-sizes-and-limits.html)\. 
@@ -53,22 +53,27 @@ Before you create the Kinesis stream, calculate the volume of log data that will
    }
    ```
 
-1. Create the IAM role that will grant CloudWatch Logs permission to put data into your Kinesis stream\. First, you'll need to create a trust policy in a file \(for example, `~/TrustPolicyForCWL.json`\)\. Use a text editor to create this policy\. Do not use the IAM console to create it\.
+1. Create the IAM role that will grant CloudWatch Logs permission to put data into your Kinesis stream\. First, you'll need to create a trust policy in a file \(for example, `~/TrustPolicyForCWL-Kinesis.json`\)\. Use a text editor to create this policy\. Do not use the IAM console to create it\.
+
+   This policy includes a `aws:SourceArn` global condition context key to help prevent the confused deputy security problem\. For more information, see [Confused deputy prevention](Subscriptions-confused-deputy.md)\.
 
    ```
    {
      "Statement": {
        "Effect": "Allow",
        "Principal": { "Service": "logs.region.amazonaws.com" },
-       "Action": "sts:AssumeRole"
-     }
+       "Action": "sts:AssumeRole",
+       "Condition": { 
+           "StringLike": { "aws:SourceArn": "arn:aws:logs:region:123456789012:*" } 
+        }
+      }
    }
    ```
 
 1. Use the **create\-role** command to create the IAM role, specifying the trust policy file\. Note the returned **Role\.Arn** value, as you will also need it for a later step:
 
    ```
-   aws iam create-role --role-name CWLtoKinesisRole --assume-role-policy-document file://~/TrustPolicyForCWL.json
+   aws iam create-role --role-name CWLtoKinesisRole --assume-role-policy-document file://~/TrustPolicyForCWL-Kinesis.json
    ```
 
    The following is an example of the output\.
@@ -82,6 +87,11 @@ Before you create the Kinesis stream, calculate the volume of log data that will
                    "Effect": "Allow",
                    "Principal": {
                        "Service": "logs.region.amazonaws.com"
+                   },
+                   "Condition": { 
+                       "StringLike": { 
+                           "aws:SourceArn": { "arn:aws:logs:region:123456789012:*" }
+                       } 
                    }
                }
            },
@@ -94,7 +104,7 @@ Before you create the Kinesis stream, calculate the volume of log data that will
    }
    ```
 
-1. Create a permissions policy to define what actions CloudWatch Logs can do on your account\. First, you'll create a permissions policy in a file \(for example, `~/PermissionsForCWL.json`\)\. Use a text editor to create this policy\. Do not use the IAM console to create it\.
+1. Create a permissions policy to define what actions CloudWatch Logs can do on your account\. First, you'll create a permissions policy in a file \(for example, `~/PermissionsForCWL-Kinesis.json`\)\. Use a text editor to create this policy\. Do not use the IAM console to create it\.
 
    ```
    {
@@ -111,14 +121,14 @@ Before you create the Kinesis stream, calculate the volume of log data that will
 1. Associate the permissions policy with the role using the following [put\-role\-policy](https://docs.aws.amazon.com/cli/latest/reference/iam/put-role-policy.html) command:
 
    ```
-   aws iam put-role-policy  --role-name CWLtoKinesisRole  --policy-name Permissions-Policy-For-CWL  --policy-document file://~/PermissionsForCWL.json
+   aws iam put-role-policy  --role-name CWLtoKinesisRole  --policy-name Permissions-Policy-For-CWL  --policy-document file://~/PermissionsForCWL-Kinesis.json
    ```
 
 1. After the Kinesis stream is in **Active** state and you have created the IAM role, you can create the CloudWatch Logs subscription filter\. The subscription filter immediately starts the flow of real\-time log data from the chosen log group to your Kinesis stream:
 
    ```
    aws logs put-subscription-filter \
-       --log-group-name "CloudTrail" \
+       --log-group-name "CloudTrail/logs" \
        --filter-name "RootAccess" \
        --filter-pattern "{$.userIdentity.type = Root}" \
        --destination-arn "arn:aws:kinesis:region:123456789012:stream/RootAccess" \
@@ -144,19 +154,19 @@ Before you create the Kinesis stream, calculate the volume of log data that will
 
    Note that you might need to make this call a few times before Kinesis starts to return data\.
 
-   You should expect to see a response with an array of records\. The **Data** attribute in a Kinesis record is Base64 encoded and compressed with the gzip format\. You can examine the raw data from the command line using the following Unix commands:
+   You should expect to see a response with an array of records\. The **Data** attribute in a Kinesis record is base64 encoded and compressed with the gzip format\. You can examine the raw data from the command line using the following Unix commands:
 
    ```
    echo -n "<Content of Data>" | base64 -d | zcat
    ```
 
-   The Base64 decoded and decompressed data is formatted as JSON with the following structure:
+   The base64 decoded and decompressed data is formatted as JSON with the following structure:
 
    ```
    {
        "owner": "111111111111",
-       "logGroup": "CloudTrail",
-       "logStream": "111111111111_CloudTrail_us-east-1",
+       "logGroup": "CloudTrail/logs",
+       "logStream": "111111111111_CloudTrail/logs_us-east-1",
        "subscriptionFilters": [
            "Destination"
        ],
@@ -195,7 +205,7 @@ Data messages will use the "DATA\_MESSAGE" type\. Sometimes CloudWatch Logs may 
 **logEvents**  
 The actual log data, represented as an array of log event records\. The "id" property is a unique identifier for every log event\.
 
-## Example 2: Subscription Filters with AWS Lambda<a name="LambdaFunctionExample"></a>
+## Example 2: Subscription filters with AWS Lambda<a name="LambdaFunctionExample"></a>
 
 In this example, you'll create a CloudWatch Logs subscription filter that sends log data to your AWS Lambda function\.
 
@@ -218,7 +228,7 @@ Before you create the Lambda function, calculate the volume of log data that wil
            if (e) { 
                context.fail(e);
            } else {
-               result = JSON.parse(result.toString('ascii'));
+               result = JSON.parse(result.toString());
                console.log("Event Data:", JSON.stringify(result, null, 2));
                context.succeed();
            }
@@ -247,7 +257,7 @@ Before you create the Lambda function, calculate the volume of log data that wil
        --statement-id "helloworld" \
        --principal "logs.region.amazonaws.com" \
        --action "lambda:InvokeFunction" \
-       --source-arn "arn:aws:logs:region:123456789123:log-group:TestLambda:*" \
+       --source-arn "arn:aws:logs:region:123456789123:log-group:TestLambda:" \
        --source-account "123456789012"
    ```
 
@@ -269,13 +279,13 @@ Before you create the Lambda function, calculate the volume of log data that wil
    aws logs put-log-events --log-group-name myLogGroup --log-stream-name stream1 --log-events "[{\"timestamp\":<CURRENT TIMESTAMP MILLIS> , \"message\": \"Simple Lambda Test\"}]"
    ```
 
-   You should expect to see a response with an array of Lambda\. The **Data** attribute in the Lambda record is Base64 encoded and compressed with the gzip format\. The actual payload that Lambda receives is in the following format `{ "awslogs": {"data": "BASE64ENCODED_GZIP_COMPRESSED_DATA"} }` You can examine the raw data from the command line using the following Unix commands:
+   You should expect to see a response with an array of Lambda\. The **Data** attribute in the Lambda record is base64 encoded and compressed with the gzip format\. The actual payload that Lambda receives is in the following format `{ "awslogs": {"data": "BASE64ENCODED_GZIP_COMPRESSED_DATA"} }` You can examine the raw data from the command line using the following Unix commands:
 
    ```
    echo -n "<BASE64ENCODED_GZIP_COMPRESSED_DATA>" | base64 -d | zcat
    ```
 
-   The Base64 decoded and decompressed data is formatted as JSON with the following structure:
+   The base64 decoded and decompressed data is formatted as JSON with the following structure:
 
    ```
    {
@@ -320,7 +330,7 @@ Data messages will use the "DATA\_MESSAGE" type\. Sometimes CloudWatch Logs may 
 **logEvents**  
 The actual log data, represented as an array of log event records\. The "id" property is a unique identifier for every log event\.
 
-## Example 3: Subscription Filters with Amazon Kinesis Data Firehose<a name="FirehoseExample"></a>
+## Example 3: Subscription filters with Amazon Kinesis Data Firehose<a name="FirehoseExample"></a>
 
 In this example, you'll create a CloudWatch Logs subscription that sends any incoming log events that match your defined filters to your Amazon Kinesis Data Firehose delivery stream\. Data sent from CloudWatch Logs to Amazon Kinesis Data Firehose is already compressed with gzip level 6 compression, so you do not need to use compression within your Kinesis Data Firehose delivery stream\.
 
@@ -331,7 +341,7 @@ Before you create the Kinesis Data Firehose stream, calculate the volume of log 
 
 1. Create an Amazon Simple Storage Service \(Amazon S3\) bucket\. We recommend that you use a bucket that was created specifically for CloudWatch Logs\. However, if you want to use an existing bucket, skip to step 2\.
 
-   Run the following command, replacing the placeholder region with the region you want to use:
+   Run the following command, replacing the placeholder Region with the Region you want to use:
 
    ```
    aws s3api create-bucket --bucket my-bucket --create-bucket-configuration LocationConstraint=region
@@ -349,16 +359,15 @@ Before you create the Kinesis Data Firehose stream, calculate the volume of log 
 
    For more information, see [Controlling Access with Amazon Kinesis Data Firehose](https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html) in the *Amazon Kinesis Data Firehose Developer Guide*\.
 
-   First, use a text editor to create a trust policy in a file `~/TrustPolicyForFirehose.json` as follows, replacing *account\-id* with your AWS account ID:
+   First, use a text editor to create a trust policy in a file `~/TrustPolicyForFirehose.json` as follows:
 
    ```
    {
      "Statement": {
        "Effect": "Allow",
        "Principal": { "Service": "firehose.amazonaws.com" },
-       "Action": "sts:AssumeRole",
-       "Condition": { "StringEquals": { "sts:ExternalId":"account-id" } }
-     }
+       "Action": "sts:AssumeRole"
+       } 
    }
    ```
 
@@ -366,8 +375,8 @@ Before you create the Kinesis Data Firehose stream, calculate the volume of log 
 
    ```
    aws iam create-role \
-         --role-name FirehosetoS3Role \
-         --assume-role-policy-document file://~/TrustPolicyForFirehose.json
+    --role-name FirehosetoS3Role \
+    --assume-role-policy-document file://~/TrustPolicyForFirehose.json
    
    {
        "Role": {
@@ -405,7 +414,7 @@ Before you create the Kinesis Data Firehose stream, calculate the volume of log 
              "s3:PutObject" ],
          "Resource": [ 
              "arn:aws:s3:::my-bucket", 
-             "arn:aws:s3:::my-bucket/*" ]
+             "arn:aws:s3:::my-bucket/" ]
        }
      ]
    }
@@ -463,12 +472,19 @@ Before you create the Kinesis Data Firehose stream, calculate the volume of log 
 
 1. Create the IAM role that will grant CloudWatch Logs permission to put data into your Kinesis Data Firehose delivery stream\. First, use a text editor to create a trust policy in a file `~/TrustPolicyForCWL.json`:
 
+   This policy includes a `aws:SourceArn` global condition context key to help prevent the confused deputy security problem\. For more information, see [Confused deputy prevention](Subscriptions-confused-deputy.md)\.
+
    ```
    {
      "Statement": {
        "Effect": "Allow",
        "Principal": { "Service": "logs.region.amazonaws.com" },
-       "Action": "sts:AssumeRole"
+       "Action": "sts:AssumeRole",
+       "Condition": { 
+            "StringLike": { 
+                "aws:SourceArn": "arn:aws:logs:region:123456789012:*"
+            } 
+        }
      }
    }
    ```
@@ -477,8 +493,8 @@ Before you create the Kinesis Data Firehose stream, calculate the volume of log 
 
    ```
    aws iam create-role \
-         --role-name CWLtoKinesisFirehoseRole \
-         --assume-role-policy-document file://~/TrustPolicyForCWL.json
+   --role-name CWLtoKinesisFirehoseRole \
+   --assume-role-policy-document file://~/TrustPolicyForCWL.json
    
    {
        "Role": {
@@ -488,7 +504,12 @@ Before you create the Kinesis Data Firehose stream, calculate the volume of log 
                    "Effect": "Allow",
                    "Principal": {
                        "Service": "logs.region.amazonaws.com"
-                   }
+                   },
+                   "Condition": { 
+                        "StringLike": { 
+                            "aws:SourceArn": "arn:aws:logs:region:123456789012:*"
+                        } 
+                    }
                }
            },
            "RoleId": "AAOIIAH450GAB4HC5F431",

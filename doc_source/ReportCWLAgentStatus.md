@@ -1,4 +1,4 @@
-# Report the CloudWatch Logs Agent Status<a name="ReportCWLAgentStatus"></a>
+# Report the CloudWatch Logs agent status<a name="ReportCWLAgentStatus"></a>
 
 Use the following procedure to report the status of the CloudWatch Logs agent on your EC2 instance\.
 

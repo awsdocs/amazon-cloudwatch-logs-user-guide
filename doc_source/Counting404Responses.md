@@ -1,4 +1,4 @@
-# Example: Count HTTP 404 Codes<a name="Counting404Responses"></a>
+# Example: Count HTTP 404 codes<a name="Counting404Responses"></a>
 
 Using CloudWatch Logs, you can monitor how many times your Apache servers return a HTTP 404 response, which is the response code for page not found\. You might want to monitor this to understand how often your site visitors do not find the resource they are looking for\. Assume that your log records are structured to include the following information for each log event \(site visit\):
 + Requestor IP Address
@@ -27,7 +27,7 @@ You could specify a rule which attempts to match events of that structure for HT
 
 1. For **Filter Pattern**, type **\[IP, UserInfo, User, Timestamp, RequestInfo, StatusCode=404, Bytes\]**\.
 
-1. To test your filter pattern, choose **Test Pattern**\.
+1. \(Optional\) To test your filter pattern, under **Test Pattern**, enter one or more log events to use to test the pattern\. Each log event must be within one line, because line breaks are used to separate log events in the **Log event messages** box\.
 
 1. Choose **Next**, and then for **Filter Name**, type **HTTP404Errors**\.
 

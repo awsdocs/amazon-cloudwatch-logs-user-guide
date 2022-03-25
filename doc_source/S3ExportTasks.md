@@ -1,10 +1,10 @@
-# Export Log Data to Amazon S3 Using the AWS CLI<a name="S3ExportTasks"></a>
+# Export log data to Amazon S3 using the AWS CLI<a name="S3ExportTasks"></a>
 
 In the following example, you use an export task to export all data from a CloudWatch Logs log group named `my-log-group` to an Amazon S3 bucket named `my-exported-logs`\. This example assumes that you have already created a log group called `my-log-group`\.
 
 Exporting log data to Amazon S3 buckets that are encrypted by AWS KMS is not supported\.
 
-## Step 1: Create an Amazon S3 Bucket<a name="CreateS3Bucket"></a>
+## Step 1: Create an Amazon S3 bucket<a name="CreateS3Bucket"></a>
 
 We recommend that you use a bucket that was created specifically for CloudWatch Logs\. However, if you want to use an existing bucket, you can skip to step 2\.
 
@@ -26,7 +26,7 @@ The following is example output\.
 }
 ```
 
-## Step 2: Create an IAM User with Full Access to Amazon S3 and CloudWatch Logs<a name="CreateIAMUser-With-S3-Access-CLI"></a>
+## Step 2: Create an IAM user with full access to Amazon S3 and CloudWatch Logs<a name="CreateIAMUser-With-S3-Access-CLI"></a>
 
 In the following steps, you create the IAM user with necessary permissions\.
 
@@ -64,7 +64,7 @@ In the following steps, you create the IAM user with necessary permissions\.
 
 1. Configure your AWS CLI to include the IAM credentials of the *CWLExportUser* IAM user\. For more information, see [Configuring the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html)\.
 
-## Step 3: Set Permissions on an Amazon S3 Bucket<a name="S3Permissions"></a>
+## Step 3: Set permissions on an Amazon S3 bucket<a name="S3Permissions"></a>
 
 By default, all Amazon S3 buckets and objects are private\. Only the resource owner, the account that created the bucket, can access the bucket and any objects that it contains\. However, the resource owner can choose to grant access permissions to other resources and users by writing an access policy\.
 
@@ -81,14 +81,14 @@ By default, all Amazon S3 buckets and objects are private\. Only the resource ow
                  "Action": "s3:GetBucketAcl",
                  "Effect": "Allow",
                  "Resource": "arn:aws:s3:::my-exported-logs",
-                 "Principal": { "Service": "logs.us-west-2.amazonaws.com" }
+                 "Principal": { "Service": "logs.us-east-2.amazonaws.com" }
              },
              {
                  "Action": "s3:PutObject" ,
                  "Effect": "Allow",
                  "Resource": "arn:aws:s3:::my-exported-logs/*",
                  "Condition": { "StringEquals": { "s3:x-amz-acl": "bucket-owner-full-control" } },
-                 "Principal": { "Service": "logs.us-west-2.amazonaws.com" }
+                 "Principal": { "Service": "logs.us-east-2.amazonaws.com" }
              }
          ]
      }
@@ -103,14 +103,14 @@ By default, all Amazon S3 buckets and objects are private\. Only the resource ow
                "Action": "s3:GetBucketAcl",
                "Effect": "Allow",
                "Resource": "arn:aws:s3:::my-exported-logs",
-               "Principal": { "Service": "logs.us-west-2.amazonaws.com" }
+               "Principal": { "Service": "logs.us-east-2.amazonaws.com" }
            },
            {
                "Action": "s3:PutObject" ,
                "Effect": "Allow",
                "Resource": "arn:aws:s3:::my-exported-logs/random-string/*",
                "Condition": { "StringEquals": { "s3:x-amz-acl": "bucket-owner-full-control" } },
-               "Principal": { "Service": "logs.us-west-2.amazonaws.com" }
+               "Principal": { "Service": "logs.us-east-2.amazonaws.com" }
            },
            {
                "Action": "s3:PutObject" ,
@@ -132,14 +132,14 @@ By default, all Amazon S3 buckets and objects are private\. Only the resource ow
                "Action": "s3:GetBucketAcl",
                "Effect": "Allow",
                "Resource": "arn:aws:s3:::my-exported-logs",
-               "Principal": { "Service": "logs.us-west-2.amazonaws.com" }
+               "Principal": { "Service": "logs.us-east-2.amazonaws.com" }
            },
            {
                "Action": "s3:PutObject" ,
                "Effect": "Allow",
                "Resource": "arn:aws:s3:::my-exported-logs/random-string/*",
                "Condition": { "StringEquals": { "s3:x-amz-acl": "bucket-owner-full-control" } },
-               "Principal": { "Service": "logs.us-west-2.amazonaws.com" }
+               "Principal": { "Service": "logs.us-east-2.amazonaws.com" }
            },
            {
                "Action": "s3:PutObject" ,
@@ -160,7 +160,7 @@ By default, all Amazon S3 buckets and objects are private\. Only the resource ow
 **Warning**  
 If the existing bucket already has one or more policies attached to it, add the statements for CloudWatch Logs access to that policy or policies\. We recommend that you evaluate the resulting set of permissions to be sure that they're appropriate for the users who will access the bucket\.
 
-## Step 4: Create an Export Task<a name="CreateExportTask"></a>
+## Step 4: Create an export task<a name="CreateExportTask"></a>
 
 After you create the export task for exporting logs from a log group, the export task might take anywhere from a few seconds to a few hours, depending on the size of the data to export\.
 
@@ -179,7 +179,7 @@ The following is example output\.
 }
 ```
 
-## Step 5: Describe Export Tasks<a name="DescribeExportTasks"></a>
+## Step 5: Describe export tasks<a name="DescribeExportTasks"></a>
 
 After you create an export task, you can get the current status of the task\.
 
@@ -250,7 +250,7 @@ The following is example output\.
 }
 ```
 
-## Step 6: Cancel an Export Task<a name="CancelExportTask"></a>
+## Step 6: Cancel an export task<a name="CancelExportTask"></a>
 
 You can cancel an export task if it is in either the `PENDING` or the `RUNNING` state\.
 

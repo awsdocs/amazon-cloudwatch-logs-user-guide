@@ -1,4 +1,4 @@
-# Example: Count Log Events<a name="CountingLogEventsExample"></a>
+# Example: Count log events<a name="CountingLogEventsExample"></a>
 
 The simplest type of log event monitoring is to count the number of log events that occur\. You might want to do this to keep a count of all events, to create a "heartbeat" style monitor or just to practice creating metric filters\.
 
@@ -35,7 +35,7 @@ At a command prompt, run the following command:
 aws logs put-metric-filter \
   --log-group-name MyApp/access.log \
   --filter-name EventCount \
-  --filter-pattern "" \
+  --filter-pattern " " \
   --metric-transformations \
   metricName=MyAppEventCount,metricNamespace=MyNamespace,metricValue=1,defaultValue=0
 ```

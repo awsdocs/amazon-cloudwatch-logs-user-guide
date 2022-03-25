@@ -1,14 +1,14 @@
-# Logging Amazon CloudWatch Logs API Calls in AWS CloudTrail<a name="logging_cw_api_calls_cwl"></a>
+# Logging Amazon CloudWatch Logs API calls in AWS CloudTrail<a name="logging_cw_api_calls_cwl"></a>
 
 Amazon CloudWatch Logs is integrated with AWS CloudTrail, a service that provides a record of actions taken by a user, role, or an AWS service in CloudWatch Logs\. CloudTrail captures API calls made by or on behalf of your AWS account\. The calls captured include calls from the CloudWatch console and code calls to the CloudWatch Logs API operations\. If you create a trail, you can enable continuous delivery of CloudTrail events to an Amazon S3 bucket, including events for CloudWatch Logs\. If you don't configure a trail, you can still view the most recent events in the CloudTrail console in **Event history**\. Using the information collected by CloudTrail, you can determine the request that was made to CloudWatch Logs, the IP address from which the request was made, who made the request, when it was made, and additional details\. 
 
 To learn more about CloudTrail, including how to configure and enable it, see the [AWS CloudTrail User Guide](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/)\.
 
 **Topics**
-+ [CloudWatch Logs Information in CloudTrail](#cwl_info_in_ct)
-+ [Understanding Log File Entries](#understanding_cw_log_file_entries_cwl)
++ [CloudWatch Logs information in CloudTrail](#cwl_info_in_ct)
++ [Understanding log file entries](#understanding_cw_log_file_entries_cwl)
 
-## CloudWatch Logs Information in CloudTrail<a name="cwl_info_in_ct"></a>
+## CloudWatch Logs information in CloudTrail<a name="cwl_info_in_ct"></a>
 
 CloudTrail is enabled on your AWS account when you create the account\. When supported event activity occurs in CloudWatch Logs, that activity is recorded in a CloudTrail event along with other AWS service events in **Event history**\. You can view, search, and download recent events in your AWS account\. For more information, see [Viewing Events with CloudTrail Event History](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/view-cloudtrail-events.html)\. 
 
@@ -32,6 +32,7 @@ CloudWatch Logs supports logging the following actions as events in CloudTrail l
 + [PutDestination](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDestination.html)
 + [PutDestinationPolicy](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDestinationPolicy.html)
 + [PutMetricFilter](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutMetricFilter.html)
++ [PutResourcePolicy](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutResourcePolicy.html)
 + [PutRetentionPolicy](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutRetentionPolicy.html)
 + [PutSubscriptionFilter](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutSubscriptionFilter.html)
 + [StartQuery](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html)
@@ -45,6 +46,7 @@ Only request elements are logged in CloudTrail for these CloudWatch Logs API act
 + [DescribeLogStreams](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeLogStreams.html)
 + [DescribeMetricFilters](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeMetricFilters.html)
 + [DescribeQueries](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeQueries.html)
++ [DescribeResourcePolicies](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeResourcePolicies.html)
 + [DescribeSubscriptionFilters](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeSubscriptionFilters.html)
 + [GetLogGroupFields](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogGroupFields.html)
 + [GetLogRecord](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogRecord.html)
@@ -56,7 +58,7 @@ Every event or log entry contains information about who generated the request\. 
 
 For more information, see the [CloudTrail userIdentity Element](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-event-reference-user-identity.html)\.
 
-## Understanding Log File Entries<a name="understanding_cw_log_file_entries_cwl"></a>
+## Understanding log file entries<a name="understanding_cw_log_file_entries_cwl"></a>
 
  A trail is a configuration that enables delivery of events as log files to an Amazon S3 bucket that you specify\. CloudTrail log files contain one or more log entries\. An event represents a single request from any source and includes information about the requested action, the date and time of the action, request parameters, and so on\. CloudTrail log files aren't an ordered stack trace of the public API calls, so they don't appear in any specific order\.
 

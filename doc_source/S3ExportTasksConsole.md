@@ -1,10 +1,10 @@
-# Export Log Data to Amazon S3 Using the Console<a name="S3ExportTasksConsole"></a>
+# Export log data to Amazon S3 using the console<a name="S3ExportTasksConsole"></a>
 
 In the following example, you use the Amazon CloudWatch console to export all data from an Amazon CloudWatch Logs log group named `my-log-group` to an Amazon S3 bucket named `my-exported-logs`\.
 
 Exporting log data to Amazon S3 buckets that are encrypted by AWS KMS is not supported\.
 
-## Step 1: Create an Amazon S3 Bucket<a name="CreateS3BucketConsole"></a>
+## Step 1: Create an Amazon S3 bucket<a name="CreateS3BucketConsole"></a>
 
 We recommend that you use a bucket that was created specifically for CloudWatch Logs\. However, if you want to use an existing bucket, you can skip to step 2\.
 
@@ -25,7 +25,7 @@ The Amazon S3 bucket must reside in the same Region as the log data to export\. 
 
 1. Choose **Create**\.
 
-## Step 2: Create an IAM User with Full Access to Amazon S3 and CloudWatch Logs<a name="CreateIAMUser-With-S3-Access"></a>
+## Step 2: Create an IAM user with full access to Amazon S3 and CloudWatch Logs<a name="CreateIAMUser-With-S3-Access"></a>
 
 In the following steps, you create the IAM user with necessary permissions\.
 
@@ -47,7 +47,7 @@ In the following steps, you create the IAM user with necessary permissions\.
 
 1. Choose **Next: Tags**, **Next: Review**, and then **Create user**\.
 
-## Step 3: Set Permissions on an Amazon S3 Bucket<a name="S3PermissionsConsole"></a>
+## Step 3: Set permissions on an Amazon S3 bucket<a name="S3PermissionsConsole"></a>
 
 By default, all Amazon S3 buckets and objects are private\. Only the resource owner, the AWS account that created the bucket, can access the bucket and any objects that it contains\. However, the resource owner can choose to grant access permissions to other resources and users by writing an access policy\.
 
@@ -116,13 +116,13 @@ When you set the policy, we recommend that you include a randomly generated stri
 **Warning**  
 If the existing bucket already has one or more policies attached to it, add the statements for CloudWatch Logs access to that policy or policies\. We recommend that you evaluate the resulting set of permissions to be sure that they're appropriate for the users who will access the bucket\.
 
-## Step 4: Create an Export Task<a name="CreateExportTaskConsole"></a>
+## Step 4: Create an export task<a name="CreateExportTaskConsole"></a>
 
 In this step, you create the export task for exporting logs from a log group\.
 
 **To export data to Amazon S3 using the CloudWatch console**
 
-1. Sign in as the IAM user that you created in **Step 2: Create an IAM User with Full Access to Amazon S3 and CloudWatch Logs**\.
+1. Sign in as the IAM user that you created in **Step 2: Create an IAM user with full access to Amazon S3 and CloudWatch Logs**\.
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 

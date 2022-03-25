@@ -1,19 +1,27 @@
-# Tutorial: Run a Query with an Aggregation Function<a name="CWL_AnalyzeLogData_AggregationQuery"></a>
+# Tutorial: Run a query with an aggregation function<a name="CWL_AnalyzeLogData_AggregationQuery"></a>
 
-In this tutorial, you run a query that returns the results of executing aggregate functions on log records\.
+You can use aggregation functions with the `stats` command and as arguments for other functions\. In this tutorial, you run a query command that counts the number of log events containing a specified field\. The query command returns a total count that's grouped by the specified field's value or values\. For more information about aggregation functions, see [Supported operations and functions](https://docs.aws.amazon.com/en_us/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html#CWL_QuerySyntax-operations-functions) in the *Amazon CloudWatch Logs User Guide*\.
 
-**To run an aggregation query**
+**To run a query with an aggregation function**
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. In the navigation pane, choose **Insights**\.
+1. In the navigation pane, choose **Logs**, and then choose **Logs Insights**\.
 
-1. Select one or more log groups above the query editor\. To help find your log groups, enter text in the search bar and CloudWatch Logs displays matching log groups in the search bar\.
+1. In the **Select log group\(s\)** drop down, choose one or more log groups to query\.
 
-1. In the query editor, delete the query that is currently shown, enter the following, and then choose **Run**\. Replace *fieldname* with the name of a field that appears in the **Fields** area on the right of the page\.
+   You can enter the name of log groups that you want to query in the search bar\. When you select a log group, CloudWatch Logs Insights automatically detects the data fields in the log group\. 
+
+1. Delete the default query in the query editor, and enter the following command:
 
    ```
-   stats count(*) by fieldname
+   stats count(*) by fieldName
    ```
 
-   The results show the number of log events in the log group that were received by CloudWatch Logs that contain each different value for the field name that you chose\.
+1. Replace *fieldName* with a discovered field from the **Fields** menu\.
+
+   The **Fields** menu is located at the top right of the page and displays all of the discovered fields that CloudWatch Logs Insights detects in your log group\.
+
+1. Choose **Run** to view the query results\.
+
+   The query results show the number of records in your log group that match the query command and the total count that's grouped by the specified field's value or values\.

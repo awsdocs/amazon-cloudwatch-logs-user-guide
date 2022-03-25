@@ -1,4 +1,4 @@
-# Create a Destination<a name="CreateDestination"></a>
+# Create a destination<a name="CreateDestination"></a>
 
 **Important**  
 All steps in this procedure are to be done in the log data recipient account\.
@@ -7,15 +7,17 @@ For this example, the log data recipient account has an AWS account ID of 999999
 
  This example creates a destination using a Kinesis stream called RecipientStream, and a role that enables CloudWatch Logs to write data to it\. 
 
+When the destination is created, CloudWatch Logs sends a test message to the destination on the recipient account’s behalf\. When the subscription filter is active later, CloudWatch Logs sends log events to the destination on the source account’s behalf\.
+
 **To create a destination**
 
-1. Create a destination stream in Kinesis\. At a command prompt, type:
+1. In the recipient account, create a destination stream in Kinesis\. At a command prompt, type:
 
    ```
    aws kinesis create-stream --stream-name "RecipientStream" --shard-count 1
    ```
 
-1. Wait until the Kinesis stream becomes active\. You can use the **aws kinesis describe\-stream** command to check the **StreamDescription\.StreamStatus** property\. In addition, take note of the **StreamDescription\.StreamARN** value because it will be passed to CloudWatch Logs later:
+1. Wait until the Kinesis stream becomes active\. You can use the **aws kinesis describe\-stream** command to check the **StreamDescription\.StreamStatus** property\. In addition, take note of the **StreamDescription\.StreamARN** value because you will pass it to CloudWatch Logs later:
 
    ```
    aws kinesis describe-stream --stream-name "RecipientStream"
@@ -44,22 +46,34 @@ For this example, the log data recipient account has an AWS account ID of 999999
 
 1. Create the IAM role that will grant CloudWatch Logs the permission to put data into your Kinesis stream\. First, you'll need to create a trust policy in a file **\~/TrustPolicyForCWL\.json**\. Use a text editor to create this policy file, do not use the IAM console\.
 
+   This policy includes a `aws:SourceArn` global condition context key that specifies the `sourceAccountId` to help prevent the confused deputy security problem\. If you don't yet know the source account ID in the first call, we recommend that you put the destination ARN in the source ARN field\. In the subsequent calls, you should set the source ARN to be the actual source ARN that you gathered from the first call\. For more information, see [Confused deputy prevention](Subscriptions-confused-deputy.md)\. 
+
    ```
    {
-     "Statement": {
-       "Effect": "Allow",
-       "Principal": { "Service": "logs.region.amazonaws.com" },
-       "Action": "sts:AssumeRole"
-     }
+       "Statement": {
+           "Effect": "Allow",
+           "Principal": {
+               "Service": "logs.region.amazonaws.com"
+           },
+           "Condition": {
+               "StringLike": {
+                   "aws:SourceArn": [
+                       "arn:aws:logs:region:sourceAccountId:*",
+                       "arn:aws:logs:region:recipientAccountId:*"
+                   ]
+               }
+           },
+           "Action": "sts:AssumeRole"
+       }
    }
    ```
 
-1. Use the **aws iam create\-role** command to create the IAM role, specifying the trust policy file\. Take note of the returned Role\.Arn value because that will also be passed to CloudWatch Logs later:
+1. Use the **aws iam create\-role** command to create the IAM role, specifying the trust policy file\. Take note of the returned Role\.Arn value because it will also be passed to CloudWatch Logs later:
 
    ```
    aws iam create-role \
-       --role-name CWLtoKinesisRole \
-       --assume-role-policy-document file://~/TrustPolicyForCWL.json
+   --role-name CWLtoKinesisRole \
+   --assume-role-policy-document file://~/TrustPolicyForCWL.json
    
    {
        "Role": {
@@ -67,6 +81,14 @@ For this example, the log data recipient account has an AWS account ID of 999999
                "Statement": {
                    "Action": "sts:AssumeRole",
                    "Effect": "Allow",
+                   "Condition": {
+                       "StringLike": {
+                           "aws:SourceArn": [
+                               "arn:aws:logs:region:sourceAccountId:*",
+                               "arn:aws:logs:region:recipientAccountId:*"
+                           ]
+                       }
+                   },
                    "Principal": {
                        "Service": "logs.region.amazonaws.com"
                    }
@@ -81,7 +103,7 @@ For this example, the log data recipient account has an AWS account ID of 999999
    }
    ```
 
-1. Create a permissions policy to define which actions CloudWatch Logs can perform on your account\. First, you'll use a text editor to create a permissions policy in a file **\~/PermissionsForCWL\.json**:
+1. Create a permissions policy to define which actions CloudWatch Logs can perform on your account\. First, use a text editor to create a permissions policy in a file **\~/PermissionsForCWL\.json**:
 
    ```
    {
@@ -95,7 +117,7 @@ For this example, the log data recipient account has an AWS account ID of 999999
    }
    ```
 
-1. Associate the permissions policy with the role using the **aws iam put\-role\-policy** command:
+1. Associate the permissions policy with the role by using the **aws iam put\-role\-policy** command:
 
    ```
    aws iam put-role-policy \
@@ -106,7 +128,7 @@ For this example, the log data recipient account has an AWS account ID of 999999
 
 1. After the Kinesis stream is in the active state and you have created the IAM role, you can create the CloudWatch Logs destination\.
 
-   1. This step will not associate an access policy with your destination and is only the first step out of two that completes a destination creation\. Make a note of the **DestinationArn** that is returned in the payload:
+   1. This step doesn't associate an access policy with your destination and is only the first step out of two that completes a destination creation\. Make a note of the **DestinationArn** that is returned in the payload:
 
       ```
       aws logs put-destination \
@@ -122,7 +144,35 @@ For this example, the log data recipient account has an AWS account ID of 999999
       }
       ```
 
-   1. After step 7a is complete, in the log data recipient account, associate an access policy with the destination\. This policy enables the log data sender account \(111111111111\) to access the destination in the log data recipient account \(999999999999\)\. You can use a text editor to put this policy in the **\~/AccessPolicy\.json** file:
+   1. After step 7a is complete, in the log data recipient account, associate an access policy with the destination\. This policy must specify the **logs:PutSubscriptionFilter** action and grants permission to the sender account to access the destination\.
+
+      The policy grants permission to the AWS account that sends logs\. You can specify just this one account in the policy, or if the sender account is a member of an organization, the policy can specify the organization ID of the organization\. This way, you can create just one policy to allow multiple accounts in one organization to send logs to this destination account\.
+
+      Use a text editor to create a file named `~/AccessPolicy.json` with one of the following policy statements\.
+
+      This first example policy allows all accounts in the organization that have an ID of `o-1234567890` to send logs to the recipient account\.
+
+      ```
+      { 
+          "Version" : "2012-10-17", 
+          "Statement" : [ 
+              { 
+                  "Sid" : "", 
+                  "Effect" : "Allow",
+                  "Principal" : "*",
+                  "Action" : "logs:PutSubscriptionFilter", 
+                  "Resource" : "arn:aws:logs:region:999999999999:destination:testDestination",
+                  "Condition": {
+                     "StringEquals" : {
+                         "aws:PrincipalOrgID" : ["o-1234567890"]
+                      }
+                  }
+              } 
+          ] 
+      }
+      ```
+
+      This next example allows just the log data sender account \(111111111111\) to send logs to the log data recipient account\.
 
       ```
       {
@@ -140,10 +190,8 @@ For this example, the log data recipient account has an AWS account ID of 999999
         ]
       }
       ```
-**Note**  
-If multiple accounts are sending logs to this destination, each sender account must be listed separately in the policy\. This policy does not support specifying `*` as the `Principal` or the use of the `aws:PrincipalOrgId` global key\.
 
-   1. This creates a policy that defines who has write access to the destination\. This policy must specify the **logs:PutSubscriptionFilter** action to access the destination\. Cross\-account users will use the **PutSubscriptionFilter** action to send log events to the destination:
+   1. Attach the policy you created in the previous step to the destination\.
 
       ```
       aws logs put-destination-policy \
@@ -154,3 +202,5 @@ If multiple accounts are sending logs to this destination, each sender account m
       This access policy enables users in the AWS Account with ID 111111111111 to call **PutSubscriptionFilter** against the destination with ARN arn:aws:logs:*region*:999999999999:destination:testDestination\. Any other user's attempt to call PutSubscriptionFilter against this destination will be rejected\.
 
       To validate a user's privileges against an access policy, see [Using Policy Validator](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies_policy-validator.html) in the *IAM User Guide*\.
+
+When you have finished, if you're using AWS Organizations for your cross\-account permissions, follow the steps in [Step 2: \(Only if using an organization\) Create an IAM role](CreateSubscriptionFilter-IAMrole.md)\. If you're granting permissions directly to the other account instead of using Organizations, you can skip that step and proceed to [Create a subscription filter](CreateSubscriptionFilter.md)\.

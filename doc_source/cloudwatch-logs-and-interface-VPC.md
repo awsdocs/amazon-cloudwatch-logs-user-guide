@@ -1,4 +1,4 @@
-# Using CloudWatch Logs with Interface VPC Endpoints<a name="cloudwatch-logs-and-interface-VPC"></a>
+# Using CloudWatch Logs with interface VPC endpoints<a name="cloudwatch-logs-and-interface-VPC"></a>
 
 If you use Amazon Virtual Private Cloud \(Amazon VPC\) to host your AWS resources, you can establish a private connection between your VPC and CloudWatch Logs\. You can use this connection to send logs to CloudWatch Logs without sending them through the internet\.
 
@@ -29,18 +29,18 @@ CloudWatch Logs currently supports VPC endpoints in the following Regions:
 + Europe \(Milan\)
 + Europe \(Paris\)
 + Europe \(Stockholm\)
-+ Middle East \(Bahrein\)
++ Middle East \(Bahrain\)
 + South America \(São Paulo\)
 + AWS GovCloud \(US\-East\)
 + AWS GovCloud \(US\-West\)
 
-## Creating a VPC Endpoint for CloudWatch Logs<a name="create-VPC-endpoint-for-CloudWatchLogs"></a>
+## Creating a VPC endpoint for CloudWatch Logs<a name="create-VPC-endpoint-for-CloudWatchLogs"></a>
 
-To start using CloudWatch Logs with your VPC, create an interface VPC endpoint for CloudWatch Logs\. The service to choose is **com\.amazonaws\.*Region*\.logs**\. For more information, see [Creating an Interface Endpoint](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#create-interface-endpoint.html) in the *Amazon VPC User Guide*\.
+To start using CloudWatch Logs with your VPC, create an interface VPC endpoint for CloudWatch Logs\. The service to choose is **com\.amazonaws\.*Region*\.logs**\. You do not need to change any settings for CloudWatch Logs\. For more information, see [Creating an Interface Endpoint](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#create-interface-endpoint.html) in the *Amazon VPC User Guide*\.
 
-You do not need to change the settings for CloudWatch Logs\. CloudWatch Logs calls other AWS services using either public endpoints or private interface VPC endpoints, whichever are in use\. For example, if you create an interface VPC endpoint for CloudWatch Logs, and you already have a CloudWatch Logs subscription filter for Kinesis Data Streams and an interface VPC endpoint for Kinesis Data Streams, calls between CloudWatch Logs and Kinesis Data Streams begin to flow through the interface VPC endpoint\.
 
-## Testing the Connection Between Your VPC and CloudWatch Logs<a name="test-VPC-endpoint-for-CloudWatchLogs"></a>
+
+## Testing the connection between your VPC and CloudWatch Logs<a name="test-VPC-endpoint-for-CloudWatchLogs"></a>
 
 After you create the endpoint, you can test the connection\.
 
@@ -69,7 +69,7 @@ After you create the endpoint, you can test the connection\.
 
    If the response to the command includes `nextSequenceToken`, the command has succeeded and your VPC endpoint is working\.
 
-## Controlling Access to Your CloudWatch Logs VPC Endpoint<a name="CloudWatchLogs-VPC-endpoint-policy"></a>
+## Controlling access to your CloudWatch Logs VPC endpoint<a name="CloudWatchLogs-VPC-endpoint-policy"></a>
 
 A VPC endpoint policy is an IAM resource policy that you attach to an endpoint when you create or modify the endpoint\. If you don't attach a policy when you create an endpoint, we attach a default policy for you that allows full access to the service\. An endpoint policy doesn't override or replace IAM user policies or service\-specific policies\. It's a separate policy for controlling access from the endpoint to the specified service\. 
 
@@ -108,6 +108,6 @@ The following is an example of an endpoint policy for CloudWatch Logs\. This pol
 
 1. Choose **Edit Policy** and make the changes to the policy\.
 
-## Support for VPC Context Keys<a name="Support-VPC-Context-Keys"></a>
+## Support for VPC context keys<a name="Support-VPC-Context-Keys"></a>
 
 CloudWatch Logs supports the `aws:SourceVpc` and `aws:SourceVpce` context keys that can limit access to specific VPCs or specific VPC endpoints\. These keys work only when the user is using VPC endpoints\. For more information, see [Keys Available for Some Services](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-service-available) in the *IAM User Guide*\.

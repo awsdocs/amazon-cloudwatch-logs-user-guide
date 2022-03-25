@@ -1,4 +1,4 @@
-# Exporting Log Data to Amazon S3<a name="S3Export"></a>
+# Exporting log data to Amazon S3<a name="S3Export"></a>
 
 You can export log data from your log groups to an Amazon S3 bucket and use this data in custom processing and analysis, or to load onto other systems\.
 
@@ -10,15 +10,15 @@ Exporting to S3 buckets that are encrypted with AES\-256 is supported\. Exportin
 
 You can export logs from multiple log groups or multiple time ranges to the same S3 bucket\. To separate log data for each export task, you can specify a prefix that will be used as the Amazon S3 key prefix for all exported objects\.
 
-Log data can take up to 12 hours to become available for export\. For near real\-time analysis of log data, see [Analyzing Log Data with CloudWatch Logs Insights](AnalyzingLogData.md) or [Real\-time Processing of Log Data with Subscriptions](Subscriptions.md) instead\.
+Log data can take up to 12 hours to become available for export\. For near real\-time analysis of log data, see [Analyzing log data with CloudWatch Logs Insights](AnalyzingLogData.md) or [Real\-time processing of log data with subscriptions](Subscriptions.md) instead\.
 
 **Note**  
 Starting on February 15, 2019, the export to Amazon S3 feature requires callers to have `s3:PutObject` access to the destination bucket\.
 
 **Topics**
 + [Concepts](#S3concepts)
-+ [Export Log Data to Amazon S3 Using the Console](S3ExportTasksConsole.md)
-+ [Export Log Data to Amazon S3 Using the AWS CLI](S3ExportTasks.md)
++ [Export log data to Amazon S3 using the console](S3ExportTasksConsole.md)
++ [Export log data to Amazon S3 using the AWS CLI](S3ExportTasks.md)
 
 ## Concepts<a name="S3concepts"></a>
 

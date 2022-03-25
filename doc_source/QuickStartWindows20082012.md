@@ -1,26 +1,26 @@
-# Quick Start: Enable Your Amazon EC2 Instances Running Windows Server 2012 and Windows Server 2008 to Send logs to CloudWatch Logs<a name="QuickStartWindows20082012"></a>
+# Quick Start: Enable your Amazon EC2 instances running Windows Server 2012 and Windows Server 2008 to send logs to CloudWatch Logs<a name="QuickStartWindows20082012"></a>
 
 **Tip**  
-CloudWatch includes a new unified agent that can collect both logs and metrics from EC2 instances and on\-premises servers\. We recommend that you use the newer unified CloudWatch agent\. For more information, see [Getting Started with CloudWatch Logs](CWL_GettingStarted.md)\.   
+CloudWatch includes a new unified agent that can collect both logs and metrics from EC2 instances and on\-premises servers\. We recommend that you use the newer unified CloudWatch agent\. For more information, see [Getting started with CloudWatch Logs](CWL_GettingStarted.md)\.   
 The rest of this section explains the use of the older CloudWatch Logs agent\.
 
-## Enable Your Amazon EC2 Instances Running Windows Server 2012 and Windows Server 2008 to Send logs to CloudWatch Logs<a name="QuickStartWindows20082012-olderagent"></a>
+## Enable your Amazon EC2 instances running Windows Server 2012 and Windows Server 2008 to send logs to CloudWatch Logs<a name="QuickStartWindows20082012-olderagent"></a>
 
 Use the following steps to enable your instances running Windows Server 2012 and Windows Server 2008 to send logs to CloudWatch Logs\.
 
-### Download the Sample Configuration File<a name="configure_cwl_download2012"></a>
+### Download the sample configuration file<a name="configure_cwl_download2012"></a>
 
-Download the following sample JSON file to your computer: [AWS\.EC2\.Windows\.CloudWatch\.json](https://ec2-downloads-windows.s3.amazonaws.com/CloudWatchConfig/AWS.EC2.Windows.CloudWatch.json)\. You edit it in the following steps\.
+Download the following sample JSON file to your computer: [https://s3.amazonaws.com/ec2-downloads-windows/CloudWatchConfig/AWS.EC2.Windows.CloudWatch.json](https://s3.amazonaws.com/ec2-downloads-windows/CloudWatchConfig/AWS.EC2.Windows.CloudWatch.json)\. You edit it in the following steps\.
 
-### Configure the JSON File for CloudWatch<a name="send_logs_to_cwl_json2012"></a>
+### Configure the JSON file for CloudWatch<a name="send_logs_to_cwl_json2012"></a>
 
 You determine which logs to send to CloudWatch by specifying your choices in the JSON configuration file\. The process of creating this file and specifying your choices can take 30 minutes or more to complete\. After you have completed this task once, you can reuse the configuration file on all of your instances\.
 
 **Topics**
 + [Step 1: Enable CloudWatch Logs](#enable-CloudWatchLogs-in-JSON-file2012)
-+ [Step 2: Configure Settings for CloudWatch](#configure_cwl_credentials2012)
-+ [Step 3: Configure the Data to Send](#configure_logs2012)
-+ [Step 4: Configure Flow Control](#configure_log_flow2012)
++ [Step 2: Configure settings for CloudWatch](#configure_cwl_credentials2012)
++ [Step 3: Configure the data to send](#configure_logs2012)
++ [Step 4: Configure flow control](#configure_log_flow2012)
 
 #### Step 1: Enable CloudWatch Logs<a name="enable-CloudWatchLogs-in-JSON-file2012"></a>
 
@@ -30,9 +30,9 @@ At the top of the JSON file, change "false" to "true" for `IsEnabled`:
 "IsEnabled": true,
 ```
 
-#### Step 2: Configure Settings for CloudWatch<a name="configure_cwl_credentials2012"></a>
+#### Step 2: Configure settings for CloudWatch<a name="configure_cwl_credentials2012"></a>
 
-Specify credentials, region, a log group name, and a log stream namespace\. This enables the instance to send log data to CloudWatch Logs\. To send the same log data to different locations, you can add additional sections with unique IDs \(for example, "CloudWatchLogs2" and CloudWatchLogs3"\) and a different region for each ID\.
+Specify credentials, Region, a log group name, and a log stream namespace\. This enables the instance to send log data to CloudWatch Logs\. To send the same log data to different locations, you can add additional sections with unique IDs \(for example, "CloudWatchLogs2" and CloudWatchLogs3"\) and a different Region for each ID\.
 
 **To configure settings to send log data to CloudWatch Logs**
 
@@ -54,7 +54,7 @@ Specify credentials, region, a log group name, and a log stream namespace\. This
 
 1.  Leave the `AccessKey` and `SecretKey` field blank\. You configure credentials using an IAM role\.
 
-1. For `Region`, type the region to which to send log data \(for example, `us-east-2`\)\.
+1. For `Region`, type the Region to which to send log data \(for example, `us-east-2`\)\.
 
 1. For `LogGroup`, type the name for your log group\. This name appears on the **Log Groups** screen in the CloudWatch console\.
 
@@ -64,7 +64,7 @@ Specify credentials, region, a log group name, and a log stream namespace\. This
 
    If you specify a log stream name that doesn't already exist, CloudWatch Logs automatically creates it for you\. You can define a log stream name using a literal string, the predefined variables `{instance_id}`, `{hostname}`, and `{ip_address}`, or a combination of these\.
 
-#### Step 3: Configure the Data to Send<a name="configure_logs2012"></a>
+#### Step 3: Configure the data to send<a name="configure_logs2012"></a>
 
 You can send event log data, Event Tracing for Windows \(ETW\) data, and other log data to CloudWatch Logs\.
 
@@ -267,7 +267,7 @@ The `div`, `div-MV`, `hu`, and `hu-HU` values are not supported\.
 
 1. \(Optional\) For `LineCount`, type the number of lines in the header to identify the log file\. For example, IIS log files have virtually identical headers\. You could enter **5**, which would read the first five lines of the log file's header to identify it\. In IIS log files, the third line is the date and time stamp, but the time stamp is not always guaranteed to be different between log files\. For this reason, we recommend including at least one line of actual log data for uniquely fingerprinting the log file\.
 
-#### Step 4: Configure Flow Control<a name="configure_log_flow2012"></a>
+#### Step 4: Configure flow control<a name="configure_log_flow2012"></a>
 
 Each data type must have a corresponding destination in the `Flows` section\. For example, to send the custom log, ETW log, and system log to CloudWatch Logs, add `(CustomLogs,ETW,SystemEventLog),CloudWatchLogs` to the `Flows` section\.
 
@@ -296,13 +296,13 @@ You can send the same log file to more than one destination\. For example, to se
 
 You are now finished editing the JSON file\. You use it in a later step\.
 
-### Start the Agent<a name="ec2config2012"></a>
+### Start the agent<a name="ec2config2012"></a>
 
 To enable an Amazon EC2 instance running Windows Server 2012 or Windows Server 2008 to send logs to CloudWatch Logs, use the EC2Config service \(`EC2Config.exe)`\. Your instance should have EC2Config 4\.0 or later, and you can use this procedure\. For more information about using an earlier version of EC2Config, see [Use EC2Config 3\.x or Earlier to Configure CloudWatch](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/send_logs_to_cwl_instances.html#ec2config-3x) in the *Amazon EC2 User Guide for Windows Instances*
 
 **To configure CloudWatch using EC2Config 4\.x**
 
-1. Check the encoding of the AWS\.EC2\.Windows\.CloudWatch\.json file that you edited earlier in this procedure\. Only UTF\-8 without BOM encoding is supported\. Then save the file in the following folder on your Windows Server 2008 \- 2012 R2 instance: `C:\Program Files\Amazon\SSM\Plugins\awsCloudWatch\`\.
+1. Check the encoding of the `AWS.EC2.Windows.CloudWatch.json` file that you edited earlier in this procedure\. Only UTF\-8 without BOM encoding is supported\. Then save the file in the following folder on your Windows Server 2008 \- 2012 R2 instance: `C:\Program Files\Amazon\SSM\Plugins\awsCloudWatch\`\.
 
 1. Start or restart the SSM agent \(`AmazonSSMAgent.exe`\) using the Windows Services control panel or using the following PowerShell command:
 

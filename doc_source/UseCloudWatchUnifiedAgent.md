@@ -1,4 +1,4 @@
-# Use the Unified CloudWatch Agent to Get Started With CloudWatch Logs<a name="UseCloudWatchUnifiedAgent"></a>
+# Use the unified CloudWatch agent to get started with CloudWatch Logs<a name="UseCloudWatchUnifiedAgent"></a>
 
 For more information about using the unified CloudWatch agent to get started with CloudWatch Logs, see [Collect Metrics and Logs from Amazon EC2 Instances and On\-Premises Servers with the CloudWatch Agent](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Install-CloudWatch-Agent.html) in the *Amazon CloudWatch User Guide*\. You complete the steps listed in this section to install, configure, and start the agent\. If you are not using the agent to also collect CloudWatch metrics, you can ignore any sections that refer to metrics\. 
 

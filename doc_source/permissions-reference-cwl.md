@@ -1,6 +1,6 @@
-# CloudWatch Logs Permissions Reference<a name="permissions-reference-cwl"></a>
+# CloudWatch Logs permissions reference<a name="permissions-reference-cwl"></a>
 
-When you are setting up [Access Control](auth-and-access-control-cwl.md#access-control-cwl) and writing permissions policies that you can attach to an IAM identity \(identity\-based policies\), you can use the following table as a reference\. The table lists each CloudWatch Logs API operation and the corresponding actions for which you can grant permissions to perform the action\. You specify the actions in the policy's `Action` field\. For the `Resource` field, you can specify the ARN of a log group or log stream, or specify `*` to represent all CloudWatch Logs resources\.
+When you are setting up [Access control](auth-and-access-control-cwl.md#access-control-cwl) and writing permissions policies that you can attach to an IAM identity \(identity\-based policies\), you can use the following table as a reference\. The table lists each CloudWatch Logs API operation and the corresponding actions for which you can grant permissions to perform the action\. You specify the actions in the policy's `Action` field\. For the `Resource` field, you can specify the ARN of a log group or log stream, or specify `*` to represent all CloudWatch Logs resources\.
 
 You can use AWS\-wide condition keys in your CloudWatch Logs policies to express conditions\. For a complete list of AWS\-wide keys, see [AWS Global and IAM Condition Context Keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html) in the *IAM User Guide*\.
 
@@ -8,9 +8,9 @@ You can use AWS\-wide condition keys in your CloudWatch Logs policies to express
 To specify an action, use the `logs:` prefix followed by the API operation name\. For example: `logs:CreateLogGroup`, `logs:CreateLogStream`, or `logs:*` \(for all CloudWatch Logs actions\)\.
 
 
-**CloudWatch Logs API Operations and Required Permissions for Actions**  
+**CloudWatch Logs API operations and required permissions for actions**  
 
-| CloudWatch Logs API Operations | Required Permissions \(API Actions\) | 
+| CloudWatch Logs API operations | Required permissions \(API actions\) | 
 | --- | --- | 
 |  [CancelExportTask](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CancelExportTask.html)  |  `logs:CancelExportTask` Required to cancel a pending or running export task\.  | 
 |  [CreateExportTask](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateExportTask.html)  |  `logs:CreateExportTask` Required to export data from a log group to an Amazon S3 bucket\.  | 

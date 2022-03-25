@@ -1,8 +1,8 @@
-# Example: Count HTTP 4xx Codes<a name="FindCountMetric"></a>
+# Example: Count HTTP 4xx codes<a name="FindCountMetric"></a>
 
 As in the previous example, you might want to monitor your web service access logs and monitor the HTTP response code levels\. For example, you might want to monitor all of the HTTP 400\-level errors\. However, you might not want to specify a new metric filter for every return code\.
 
-The following example demonstrates how to create a metric that includes all 400\-level HTTP code responses from an access log using the Apache access log format from the [Example: Count HTTP 404 Codes](Counting404Responses.md) example\.
+The following example demonstrates how to create a metric that includes all 400\-level HTTP code responses from an access log using the Apache access log format from the [Example: Count HTTP 404 codes](Counting404Responses.md) example\.
 
 **To create a metric filter using the CloudWatch console**
 
@@ -14,11 +14,9 @@ The following example demonstrates how to create a metric that includes all 400\
 
 1. Choose `Actions`, **Create metric filter**\.
 
-1. For **Filter name**, enter **HTTP4xxErrors**\.
-
 1. For **Filter pattern**, enter **\[ip, id, user, timestamp, request, status\_code=4\*, size\]**\.
 
-1. To test your filter pattern, choose **Test Pattern**\.
+1. \(Optional\) To test your filter pattern, under **Test Pattern**, enter one or more log events to use to test the pattern\. Each log event must be within one line, because line breaks are used to separate log events in the **Log event messages** box\.
 
 1. Choose **Next**, and then for **Filter name**, type **HTTP4xxErrors**\.
 

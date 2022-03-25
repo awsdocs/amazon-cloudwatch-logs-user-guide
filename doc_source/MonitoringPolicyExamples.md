@@ -1,10 +1,11 @@
-# Creating Metric Filters<a name="MonitoringPolicyExamples"></a>
+# Creating metric filters<a name="MonitoringPolicyExamples"></a>
 
-The following examples show how to create metric filters\.
+The following procedure and examples show how to create metric filters\.
 
 **Topics**
-+ [Example: Count Log Events](CountingLogEventsExample.md)
-+ [Example: Count Occurrences of a Term](CountOccurrencesExample.md)
-+ [Example: Count HTTP 404 Codes](Counting404Responses.md)
-+ [Example: Count HTTP 4xx Codes](FindCountMetric.md)
-+ [Example: Extract Fields from an Apache Log](ExtractBytesExample.md)
++ [Create a metric filter for a log group](CreateMetricFilterProcedure.md)
++ [Example: Count log events](CountingLogEventsExample.md)
++ [Example: Count occurrences of a term](CountOccurrencesExample.md)
++ [Example: Count HTTP 404 codes](Counting404Responses.md)
++ [Example: Count HTTP 4xx codes](FindCountMetric.md)
++ [Example: Extract fields from an Apache log and assign dimensions](ExtractBytesExample.md)

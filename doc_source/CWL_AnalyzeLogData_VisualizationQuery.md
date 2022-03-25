@@ -1,4 +1,4 @@
-# Tutorial: Run a Query That Produces a Time Series Visualization<a name="CWL_AnalyzeLogData_VisualizationQuery"></a>
+# Tutorial: Run a query that produces a time series visualization<a name="CWL_AnalyzeLogData_VisualizationQuery"></a>
 
 When you run a query that uses the `bin()` function to group the returned results by a time period, you can view the results as a line graph, stacked area graph, pie chart, or bar chart\. This helps you more efficiently visualize trends in log events over time\.
 
@@ -6,7 +6,7 @@ When you run a query that uses the `bin()` function to group the returned result
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. In the navigation pane, choose **Insights**\.
+1. In the navigation pane, choose **Logs**, and then choose **Logs Insights**\.
 
 1. Select one or more log groups to query\.
 

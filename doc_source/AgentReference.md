@@ -1,4 +1,4 @@
-# CloudWatch Logs Agent Reference<a name="AgentReference"></a>
+# CloudWatch Logs agent reference<a name="AgentReference"></a>
 
 **Important**  
 This reference is for the older CloudWatch Logs agent, which is on the path to deprecation\. We strongly recommend that you use the unified CloudWatch agent instead\. For more information about that agent, see [ Collecting metrics and logs from Amazon EC2 instance and on\-premises servers with the CloudWatch agent](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Install-CloudWatch-Agent.html)\.
@@ -8,7 +8,7 @@ The CloudWatch Logs agent provides an automated way to send log data to CloudWat
 + A script \(daemon\) that initiates the process to push data to CloudWatch Logs\.
 + A cron job that ensures that the daemon is always running\.
 
-## Agent Configuration File<a name="agent-configuration-file"></a>
+## Agent configuration file<a name="agent-configuration-file"></a>
 
 The CloudWatch Logs agent configuration file describes information needed by the CloudWatch Logs agent\. The agent configuration file's \[general\] section defines common configurations that apply to all log streams\. The \[logstream\] section defines the information necessary to send a local file to a remote log stream\. You can have more than one \[logstream\] section, but each must have a unique name within the configuration file, e\.g\., \[logstream1\], \[logstream2\], and so on\. The \[logstream\] value along with the first line of data in the log file, define the log file's identity\.
 
@@ -156,7 +156,7 @@ Specifies the max number of log events in a batch, up to 10000\. The default val
 **batch\_size**  
 Specifies the max size of log events in a batch, in bytes, up to 1048576 bytes\. The default value is 1048576 bytes\. This size is calculated as the sum of all event messages in UTF\-8, plus 26 bytes for each log event\.
 
-## Using the CloudWatch Logs Agent with HTTP Proxies<a name="agent-http-proxies"></a>
+## Using the CloudWatch Logs agent with HTTP proxies<a name="agent-http-proxies"></a>
 
 You can use the CloudWatch Logs agent with HTTP proxies\.
 
@@ -170,7 +170,7 @@ HTTP proxies are supported in awslogs\-agent\-setup\.py version 1\.3\.8 or later
    1. For a new installation of the CloudWatch Logs agent, run the following commands:
 
       ```
-      curl https://aws-cloudwatch.s3.amazonaws.com/downloads/latest/awslogs-agent-setup.py -O
+      curl https://s3.amazonaws.com/aws-cloudwatch/downloads/latest/awslogs-agent-setup.py -O
       ```
 
       ```
@@ -201,7 +201,7 @@ HTTP proxies are supported in awslogs\-agent\-setup\.py version 1\.3\.8 or later
    sudo service awslogsd restart
    ```
 
-## Compartmentalizing CloudWatch Logs Agent Configuration Files<a name="create-additional-configuration-files"></a>
+## Compartmentalizing CloudWatch Logs agent configuration files<a name="create-additional-configuration-files"></a>
 
 If you're using awslogs\-agent\-setup\.py version 1\.3\.8 or later with awscli\-cwlogs 1\.3\.3 or later, you can import different stream configurations for various components independently of one another by creating additional configuration files in the **/var/awslogs/etc/config/** directory\. When the CloudWatch Logs agent starts, it includes any stream configurations in these additional configuration files\. Configuration properties in the \[general\] section must be defined in the main configuration file \(/var/awslogs/etc/awslogs\.conf\) and are ignored in any additional configuration files found in /var/awslogs/etc/config/\.
 
@@ -219,7 +219,7 @@ If you are using Amazon Linux 2, use the following command to restart the agent:
 sudo service awslogsd restart
 ```
 
-## CloudWatch Logs Agent FAQs<a name="agent-faq"></a>
+## CloudWatch Logs agent FAQ<a name="agent-faq"></a>
 
 **What kinds of file rotations are supported?**  
 The following file rotation mechanisms are supported:  

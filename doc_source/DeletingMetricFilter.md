@@ -1,4 +1,4 @@
-# Deleting a Metric Filter<a name="DeletingMetricFilter"></a>
+# Deleting a metric filter<a name="DeletingMetricFilter"></a>
 
 A policy is identified by its name and the log group it belongs to\.
 
@@ -8,11 +8,11 @@ A policy is identified by its name and the log group it belongs to\.
 
 1. In the navigation pane, choose **Log groups**\.
 
-1. In the contents pane, in the **Metric Filter** column, choose the metric filter\.
+1. In the contents pane, in the **Metric Filter** column, choose the number of metric filters for the log group\.
 
-1. On the **Logs Metric Filters** screen, in the metric filter, choose **Delete Filter**\.
+1. Under **Metric Filters** screen, select the check box to the right of the name of the filter that you want to delete\. Then choose **Delete**\.
 
-1. When prompted for confirmation, choose **Yes, Delete**\.
+1. When prompted for confirmation, choose **Delete**\.
 
 **To delete a metric filter using the AWS CLI**  
 At a command prompt, run the following command:

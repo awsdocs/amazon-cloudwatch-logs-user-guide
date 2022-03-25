@@ -1,169 +1,262 @@
-# Filter and Pattern Syntax<a name="FilterAndPatternSyntax"></a>
+# Filter and pattern syntax<a name="FilterAndPatternSyntax"></a>
 
-You can use metric filters to search for and match terms, phrases, or values in your log events\. When a metric filter finds one of the terms, phrases, or values in your log events, you can increment the value of a CloudWatch metric\. For example, you can create a metric filter to search for and count the occurrence of the word *ERROR* in your log events\. 
+You can create metric filters to match terms in your log events and convert log data into metrics\. When a metric filter matches a term, it increments the metric's count\. For example, you can create a metric filter that counts the number of times the word ***ERROR*** occurs in your log events\.
 
-Metric filters can also extract numerical values from space\-delimited log events, such as the latency of web requests\. In these examples, you can increment your metric value by the actual numerical value extracted from the log\.
+You can assign units and dimensions to metrics\. For example, if you create a metric filter that counts the number of times the word ***ERROR*** occurs in your log events, you can specify a dimension that's called `ErrorCode` to show the total number of log events that contain the word ***ERROR*** and filter data by reported error codes\.
 
-You can also use conditional operators and wildcards to create exact matches\. Before you create a metric filter, you can test your search patterns in the CloudWatch console\. The following sections explain the metric filter syntax in more detail\.
+**Note**  
+When you assign a unit to a metric, make sure to specify the correct one\. If you change the unit later, your change might not take effect\.
 
-## Matching Terms in Log Events<a name="matching-terms-events"></a>
+**Topics**
++ [Using filter patterns to match terms in log events](#matching-terms-events)
++ [Using metric filters to match terms and extract values from JSON log events](#metric-filters-extract-json)
++ [Using metric filters to extract values from space\-delimited log events](#extract-log-event-values)
++ [Configuring metric values for a metric filter](#changing-default-increment-value)
++ [Publishing dimensions with metrics from values in JSON or space\-delimited log events](#logs-metric-filters-dimensions)
++ [Using values in log events to increment a metric's value](#publishing-values-found-in-logs)
 
-To search for a term in your log events, use the term as your metric filter pattern\. You can specify multiple terms in a metric filter pattern, but all terms must appear in a log event for there to be a match\. Metric filters are case sensitive\.
+## Using filter patterns to match terms in log events<a name="matching-terms-events"></a>
 
-Metric filter terms that include characters other than alphanumeric or underscore must be placed inside double quotes \(""\)\.
+Filter patterns make up the syntax that metric filters use to match terms in log events\. Terms can be words, exact phrases, or numeric values\. Create filter patterns with the terms that you want to match\. Filter patterns only return the log events that contain the terms you define\. You can test filter patterns in the CloudWatch console\. The following examples contain code snippets that show how you can use filter patterns to match terms in your log events\.
 
-To exclude a term, use a minus sign \(\-\) before the term\.
+**Note**  
+Filter patterns are case sensitive\. Enclose exact phrases and terms that include non\-alphanumeric characters in double quotation marks \(**""**\)\.
 
-**Example 1: Match everything**  
-The filter pattern "" matches all log events\.
+**Example: Match a single term**
 
-**Example 2: Single term**  
-The filter pattern "ERROR" matches log event messages that contain this term, such as the following:
-+ \[ERROR\] A fatal exception has occurred
-+ Exiting with ERRORCODE: \-1
-
-**Example 3: Include a term and exclude a term**  
-In the previous example, if you change the filter pattern to "ERROR" \- "Exiting", the log event message "Exiting with ERRORCODE: \-1" would be excluded\.
-
-**Example 4: Multiple terms**  
-The filter pattern "ERROR" "Exception" matches log event messages that contain both terms, such as the following:
-+ \[ERROR\] Caught IllegalArgumentException
-+ \[ERROR\] Unhandled Exception
-
-The filter pattern "Failed to process the request" matches log event messages that contain all terms, such as the following:
-+ \[WARN\] Failed to process the request
-+ \[ERROR\] Unable to continue: Failed to process the request
-
-### OR Pattern Matching<a name="log-filters-or-pattern-matching"></a>
-
-You can match terms in text\-based filters using OR pattern matching\. Use a question mark for OR, such as `?term`\.
-
-Look at the three log event examples below\. `ERROR` matches examples 1 and 2\. `?ERROR ?WARN` matches examples 1, 2, and 3, as all of them include either the word ERROR or the word WARN\. `ERROR WARN` only matches example 1, as it is the only one containing both of those words\. ERROR \-WARN matches example 2, as it matches a string that contains ERROR but does not contain WARN\.
-
-1. `ERROR WARN message`
-
-1. `ERROR message`
-
-1. `WARN message`
-
-You can match terms using OR pattern matching in space\-delimited filters\. With space\-delimited filters, `w1` means the first word in the log event, `w2` means the second word, and so on\. For the example patterns below, \[w1=ERROR, w2\] matches pattern 2 because ERROR is the first word, and \[w1=ERROR \|\| w1=WARN, w2\] matches patterns 2 and 3\. \[w1\!=ERROR&&w1\!=WARN, w2\] matches lines containing both ERROR and WARN \(pattern 1\)\.
-
-1. ERROR WARN message
-
-1. ERROR message
-
-1. WARN message
-
-You can match terms using OR pattern matching in JSON filters\. For the example patterns below, \{$\.foo = bar\} matches pattern 1, \{$\.foo = baz \} matches pattern 2, and \{$\.foo = bar \|\| $\.foo = baz \} matches pattern 1 and 2\.
-
-1. \{"foo": "bar"\}
-
-1. \{"foo": "baz"\}
-
-### Matching Terms in JSON Log Events<a name="matching-terms-events-json"></a>
-
-You can extract values from JSON log events\. To extract values from JSON log events, you need to create a string\-based metric filter\. Strings containing scientific notation are not supported\. The items in the JSON log event data must exactly match the metric filter\. You might want to create metric filters in JSON log events to indicate the following:
-+ A certain event occurs\. For example eventName is "UpdateTrail"\.
-+ The IP is outside a known subnet\. For example, sourceIPAddress is not in some known subnet range\.
-+ A combination of two or more other conditions are true\. For example, the eventName is "UpdateTrail" and the recipientAccountId is 123456789012\.
-
-#### Using Metric Filters to Extract Values from JSON Log Events<a name="extract-json-log-event-values"></a>
-
-You can use metric filters to extract values from JSON log events\. A metric filter checks incoming logs and modifies a numeric value when the filter finds a match in the log data\. When you create a metric filter, you can simply increment a count each time the matching text is found in a log, or you can extract numerical values from the log and use those to increment the metric value\.
-
-##### Matching JSON Terms Using Metric Filters<a name="metric-filter-term-matching"></a>
-
-The metric filter syntax for JSON log events uses the following format:
+The following code snippet shows an example of a single\-term filter pattern that returns all log events where messages contain the word ***ERROR***\.
 
 ```
-{ SELECTOR EQUALITY_OPERATOR STRING }
+ERROR
 ```
 
-The metric filter must be enclosed in curly braces \{ \}, to indicate this is a JSON expression\. The metric filter contains the following parts:
+The filter pattern matches log event messages, such as the following:
++ `[ERROR 400] BAD REQUEST`
++ `[ERROR 401] UNAUTHORIZED REQUEST`
++ `[ERROR 419] MISSING ARGUMENTS`
++ `[ERROR 420] INVALID ARGUMENTS`
 
-**SELECTOR**  
-Specifies what JSON property to check\. Property selectors always start with dollar sign \($\), which signifies the root of the JSON\. Property selectors are alphanumeric strings that also support '\-' and '\_' characters\. Array elements are denoted with \[NUMBER\] syntax, and must follow a property\. Examples are: $\.eventId, $\.users\[0\], $\.users\[0\]\.id, $\.requestParameters\.instanceId\.
+**Example: Match multiple terms**
 
-**EQUALITY\_OPERATOR**  
-Can be either = or \!=\.
-
-**STRING**  
-A string with or without quotes\. You can use the asterisk '\*' wildcard character to match any text at, before, or after a search term\. For example, **\*Event** will match **PutEvent** and **GetEvent**\. **Event\*** will match **EventId** and **EventName**\. **Ev\*ent** will only match the actual string **Ev\*ent**\. Strings that consist entirely of alphanumeric characters do not need to be quoted\. Strings that have unicode and other characters such as ‘@,‘ ‘$,' ‘\\,' etc\. must be enclosed in double quotes to be valid\.
-
-##### JSON Metric Filter Examples<a name="metric-filter-examples"></a>
-
-The following is a JSON example:
+The following code snippet shows an example of a multiple\-term filter pattern that returns all log events where messages contain the words ***ERROR*** and ***ARGUMENTS***\.
 
 ```
-{
-  "eventType": "UpdateTrail",
-  "sourceIPAddress": "111.111.111.111",
-  "arrayKey": [
-        "value",
-        "another value"
-  ],
-  "objectList": [
-       {
-         "name": "a",
-         "id": 1
-       },
-       {
-         "name": "b",
-         "id": 2
-       }
-  ],
-  "SomeObject": null,
-  "ThisFlag": true
-}
+ERROR ARGUMENTS
 ```
 
-The following filters would match:
+The filter returns log event messages, such as the following:
++ `[ERROR 419] MISSING ARGUMENTS`
++ `[ERROR 420] INVALID ARGUMENTS`
+
+The filter pattern doesn't return the following log event messages because they don't contain both of the terms specified in the filter pattern\.
++ `[ERROR 400] BAD REQUEST`
++ `[ERROR 401] UNAUTHORIZED REQUEST`
+
+**Example: Match single and multiple terms**
+
+You can use pattern matching to create filter patterns that return log events containing single and multiple terms\. Place a question mark \("?"\) before the terms that you want to match\. The following code snippet shows an example of a filter pattern that returns all log events where messages contain the word ***ERROR*** or ***ARGUMENTS*** and the words ***ERROR*** and ***ARGUMENTS***\.
+
+```
+?ERROR ?ARGUMENTS
+```
+
+The filter pattern matches log event messages, such as the following:
++ `[ERROR 400] BAD REQUEST`
++ `[ERROR 401] UNAUTHORIZED REQUEST`
++ `[ERROR 419] MISSING ARGUMENTS`
++ `[ERROR 420] INVALID ARGUMENTS`
+
+**Example: Match exact phrases**
+
+The following code snippet shows an example of a filter pattern that returns log events where messages contain the exact phrase ***INTERNAL SERVER ERROR***\.
+
+```
+"INTERNAL SERVER ERROR"
+```
+
+The filter pattern returns the following log event message:
++ `[ERROR 500] INTERNAL SERVER ERROR`
+
+**Example: Include and exclude terms**
+
+You can create filter patterns that return log events where messages include some terms and exclude other terms\. Place a minus symbol \(**"\-"**\) before the terms that you want to exclude\. The following code snippet shows an example of a filter pattern that returns log events where messages include the term ***ERROR*** and exclude the term ***ARGUMENTS***\.
+
+```
+ERROR -ARGUMENTS
+```
+
+The filter pattern returns log event messages, such as the following:
++ `[ERROR 400] BAD REQUEST`
++ `[ERROR 401] UNAUTHORIZED REQUEST`
+
+The filter pattern doesn't return the following log event messages because they contain the word ***ARGUMENTS***\.
++ `[ERROR 419] MISSING ARGUMENTS`
++ `[ERROR 420] INVALID ARGUMENTS`
+
+**Example: Match everything**
+
+You can match everything in your log events with double quotation marks\. The following code snippet shows an example of a filter pattern that returns all log events\.
+
+```
+" "
+```
+
+## Using metric filters to match terms and extract values from JSON log events<a name="metric-filters-extract-json"></a>
+
+Metric filters are configurations that include filter patterns\. You can create metric filters to match terms in your log events and convert log data into metrics\. When your metric filter matches a term, you can increment the metric's count\. Metric filters only match the terms that you define in your filter pattern\. You can test metric filters in the CloudWatch console\. You also can create metric filters to match terms and extract values from JSON log events\. The following examples describe the syntax for metric filters that match JSON terms containing strings and numeric values\.
+
+**Example: Metric filters that match strings**
+
+You can create metric filters to match strings in JSON log events\. The following code snippet shows an example of the syntax for string\-based metric filters\.
+
+```
+{ PropertySelector EqualityOperator String }
+```
+
+Enclose metric filters in curly braces \("\{\}"\)\. String\-based metric filters must contain the following parts:
++ **Property selector**
+
+  Set off property selectors with a dollar sign followed by a period \("$\."\)\. Property selectors are alphanumeric strings that support hyphen \("\-"\) and underscore \("\_"\) characters\. Strings don't support scientific notation\. Property selectors point to value nodes in JSON log events\. Value nodes can be strings or numbers\. Place arrays after property selectors\. Arrays contain elements that follow a zero\-based ordering system \(0 = 1, 1 = 2, and so on\)\. Enclose elements in brackets \("\[\]"\)\. If a property selector points to an array or object, the metric filter won't match the log format\.
++ **Equality operator**
+
+  Set off equality operators with one of the following symbols: equal \("="\) or not equal \("\!="\)\. Equality operators return a Boolean value \(true or false\)\.
++ **String **
+
+  You can enclose strings in double quotation marks \(""\)\. Strings that contain types other than alphanumeric characters and the underscore symbol must be placed in double quotation marks\. Use the asterisk \("\*"\) as a wild card to match text\.
+
+The following code snippet contains an example of a metric filter showing how you can format a metric filter to match a JSON term with a string\.
 
 ```
 { $.eventType = "UpdateTrail" }
 ```
 
-Filter on the event type being UpdateTrail\.
+**Example: Metric filters that match numeric values**
+
+You can create metric filters to match numeric values in JSON log events\. The following code snippet shows an example of the syntax for metric filters that match numeric values\.
+
+```
+{ PropertySelector NumericOperator Number }
+```
+
+Enclose metric filters in curly braces \("\{\}"\)\. Metric filters that match numeric values must have the following parts:
++ **Property selector**
+
+  Set off property selectors with a dollar sign followed by a period \("$\."\)\. Property selectors are alphanumeric strings that support hyphen \("\-"\) and underscore \("\_"\) characters\. Strings don't support scientific notation\. Property selectors point to value nodes in JSON log events\. Value nodes can be strings or numbers\. Place arrays after property selectors\. Arrays contain elements that follow a zero\-based ordering system \(0 = 1, 1 = 2, and so on\)\. Enclose elements in brackets \("\[\]"\)\. If a property selector points to an array or object, the metric filter won't match the log format\.
++ **Numeric operator**
+
+  Set off numeric operators with one of the following symbols: greater than \(">"\), less than \("<"\), equal \("="\), not equal \("\!="\), greater than or equal to \(">="\), or less than or equal to \("<="\)\.
++ **Number**
+
+  You can use integers that contain plus \("\+"\) or minus \("\-"\) symbols and follow scientific notation\. Use the asterisk \("\*"\) as a wild card to match numbers\.
+
+The following code snippet contains examples showing how you can format metric filters to match JSON terms with numeric values\.
+
+```
+// Metric filter with greater than symbol       
+{ $.bandwidth > 75 }      
+// Metric filter with less than symbol
+{ $.latency < 50 }
+// Metric filter with greater than or equal to symbol
+{ $.refreshRate >= 60 } 
+// Metric filter with less than or equal to symbol
+{ $.responseTime <= 5 }
+// Metric filter with equal sign
+{ $.errorCode = 400} 
+// Metric filter with not equal sign and scientific notation
+{ $.errorCode != 500 }
+// Metric filter with scientific notation and plus symbol
+{ $.number[0] = 1e-3 } 
+// Metric filter with scientific notation and minus symbol
+{ $.number[0] != 1e+3 }
+```
+
+### Matching terms in JSON log events<a name="match-items-metric-filters"></a>
+
+The following examples contain code snippets that show how metric filters can match terms in a JSON log event\.
+
+**Example: JSON log event**
+
+```
+{
+      "eventType": "UpdateTrail",
+      "sourceIPAddress": "111.111.111.111",
+      "arrayKey": [
+            "value",
+            "another value"
+      ],
+      "objectList": [
+           {
+             "name": "a",
+             "id": 1
+           },
+           {
+             "name": "b",
+             "id": 2
+           }
+      ],
+      "SomeObject": null
+}
+```
+
+**Note**  
+If you test the example metric filters with the example JSON log event, you must enter the example JSON log on a single line\.
+
+**Example: Metric filter that matches string**
+
+The metric filter matches the string `"UpdateTrail"` in the property `"eventType"`\.
+
+```
+{ $.eventType = "UpdateTrail" }
+```
+
+**Example: Metric filter that matches number**
+
+The metric filter contains a wild card and matches the property `"sourceIPAddress"` because it doesn't contain a number with the prefix `"123.123"`\.
 
 ```
 { $.sourceIPAddress != 123.123.* }
 ```
 
-Filter on the IP address being outside the subnet 123\.123 prefix\.
+**Example: Metric filter that matches element in array**
+
+The metric filter matches the element `"value"` in the array `"arrayKey"`\.
 
 ```
 { $.arrayKey[0] = "value" }
 ```
 
-Filter on the first entry in arrayKey being "value"\. If arrayKey is not an array this will be false\.
+**Example: Metric filter that matches an object in array**
+
+The metric filter matches the object `"id":2` in the array `"objectList"`\.
 
 ```
 { $.objectList[1].id = 2 }
 ```
 
-Filter on the second entry in objectList having a property called id = 2\. If objectList is not an array this will be false\. If the items in objectList are not objects or do not have an id property, this will be false\.
+**Example: Metric filter that matches JSON logs using `IS`**
+
+You can create metric filters that match fields in JSON logs with the `IS` variable\. The `IS` variable can match fields that contain the values `NULL`, `TRUE`, or `FALSE`\. The following metric filter returns JSON logs where the value of `SomeObject` is `NULL`\.
 
 ```
 { $.SomeObject IS NULL }
 ```
 
-Filter on SomeObject being set to null\. This will only be true is the specified object is set to null\.
+**Example: Metric filter that matches JSON logs using `NOT EXISTS`**
+
+You can create metric filters with the `NOT EXISTS` variable to return JSON logs that don't contain specific fields in the log data\. The following metric filter uses `NOT EXISTS` to return JSON logs that don't contain the field `SomeOtherObject`\.
 
 ```
 { $.SomeOtherObject NOT EXISTS }
 ```
 
-Filter on SomeOtherObject being non\-existent\. This will only be true if specified object does not exist in log data\.
+**Note**  
+The variables `IS NOT` and `EXISTS` currently aren't supported\.
 
-```
-{ $.ThisFlag IS TRUE }
-```
+### Using compound expressions to match terms in JSON objects<a name="compound-conditions"></a>
 
-Filters on ThisFlag being TRUE\. This also works for boolean filters which check for FALSE value\.
+You can use the logical operators AND \("&&"\) and OR \("\|\|"\) in metric filters to create compound expressions that match log events where two or more conditions are true\. Compound expressions support the use of parentheses \("\(\)"\) and the following standard order of operations: \(\) > && > \|\|\. The following examples contain code snippets that show how you can use metric filters with compound expressions to match terms in a JSON object\.
 
-##### JSON Compound Conditions<a name="compound-conditions"></a>
-
-You can combine multiple conditions into a compound expression using OR \(\|\|\) and AND \(&&\)\. Parenthesis are allowed and the syntax follows standard order of operations \(\) > && > \|\|\.
+**Example: JSON object**
 
 ```
 {
@@ -194,178 +287,258 @@ You can combine multiple conditions into a compound expression using OR \(\|\|\)
 }
 ```
 
-##### Examples<a name="w28aac15c13b9c28b6b6b6"></a>
+**Example: Expression that matches using AND \(&&\)**
+
+The metric filter contains a compound expression that matches `"id"` in `"user"` with a numeric value of `1` and `"users"` in `"email"` with the string `"John.Doe@example.com"`\.
 
 ```
 { ($.user.id = 1) && ($.users[0].email = "John.Doe@example.com") }
 ```
 
-Matches the JSON above\.
+**Example: Expression that matches using OR \(\|\|\)**
+
+The metric filter contains a compound expression that matches `"email"` in `"user"` with the string `"John.Stiles@example.com"`\.
+
+```
+{ $.user.email = "John.Stiles@example.com" || $.coordinates[0][1] = "nonmatch" && $.actions[2] = "nonmatch" }
+```
+
+**Example: Expression that doesn't match using AND \(&&\)**
+
+The metric filter contains a compound expression that doesn't find a match because the expression doesn't match the first and second coordinates in `"coordinates"` and the third action in `"actions"`\.
+
+```
+{ ($.user.email = "John.Stiles@example.com" || $.coordinates[0][1] = "nonmatch") && $.actions[2] = "nonmatch" }
+```
+
+**Example: Expression that doesn't match using OR \(\|\|\)**
+
+The metric filter contains a compound expression that doesn't find a match because the expression doesn't match the first property in `"users"` or the third action in `"actions"`\.
 
 ```
 { ($.user.id = 2 && $.users[0].email = "nonmatch") || $.actions[2] = "GET" }
 ```
 
-Doesn't match the JSON above\.
+## Using metric filters to extract values from space\-delimited log events<a name="extract-log-event-values"></a>
+
+You can create metric filters that map to and extract values from fields in space\-delimited log events\. The following examples contain code snippets that show a space\-delimited log event, a metric filter that maps to the fields in the space\-delimited log event, and the values that the metric filter extracts from the fields in the space\-delimited log event\.
+
+**Example: Space\-delimited log event**
+
+The following code snippet shows a space\-delimited log event that contains seven fields: `ip`, `user`, `username`, `timestamp`, `request`, `status_code`, and `bytes`\.
 
 ```
-{ $.user.email = "John.Stiles@example.com" || $.coordinates[0][1] = nonmatch && $.actions[2] = nomatch }
+127.0.0.1 Prod frank [10/Oct/2000:13:25:15 -0700] "GET /index.html HTTP/1.0" 404 1534
 ```
 
-Matches the JSON above\.
+**Note**  
+Characters between brackets \("\[\]"\) and double quotation marks \(""\) are considered single fields\.
+
+**Example: Metric filter**
+
+To create a metric filter that maps to and extracts values from fields in a space\-delimited log event, enclose the metric filter in brackets \("\[\]"\), and specify fields with names that are separated by commas \(","\)\. The following metric filter parses seven fields\. 
 
 ```
-{ ($.user.email = "John.Stiles@example.com" || $.coordinates[0][1] = nonmatch) && $.actions[2] = nomatch }
+[ip, user, username, timestamp, request =*.html*, status_code = 4*, bytes]
 ```
 
-Doesn't match the JSON above\.
+You can use numeric operators \( >, <, =, \!=, >>=, or <=\) and the asterisk \(\*\) as a wild card to give your metric filter conditions\. In the example metric filter, `request` contains a wild card that states it must extract a value with `.html`, and `status_code` contains a wild card that states it must extract a value beginning with `4`\.
 
-##### JSON Special Considerations<a name="w28aac15c13b9c28b6b6b8"></a>
-
-The SELECTOR must point to a value node \(string or number\) in the JSON\. If it points to an array or object, the filter will not be applied because the log format doesn't match the filter\. For example, both \{$\.users = 1\} and \{$\.users \!= 1\} will fail to match a log event where users is an array:
+If you don't know the number of fields that you're parsing in a space\-delimited log event, you can use ellipsis \(\.\.\.\) to reference any unnamed field\. Elipsis can reference as many fields as needed\. The following example shows a metric filter with ellipsis that represent the first four unnamed fields shown in the previous example metric filter\.
 
 ```
-{
-  "users": [1, 2, 3]
-}
+[..., request =*.html*, status_code = 4*, bytes]
 ```
 
-##### Numeric Comparisons<a name="w28aac15c13b9c28b6b6c10"></a>
-
-The metric filter syntax supports precise matching on numeric comparisons\. The following numeric comparisons are supported: <, >, >=, <=, =, \!=
-
-Numeric filters have a syntax of
+You also can use the logical operators AND \(&&\) and OR \(\|\|\) to create compound expressions\. The following metric filter contains a compound expression that states the value of `status_code` must be `404` or `410`\.
 
 ```
-{ SELECTOR NUMERIC_OPERATOR NUMBER }
+[ip, user, username, timestamp, request =*.html*, status_code = 404 || status_code = 410, bytes]
 ```
 
-The metric filter must be enclosed in curly braces \{ \}, to indicate this is a JSON expression\. The metric filter contains the following parts:
+**Example: Extracted fields and values**
 
-**SELECTOR**  
-Specifies what JSON property to check\. Property selectors always start with dollar sign \($\), which signifies the root of the JSON\. Property selectors are alphanumeric strings that also support '\-' and '\_' characters\. Array elements are denoted with \[NUMBER\] syntax, and must follow a property\. Examples are: $\.latency, $\.numbers\[0\], $\.errorCode, $\.processes\[4\]\.averageRuntime\.
-
-**NUMERIC\_OPERATOR**  
-Can be one of the following: =, \!=, <, >, <=, or >=\.
-
-**NUMBER**  
-An integer with an optional \+ or \- sign, a decimal with an optional \+ or \- sign, or a number in scientific notation, which is an integer or a decimal with an optional \+ or \- sign, followed by 'e', followed by an integer with an optional \+ or \- sign\.
-
-Examples:
-
-```
-{ $.latency >= 500 }
-{ $.numbers[0] < 10e3 }
-{ $.numbers[0] < 10e-3 }
-{ $.processes[4].averageRuntime <= 55.5 }
-{ $.errorCode = 400 }
-{ $.errorCode != 500 }
-{ $.latency > +1000 }
-```
-
-### Using Metric Filters to Extract Values from Space\-Delimited Log Events<a name="extract-log-event-values"></a>
-
-You can use metric filters to extract values from space\-delimited log events\. The characters between a pair of square brackets \[\] or two double quotes \(""\) are treated as a single field\. For example:
-
-```
-127.0.0.1 - frank [10/Oct/2000:13:25:15 -0700] "GET /apache_pb.gif HTTP/1.0" 200 1534
-127.0.0.1 - frank [10/Oct/2000:13:35:22 -0700] "GET /apache_pb.gif HTTP/1.0" 500 5324
-127.0.0.1 - frank [10/Oct/2000:13:50:35 -0700] "GET /apache_pb.gif HTTP/1.0" 200 4355
-```
-
-To specify a metric filter pattern that parses space\-delimited events, the metric filter pattern has to specify the fields with a name, separated by commas, with the entire pattern enclosed in square brackets\. For example: \[ip, user, username, timestamp, request, status\_code, bytes\]\.
-
-In cases where you don't know the number of fields, you can use shorthand notification using an ellipsis \(…\)\. For example:
-
-```
-[..., status_code, bytes]
-[ip, user, ..., status_code, bytes]
-[ip, user, ...]
-```
-
-You can also add conditions to your fields so that only log events that match all conditions would match the filters\. For example:
-
-```
-[ip, user, username, timestamp, request, status_code, bytes > 1000]
-[ip, user, username, timestamp, request, status_code = 200, bytes]
-[ip, user, username, timestamp, request, status_code = 4*, bytes]
-[ip, user, username, timestamp, request = *html*, status_code = 4*, bytes]
-```
-
-You can use `&&` as a logical AND operator and `||` as a logical OR operator, as in the following examples:
-
-```
-[ip, user, username, timestamp, request, status_code = 4* && bytes > 1000]
-[ip, user, username, timestamp, request, status_code = 403 || status_code = 404, bytes]
-```
-
-CloudWatch Logs supports both string and numeric conditional fields\. For string fields, you can use = or \!= operators with an asterisk \(\*\)\.
-
-For numeric fields, you can use the >, <, >=, <=, =, and \!= operators\.
-
-If you are using a space\-delimited filter, extracted fields map to the names of the space\-delimited fields \(as expressed in the filter\) to the value of each of these fields\. If you are not using a space\-delimited filter, this will be empty\.
-
-Example Filter:
-
-```
-[..., request=*.html*, status_code=4*,]
-```
-
-Example log event for the filter:
-
-```
-127.0.0.1 - frank [10/Oct/2000:13:25:15 -0700] \"GET /index.html HTTP/1.0\" 404 1534
-```
-
-Extracted fields for the log event and filter pattern:
+The following code snippet shows the values that the metric filter extracts from the fields in the space\-delimited log event\.
 
 ```
 {
+   "$bytes": "1534",
    "$status_code": "404", 
-   "$request": "GET /products/index.html HTTP/1.0", 
-   "$7": "1534", 
-   "$4": "10/Oct/2000:13:25:15 -0700", 
-   "$3": "frank",
-   "$2": "-", 
-   "$1": "127.0.0.1"
+   "$request": "GET /index.html HTTP/1.0", 
+   "$timestamp": "10/Oct/2000:13:25:15 -0700", 
+   "$username": "frank",
+   "$user": "Prod", 
+   "$ip": "127.0.0.1"
 }
 ```
 
-## Setting How the Metric Value Changes When Matches Are Found<a name="changing-default-increment-value"></a>
+### Using pattern matching to match terms in space\-delimited log events<a name="pattern-matching-space-delimited"></a>
 
-When a metric filter finds one of the matching terms, phrases, or values in your log events, it increments the count in the CloudWatch metric by the amount you specify for Metric Value\. The metric value is aggregated and reported every minute\.
+You can use pattern matching to create space\-delimited metric filters that match terms in a specific order\. Specify the order of your terms with indicators\. Use **w1** to represent your first term and **w2** and so on to represent the order of your subsequent terms\. Place commas \(","\) between your terms\. The following examples contain code snippets that show how you can use pattern matching with space\-delimited metric filters\.
 
-If logs are ingested during a one\-minute time period but no matches are found, the value specified for Default Value \(if any\) is reported\. However, if no log events are ingested during a one\-minute period, then no value is reported\.
+**Example: Match terms in order**
 
-Specifying a Default Value, even if that value is 0, helps ensure that data is reported more often, helping prevent spotty metrics when matches are not found\.
+The following space\-delimited metric filter returns log events where the first word in the log events is ***ERROR***\.
 
-For example, suppose there is a log group that publishes two records every minute and the Metric Value is 1 and the Default Value is 0\. If matches are found in both of the log records in the first minute, the metric value for that minute is 2\. If there are no matches in the log records published in the second minute, the Default Value of 0 is used for both log records and the metric value for that minute is 0\.
+```
+[w1=ERROR, w2]
+```
 
-If you don't specify a Default Value, then no data is reported for any periods where no pattern matches are found\.
+**Note**  
+ When you create space\-delimited metric filters that use pattern matching, you must include a blank indicator after you specify the order of your terms\. For example, if you create a metric filter that returns log events where the first word is ***ERROR***, include a blank **w2** indicator after the **w1** term\. 
 
-## Publishing Numerical Values Found in Log Entries<a name="publishing-values-found-in-logs"></a>
+**Example: Match terms with AND \(&&\) and OR \(\|\|\)**
 
-Instead of just counting the number of matching items found in logs, you can also use the metric filter to publish values based on numerical values found in the logs\. The following procedure shows how to publish a metric with the latency found in the JSON request `metricFilter: { $.latency = * } metricValue: $.latency`\.
+You can use the logical operators AND \("&&"\) and OR \("\|\|"\) to create space\-delimited metric filters that contain conditions\. The following metric filter returns log events where the first word in the events is ***ERROR*** or ***WARNING***\.
 
-**To publish a metric with the latency in a JSON request**
+```
+[w1=ERROR || W1=WARNING, w2]
+```
+
+**Example: Exclude terms from matches**
+
+You can create space\-delimited metric filters that return log events excluding one or more terms\. Place a not equal symbol \("\!="\) before the term or terms that you want to exclude\. The following code snippet shows an example of a metric filter that returns log events where the first words aren't ***ERROR*** and ***WARNING***\.
+
+```
+[w1!=ERROR && w1!=WARNING, w2]
+```
+
+## Configuring metric values for a metric filter<a name="changing-default-increment-value"></a>
+
+When you create a metric filter, you define your filter pattern and specify your metric's value and default value\. You can set metric values to numbers, named identifiers, or numeric identifiers\. If you don't specify a default value, CloudWatch won't report data when your metric filter doesn't find a match\. We recommend that you specify a default value, even if the value is 0\. Setting a default value helps CloudWatch report data more accurately and prevents CloudWatch from aggregating spotty metrics\. CloudWatch aggregates and reports metric values every minute\.
+
+ When your metric filter finds a match in your log events, it increments your metric's count by your metric's value\. If your metric filter doesn't find a match, CloudWatch reports the metric's default value\. For example, your log group publishes two records every minute, the metric value is 1, and the default value is 0\. If your metric filter finds matches in both log records within the first minute, the metric value for that minute is 2\. If your metric filter doesn't find matches in either records during the second minute, the default value for that minute is 0\. If you assign dimensions to metrics that metric filters generate, you can't specify default values for those metrics\.
+
+You also can set up a metric filter to increment a metric with a value extracted from a log event, instead of a static value\. For more information, see [Using values in log events to increment a metric's value](#publishing-values-found-in-logs)\.
+
+## Publishing dimensions with metrics from values in JSON or space\-delimited log events<a name="logs-metric-filters-dimensions"></a>
+
+You can use the CloudWatch console or AWS CLI to create metric filters that publish dimensions with metrics that JSON and space\-delimited log events generate\. Dimensions are name/value value pairs  and only available for JSON and space\-delimited filter patterns\. You can create JSON and space\-delimited metric filters with up to three dimensions\. For more information about dimensions and information about how to assign dimensions to metrics, see the following sections:
++ [Dimensions](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Dimension) in the *Amazon CloudWatch User guide*
++ [Example: Extract fields from an Apache log and assign dimensions](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/ExtractBytesExample.html) in the *Amazon CloudWatch Logs User Guide*
+
+**Important**  
+Dimensions contain values that gather charges the same as custom metrics\. To prevent unexpected charges, don't specify high\-cardinality fields, such as `IPAddress` or `requestID`, as dimensions\.  
+If you extract metrics from log events, you're charged for custom metrics\. To prevent you from collecting accidental high charges, Amazon might disable your metric filter if it generates 1000 different name/value pairs for specified dimensions over a certain amount of time\.   
+You can create billing alarms that notify you of your estimated charges\. For more information, see [ Creating a billing alarm to monitor your estimated AWS charges](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.htmll)\.
+
+### Publishing dimensions with metrics from JSON log events<a name="logs-metric-filters-JSON"></a>
+
+The following examples contain code snippets that describe how to specify dimensions in a JSON metric filter\.
+
+**Example: JSON log event**
+
+```
+{
+  "eventType": "UpdateTrail",
+  "sourceIPAddress": "111.111.111.111",
+  "arrayKey": [
+        "value",
+        "another value"
+  ],
+  "objectList": [
+       {"name": "a",
+         "id": 1
+       },
+       {"name": "b",
+         "id": 2
+       }
+  ]
+  
+}
+```
+
+**Note**  
+If you test the example metric filter with the example JSON log event, you must enter the example JSON log on a single line\.
+
+**Example: Metric filter**
+
+The metric filter increments the metric whenever a JSON log event contain the properties `eventType` and `"sourceIPAddress"`\.
+
+```
+{ $.eventType = "*" && $.sourceIPAddress != 123.123.* }
+```
+
+When you create a JSON metric filter, you can specify any of the properties in the metric filter as a dimension\. For example, to set `eventType` as a dimension, use the following:
+
+```
+"eventType" : $.eventType
+```
+
+The example metric contains a dimension that's named `"eventType"`, and the dimension's value in the example log event is `"UpdateTrail"`\.
+
+### Publishing dimensions with metrics from space\-delimited log events<a name="logs-metric-filters-dimensions-space-delimited"></a>
+
+The following examples contain code snippets that describe how to specify dimensions in a space\-delimited metric filter\.
+
+**Example: Space\-delimited log event**
+
+```
+127.0.0.1 Prod frank [10/Oct/2000:13:25:15 -0700] "GET /index.html HTTP/1.0" 404 1534
+```
+
+**Example: Metric filter**
+
+```
+[ip, server, username, timestamp, request, status_code, bytes > 1000]
+```
+
+The metric filter increments the metric when a space\-delimited log event includes any of the fields that are specified in the filter\. For example, the metric filter finds following fields and values in the example space\-delimited log event\.
+
+```
+{
+   "$bytes": "1534", 
+   "$status_code": "404", 
+
+   "$request": "GET /index.html HTTP/1.0", 
+   "$timestamp": "10/Oct/2000:13:25:15 -0700", 
+   "$username": "frank",
+   "$server": "Prod", 
+   "$ip": "127.0.0.1"
+}
+```
+
+When you create a space\-delimited metric filter, you can specify any of the fields in the metric filter as a dimension\. For example, to set `server` as a dimension, use the following:
+
+```
+"server" : $server
+```
+
+The example metric filter has a dimension that's named `server`, and the dimension's value in the example log event is `"Prod"`\.
+
+## Using values in log events to increment a metric's value<a name="publishing-values-found-in-logs"></a>
+
+You can create metric filters that publish numeric values found in your log events\. The procedure in this section uses the following example metric filter to show how you can publish a numeric value in a JSON log event to a metric\.
+
+```
+{ $.latency = * } metricValue: $.latency
+```
+
+**To create a metric filter that publishes a value in a log event**
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. In the navigation pane, choose **Log groups**\.
+1. In the navigation pane, choose **Logs**, and then choose **Log groups**\.
 
-1. Choose `Actions`, **Create metric filter**\.
+1. Select or create a log group\.
 
-1. For **Filter Pattern**, type **\{ $\.latency = \* \}**, and then choose **Next**\.
+   For information about how to create a log group, see [Create a log group in CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html) in the *Amazon CloudWatch Logs User Guide*\.
 
-1. For **Metric Name**, type **myMetric**\.
+1. Choose **Actions**, and then choose **Create metric filter**\.
+
+1. For **Filter Pattern**, enter **\{ $\.latency = \* \}**, and then choose **Next**\.
+
+1. For **Metric Name**, enter **myMetric**\.
 
 1. For **Metric Value**, enter **$\.latency**\.
 
-1. For **Default Value** enter 0, and then choose **Next**\. Specifying a default value ensures that data is reported even during periods when no log events match the filter\. This prevents spotty or missing metrics when logs are ingested but don't match the filter\.
+1. \(Optional\) For **Default Value**, enter **0**, and then choose **Next**\.
+
+   We recommend that you specify a default value, even if the value is 0\. Setting a default value helps CloudWatch report data more accurately and prevents CloudWatch from aggregating spotty metrics\. CloudWatch aggregates and reports metric values every minute\.
 
 1. Choose **Create metric filter**\.
 
-The following log event would publish a value of 50 to the metric **myMetric** following filter creation\.
+The example metric filter matches the term `"latency"` in the example JSON log event and publishes a numeric value of 50 to the metric **myMetric**\.
 
 ```
 {

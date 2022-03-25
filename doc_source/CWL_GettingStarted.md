@@ -1,4 +1,4 @@
-# Getting Started with CloudWatch Logs<a name="CWL_GettingStarted"></a>
+# Getting started with CloudWatch Logs<a name="CWL_GettingStarted"></a>
 
 To collect logs from your Amazon EC2 instances and on\-premises servers into CloudWatch Logs, AWS offers two options:
 + **Recommended** – The unified CloudWatch agent\. It enables you to collect both logs and advanced metrics with one agent\. It offers support across operating systems, including servers running Windows Server\. This agent also provides better performance\.
@@ -8,9 +8,11 @@ To collect logs from your Amazon EC2 instances and on\-premises servers into Clo
   For more information, see [Installing the CloudWatch Agent](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/install-CloudWatch-Agent-on-EC2-Instance.html) in the *Amazon CloudWatch User Guide*\.
 + **Supported, but on the path to deprecation** – The older CloudWatch Logs agent, which supports the collection of logs from only servers running Linux\. If you're already using that agent, you may continue to do so\. However, the older agent requires Python 2\.7, 3\.0, and 3\.3\. Because current EC2 instances do not use those versions of Python and those versions are deprecated and are no longer being patched, **we strongly recommend that you migrate to the unified CloudWatch agent\.**
 
+  Additionally, the older agent doesn't support Instance Metadata Service Version 2 \(IMDSv2\)\. If your server uses IMDSv2, you must use the newer unified agent instead of the older CloudWatch Logs agent\.
+
   When you migrate from the CloudWatch Logs agent to the unified CloudWatch agent, the unified agent's configuration wizard can read your current CloudWatch Logs agent configuration file and set up the new agent to collect the same logs\. For more information about the wizard, see [ Create the CloudWatch Agent Configuration File with the Wizard](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/create-cloudwatch-agent-configuration-file-wizard.html) in the *Amazon CloudWatch User Guide*\.
 
 **Topics**
-+ [Use the Unified CloudWatch Agent to Get Started With CloudWatch Logs](UseCloudWatchUnifiedAgent.md)
-+ [Use the Previous CloudWatch Logs Agent to Get Started With CloudWatch Logs](UsePreviousCloudWatchLogsAgent.md)
-+ [Quick Start: Use AWS CloudFormation to Get Started With CloudWatch Logs](QuickStartCloudFormation.md)
++ [Use the unified CloudWatch agent to get started With CloudWatch Logs](UseCloudWatchUnifiedAgent.md)
++ [Use the previous CloudWatch Logs agent to get started with CloudWatch Logs](UsePreviousCloudWatchLogsAgent.md)
++ [Quick Start: Use AWS CloudFormation to get started with CloudWatch Logs](QuickStartCloudFormation.md)

@@ -1,12 +1,12 @@
-# Quick Start: Install the CloudWatch Logs Agent Using AWS OpsWorks and Chef<a name="QuickStartChef"></a>
+# Quick Start: Install the CloudWatch Logs agent using AWS OpsWorks and Chef<a name="QuickStartChef"></a>
 
 You can install the CloudWatch Logs agent and create log streams using AWS OpsWorks and Chef, which is a third\-party systems and cloud infrastructure automation tool\. Chef uses "recipes," which you write to install and configure software on your computer, and "cookbooks," which are collections of recipes, to perform its configuration and policy distribution tasks\. For more information, see [Chef](http://www.getchef.com/chef/)\.
 
 The Chef recipes examples below show how to monitor one log file on each EC2 instance\. The recipes use the stack name as the log group and the instance's hostname as the log stream name\. To monitor multiple log files, you need to extend the recipes to create multiple log groups and log streams\.
 
-## Step 1: Create Custom Recipes<a name="opsworks-step-1"></a>
+## Step 1: Create custom recipes<a name="opsworks-step-1"></a>
 
-Create a repository to store your recipes\. AWS OpsWorks supports Git and Subversion, or you can store an archive in Amazon S3\. The structure of your cookbook repository is described in [Cookbook Repositories](https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-installingcustom-repo.html) in the *AWS OpsWorks User Guide*\. The examples below assume that the cookbook is named `logs`\. The install\.rb recipe installs the CloudWatch Logs agent\. You can also download the cookbook example \([CloudWatchLogs\-Cookbooks\.zip](https://aws-cloudwatch.s3.amazonaws.com/downloads/CloudWatchLogs-Cookbooks.zip)\)\.
+Create a repository to store your recipes\. AWS OpsWorks supports Git and Subversion, or you can store an archive in Amazon S3\. The structure of your cookbook repository is described in [Cookbook Repositories](https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-installingcustom-repo.html) in the *AWS OpsWorks User Guide*\. The examples below assume that the cookbook is named `logs`\. The install\.rb recipe installs the CloudWatch Logs agent\. You can also download the cookbook example \([CloudWatchLogs\-Cookbooks\.zip](https://s3.amazonaws.com/aws-cloudwatch/downloads/CloudWatchLogs-Cookbooks.zip)\)\.
 
 Create a file named metadata\.rb that contains the following code:
 
@@ -41,7 +41,7 @@ directory "/opt/aws/cloudwatch" do
 end
 
 remote_file "/opt/aws/cloudwatch/awslogs-agent-setup.py" do
-  source "https://aws-cloudwatch.s3.amazonaws.com/downloads/latest/awslogs-agent-setup.py"
+  source "https://s3.amazonaws.com/aws-cloudwatch/downloads/latest/awslogs-agent-setup.py"
   mode "0755"
 end
  
@@ -60,7 +60,7 @@ If the installation of the agent fails, check to make sure that the `python-dev`
 sudo apt-get -y install python-dev
 ```
 
-This recipe uses a cwlogs\.cfg\.erb template file that you can modify to specify various attributes such as what files to log\. For more information about these attributes, see [CloudWatch Logs Agent Reference](AgentReference.md)\.
+This recipe uses a cwlogs\.cfg\.erb template file that you can modify to specify various attributes such as what files to log\. For more information about these attributes, see [CloudWatch Logs agent reference](AgentReference.md)\.
 
 ```
 [general]
@@ -105,7 +105,7 @@ The template gets the stack name and host name by referencing the corresponding 
 default[:cwlogs][:logfile] = '/var/log/aws/opsworks/opsworks-agent.statistics.log'
 ```
 
-## Step 2: Create an AWS OpsWorks Stack<a name="opsworks-step-2"></a>
+## Step 2: Create an AWS OpsWorks stack<a name="opsworks-step-2"></a>
 
 1. Open the AWS OpsWorks console at [https://console\.aws\.amazon\.com/opsworks/](https://console.aws.amazon.com/opsworks/)\.
 
@@ -123,7 +123,7 @@ default[:cwlogs][:logfile] = '/var/log/aws/opsworks/opsworks-agent.statistics.lo
 
 1. Choose **Add Stack** to create the stack\.
 
-## Step 3: Extend Your IAM Role<a name="opsworks-step-3"></a>
+## Step 3: Extend your IAM role<a name="opsworks-step-3"></a>
 
 To use CloudWatch Logs with your AWS OpsWorks instances, you need to extend the IAM role used by your instances\.
 
@@ -171,7 +171,7 @@ Choose the role name, not the check box\.
 
    For more information about IAM users and policies, see [IAM Users and Groups](https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_WorkingWithGroupsAndUsers.html) and [Managing IAM Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/ManagingPolicies.html) in the *IAM User Guide*\.
 
-## Step 4: Add a Layer<a name="opsworks-step-4"></a>
+## Step 4: Add a layer<a name="opsworks-step-4"></a>
 
 1. Open the AWS OpsWorks console at [https://console\.aws\.amazon\.com/opsworks/](https://console.aws.amazon.com/opsworks/)\.
 
@@ -191,7 +191,7 @@ If the above headings aren't visible, under **Custom Chef Recipes**, choose **ed
 
    AWS OpsWorks runs this recipe on each of the new instances in this layer, right after the instance boots\.
 
-## Step 5: Add an Instance<a name="opsworks-step-5"></a>
+## Step 5: Add an instance<a name="opsworks-step-5"></a>
 
 The layer only controls how to configure instances\. You now need to add some instances to the layer and start them\.
 
@@ -205,8 +205,8 @@ The layer only controls how to configure instances\. You now need to add some in
 
    AWS OpsWorks launches a new EC2 instance and configures CloudWatch Logs\. The instance's status changes to online when it's ready\.
 
-## Step 6: View Your Logs<a name="opsworks-step-6"></a>
+## Step 6: View your logs<a name="opsworks-step-6"></a>
 
 You should see the newly created log group and log stream in the CloudWatch console after the agent has been running for a few moments\.
 
-For more information, see [View Log Data Sent to CloudWatch Logs](Working-with-log-groups-and-streams.md#ViewingLogData)\.
+For more information, see [View log data sent to CloudWatch Logs](Working-with-log-groups-and-streams.md#ViewingLogData)\.

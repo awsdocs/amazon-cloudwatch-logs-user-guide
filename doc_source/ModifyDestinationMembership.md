@@ -1,6 +1,6 @@
-# Modifying Destination Membership at Runtime<a name="ModifyDestinationMembership"></a>
+# Modifying destination membership at runtime<a name="ModifyDestinationMembership"></a>
 
-You might encounter situations where you have to add or remove membership of some users from a destination that you own\. You can use the **PutDestinationPolicy** action on your destination with new access policy\. In the following example, a previously added account **111111111111** is stopped from sending any more log data, and account **222222222222** is enabled\.
+You might encounter situations where you have to add or remove membership of some users from a destination that you own\. You can use the `put-destination-policy` command on your destination with a new access policy\. In the following example, a previously added account **111111111111** is stopped from sending any more log data, and account **222222222222** is enabled\.
 
 1. Fetch the policy that is currently associated with the destination **testDestination** and make a note of the **AccessPolicy**:
 
@@ -12,10 +12,10 @@ You might encounter situations where you have to add or remove membership of som
     "Destinations": [
       {
         "DestinationName": "testDestination",
-        "RoleArn": "arn:aws:iam::222222222222:role/CWLtoKinesisRole",
-        "DestinationArn": "arn:aws:logs:region:222222222222:destination:testDestination",
-        "TargetArn": "arn:aws:kinesis:region:222222222222:stream/RecipientStream",
-        "AccessPolicy": "{\"Version\": \"2012-10-17\", \"Statement\": [{\"Sid\": \"\", \"Effect\": \"Allow\", \"Principal\": {\"AWS\": \"111111111111\"}, \"Action\": \"logs:PutSubscriptionFilter\", \"Resource\": \"arn:aws:logs:region:123456789012:destination:testDestination\"}] }"
+        "RoleArn": "arn:aws:iam::999999999999:role/CWLtoKinesisRole",
+        "DestinationArn": "arn:aws:logs:region:999999999999:destination:testDestination",
+        "TargetArn": "arn:aws:kinesis:region:999999999999:stream/RecipientStream",
+        "AccessPolicy": "{\"Version\": \"2012-10-17\", \"Statement\": [{\"Sid\": \"\", \"Effect\": \"Allow\", \"Principal\": {\"AWS\": \"111111111111\"}, \"Action\": \"logs:PutSubscriptionFilter\", \"Resource\": \"arn:aws:logs:region:999999999999:destination:testDestination\"}] }"
       }
     ]
    }
@@ -34,7 +34,7 @@ You might encounter situations where you have to add or remove membership of som
            "AWS" : "222222222222"
          },
          "Action" : "logs:PutSubscriptionFilter",
-         "Resource" : "arn:aws:logs:region:222222222222:destination:testDestination"
+         "Resource" : "arn:aws:logs:region:999999999999:destination:testDestination"
        }
      ]
    }
@@ -48,4 +48,4 @@ You might encounter situations where you have to add or remove membership of som
    --access-policy file://~/NewAccessPolicy.json
    ```
 
-   This will eventually disable the log events from account ID **111111111111**\. Log events from account ID **222222222222** start flowing to the destination as soon as the owner of account **222222222222** creates a subscription filter using **PutSubscriptionFilter**\.
+   This will eventually disable the log events from account ID **111111111111**\. Log events from account ID **222222222222** start flowing to the destination as soon as the owner of account **222222222222** creates a subscription filter\.

@@ -1,4 +1,4 @@
-# Example: Count Occurrences of a Term<a name="CountOccurrencesExample"></a>
+# Example: Count occurrences of a term<a name="CountOccurrencesExample"></a>
 
 Log events frequently include important messages that you want to count, maybe about the success or failure of operations\. For example, an error may occur and be recorded to a log file if a given operation fails\. You may want to monitor these entries to understand the trend of your errors\.
 
@@ -20,7 +20,7 @@ After you create a metric filter, you can view the metric in the CloudWatch cons
 **Note**  
 All entries in **Filter Pattern** are case\-sensitive\.
 
-1. To test your filter pattern, choose **Test Pattern**\.
+1. \(Optional\) To test your filter pattern, under **Test Pattern**, enter one or more log events to use to test the pattern\. Each log event must be within one line, because line breaks are used to separate log events in the **Log event messages** box\.
 
 1. Choose **Next**, and then on the **Assign metric** page, for **Filter Name**, type **MyAppErrorCount**\.
 

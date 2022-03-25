@@ -1,14 +1,14 @@
-# Add Query to Dashboard or Export Query Results<a name="CWL_ExportQueryResults"></a>
+# Add query to dashboard or export query results<a name="CWL_ExportQueryResults"></a>
 
 After you run a query, you can add the query to a CloudWatch dashboard or copy the results to the clipboard\.
 
-Queries added to dashboards run every time you load the dashboard and every time that the dashboard refreshes\. These queries count toward your limit of four concurrent CloudWatch Logs Insights queries\.
+Queries added to dashboards run every time you load the dashboard and every time that the dashboard refreshes\. These queries count toward your limit of 10 concurrent CloudWatch Logs Insights queries\.
 
 **To add query results to a dashboard**
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. In the navigation pane, choose **Insights**\.
+1. In the navigation pane, choose **Logs**, and then choose **Logs Insights**\.
 
 1. Choose one or more log groups and run a query\.
 
@@ -26,7 +26,7 @@ Queries added to dashboards run every time you load the dashboard and every time
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. In the navigation pane, choose **Insights**\.
+1. In the navigation pane, choose **Logs**, and then choose **Logs Insights**\.
 
 1. Choose one or more log groups and run a query\.
 

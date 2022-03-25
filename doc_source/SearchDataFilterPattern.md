@@ -1,12 +1,12 @@
-# Search Log Data Using Filter Patterns<a name="SearchDataFilterPattern"></a>
+# Search log data using filter patterns<a name="SearchDataFilterPattern"></a>
 
-You can search your log data using the [Filter and Pattern Syntax](FilterAndPatternSyntax.md)\. You can search all the log streams within a log group, or by using the AWS CLI you can also search specific log streams\. When each search runs, it returns up to the first page of data found and a token to retrieve the next page of data or to continue searching\. If no results are returned, you can continue searching\.
+You can search your log data using the [Filter and pattern syntax](FilterAndPatternSyntax.md)\. You can search all the log streams within a log group, or by using the AWS CLI you can also search specific log streams\. When each search runs, it returns up to the first page of data found and a token to retrieve the next page of data or to continue searching\. If no results are returned, you can continue searching\.
 
 You can set the time range you want to query to limit the scope of your search\. You could start with a larger range to see where the log lines you are interested in fall, and then shorten the time range to scope the view to logs in the time range that interest you\.
 
 You can also pivot directly from your logs\-extracted metrics to the corresponding logs\.
 
-## Search Log Entries Using the Console<a name="search-log-entries"></a>
+## Search log entries using the console<a name="search-log-entries"></a>
 
 You can search for log entries that meet a specified criteria using the console\.
 
@@ -34,15 +34,15 @@ You can search for log entries that meet a specified criteria using the console\
 
 1. For **Log events**, select the date and time range, and enter the filter syntax\.
 
-## Search Log Entries Using the AWS CLI<a name="search-log-entries-cli"></a>
+## Search log entries using the AWS CLI<a name="search-log-entries-cli"></a>
 
 You can search for log entries that meet a specified criteria using the AWS CLI\.
 
 **To search log entries using the AWS CLI**  
-At a command prompt, run the following [filter\-log\-events](https://docs.aws.amazon.com/cli/latest/reference/logs/filter-log-events.html) command\. Use `--filter-pattern` to limit the results to the specified filter pattern and `--log-stream-names` to limit the results to the specified log group\.
+At a command prompt, run the following [filter\-log\-events](https://docs.aws.amazon.com/cli/latest/reference/logs/filter-log-events.html) command\. Use `--filter-pattern` to limit the results to the specified filter pattern and `--log-stream-names` to limit the results to the specified log streams\.
 
 ```
-aws logs filter-log-events --log-group-name my-group [--log-stream-names LIST_OF_STREAMS_TO_SEARCH] --filter-pattern VALID_METRIC_FILTER_PATTERN]
+aws logs filter-log-events --log-group-name my-group [--log-stream-names LIST_OF_STREAMS_TO_SEARCH] [--filter-pattern VALID_METRIC_FILTER_PATTERN]
 ```
 
 **To search log entries over a given time range using the AWS CLI**  
@@ -52,7 +52,7 @@ At a command prompt, run the following [filter\-log\-events](https://docs.aws.am
 aws logs filter-log-events --log-group-name my-group [--log-stream-names LIST_OF_STREAMS_TO_SEARCH] [--start-time 1482197400000] [--end-time 1482217558365] [--filter-pattern VALID_METRIC_FILTER_PATTERN]
 ```
 
-## Pivot from Metrics to Logs<a name="pivot-metrics-logs"></a>
+## Pivot from metrics to logs<a name="pivot-metrics-logs"></a>
 
 You can get to specific log entries from other parts of the console\.
 
