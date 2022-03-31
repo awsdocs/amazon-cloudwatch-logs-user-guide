@@ -47,7 +47,7 @@ Some sample queries provided with CloudWatch Logs Insights use `head` or `tail` 
 
 1. In the query editor, change **20** to **50**, and then choose **Run**\.
 
-   The results of the new query appear\. Assuming there is enough data in the log group in the default time range, there are now 50 log events listed\.
+   The results of the new query appear\. Assuming there are enough data in the log group in the default time range, there are now 50 log events listed\.
 
 1. \(Optional\) You can save queries that you have created\. To save this query, choose **Save**\. For more information, see [Saving and re\-running CloudWatch Logs Insights queries](CWL_Insights-Saving-Queries.md)\.
 
