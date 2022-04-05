@@ -23,7 +23,7 @@ The following table lists the supported query commands for CloudWatch Logs Insig
 
 You must surround log fields named in queries that include characters other than the `@` symbol, period \(`.`\), and non\-alphanumeric characters in backtick keys \(```\)\. For example, the log field `foo-bar` must be enclosed in backtick kets \(``foo-bar``\) because it contains a non\-alphanumeric character, the hyphen \(`-`\)\.
 
-Use the `display` command to show the field or fields that you want to see in your query results\. The `display` command only shows the fiels you specify\. If your query contains multiple `display` commands, the query results show only the field or fields that you specified in the final `display` command\.
+Use the `display` command to show the field or fields that you want to see in your query results\. The `display` command only shows the fields you specify\. If your query contains multiple `display` commands, the query results show only the field or fields that you specified in the final `display` command\.
 
 You can use `fields` command with the keyword *as* to create ephemeral fields that use fields and functions in your log events\. For example, `fields ispresent as isRes` creates an ephemeral field named `isRes`, and the ephemaral field can be used in the rest of your query\.
 
