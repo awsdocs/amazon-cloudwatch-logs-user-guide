@@ -117,6 +117,20 @@ When the destination is created, CloudWatch Logs sends a test message to the des
    }
    ```
 
+1. If the recepient Kinesis Stream uses server-side encryption with KMS, the role also needs kms:GenerateDataKey permissions: 
+
+```
+   {
+     "Statement": [
+       {
+         "Effect": "Allow",
+         "Action": "kms:GenerateDataKey",
+         "Resource": "arn:aws:kms:region:999999999999:key/*"
+       }
+     ]
+   }
+```
+
 1. Associate the permissions policy with the role by using the **aws iam put\-role\-policy** command:
 
    ```
