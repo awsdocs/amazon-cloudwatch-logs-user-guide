@@ -26,6 +26,7 @@ The following AWS services publish logs to CloudWatch Logs\. For information abo
 |  Amazon Managed Streaming for Apache Kafka  |  [ Logging](https://docs.aws.amazon.com/msk/latest/developerguide/msk-logging.html)  | 
 |  Amazon MQ  |  [ Configuring Amazon MQ to Publish General and Audit Logs to Amazon CloudWatch Logs](https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/security-logging-monitoring-configure-cloudwatch)  | 
 |  AWS Network Firewall  |  [ Logging network traffic from AWS Network Firewall](https://docs.aws.amazon.com/network-firewall/latest/developerguide/firewall-logging.html)  | 
+|  AWS OpenSearch  |  [ Monitoring OpenSearch logs with Amazon CloudWatch Logs](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createdomain-configure-slow-logs.html)  | 
 |  AWS OpsWorks  |  [ Using Amazon CloudWatch Logs with AWS OpsWorks Stacks](https://docs.aws.amazon.com/opsworks/latest/userguide/monitoring-cloudwatch-logs.html)  | 
 |  Amazon Relational Database Service  |  [ Publishing PostgreSQL Logs to CloudWatch Logs](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.Concepts.PostgreSQL.html#USER_LogAccess.PostgreSQL.PublishtoCloudWatchLogs)  | 
 |  AWS Robomaker  |  [AWS RoboMaker’s CloudWatch ROS nodes with offline support](https://aws.amazon.com/blogs/opensource/robomaker-cloudwatch-ros-nodes-offline-support/)  | 
