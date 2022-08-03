@@ -414,7 +414,7 @@ Before you create the Kinesis Data Firehose stream, calculate the volume of log 
              "s3:PutObject" ],
          "Resource": [ 
              "arn:aws:s3:::my-bucket", 
-             "arn:aws:s3:::my-bucket/" ]
+             "arn:aws:s3:::my-bucket/*" ]
        }
      ]
    }
