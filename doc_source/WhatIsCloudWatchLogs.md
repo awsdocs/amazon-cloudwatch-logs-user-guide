@@ -12,7 +12,7 @@ CloudWatch Logs enables you to centralize the logs from all of your systems, app
 + **Archive log data** – You can use CloudWatch Logs to store your log data in highly durable storage\. The CloudWatch Logs agent makes it easy to quickly send both rotated and non\-rotated log data off of a host and into the log service\. You can then access the raw log data when you need it\.
 + **Log Route 53 DNS queries** – You can use CloudWatch Logs to log information about the DNS queries that Route 53 receives\. For more information, see [Logging DNS Queries](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/query-logs.html) in the *Amazon Route 53 Developer Guide*\.
 
-## Related AWSservices<a name="related_services_cwl"></a>
+## Related AWS services<a name="related_services_cwl"></a>
 
 The following services are used in conjunction with CloudWatch Logs:
 + **AWS CloudTrail** is a web service that enables you to monitor the calls made to the CloudWatch Logs API for your account, including calls made by the AWS Management Console, AWS Command Line Interface \(AWS CLI\), and other services\. When CloudTrail logging is turned on, CloudTrail captures API calls in your account and delivers the log files to the Amazon S3 bucket that you specify\. Each log file can contain one or more records, depending on how many actions must be performed to satisfy a request\. For more information about AWS CloudTrail, see [What Is AWS CloudTrail?](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/whatisawscloudtrail.html) in the *AWS CloudTrail User Guide*\. For an example of the type of data that CloudWatch writes into CloudTrail log files, see [Logging Amazon CloudWatch Logs API calls in AWS CloudTrail](logging_cw_api_calls_cwl.md)\.
