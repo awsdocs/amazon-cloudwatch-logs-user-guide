@@ -119,7 +119,7 @@ The common datetime\_format codes are listed below\. You can also use any dateti
 **%p**: Locale's equivalent of either AM or PM\.  
 **%M**: Minute as a zero\-padded decimal number\. 00, 01, \.\.\., 59  
 **%S**: Second as a zero\-padded decimal number\. 00, 01, \.\.\., 59  
-**%f**: Microsecond as a decimal number, zero\-padded on the left\. 000000, \.\.\., 999999  
+**%f**: Second fraction as a decimal number, zero\-padded on the left\. 000000, \.\.\., 999999 for microseconds; 000, \.\.\., 999 for milliseconds etc.
 **%z**: UTC offset in the form \+HHMM or \-HHMM\. \+0000, \-0400, \+1030  
 **Example formats:**  
 `Syslog: '%b %d %H:%M:%S', e.g. Jan 23 20:59:29`  
