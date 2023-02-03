@@ -138,7 +138,11 @@ On Ubuntu, run `apt-get update` before running the commands below\.
    ```
 
    ```
-   sudo python ./awslogs-agent-setup.py --region us-east-1
+   sudo python ./awslogs-agent-setup.py --region us-east-1                      
+   
+   if this command does not work as it shows error"This scipt only supports python version 2.6 - 3.5" to eliminate this error use following command if you have installed python 2
+   
+    sudo python2 ./awslogs-agent-setup.py --region us-east-1
    ```
 
    If the preceding command does not work, try the following:
