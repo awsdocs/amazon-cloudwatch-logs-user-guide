@@ -165,9 +165,9 @@ The following code snippet contains examples showing how you can format metric f
 // Metric filter with not equal sign and scientific notation
 { $.errorCode != 500 }
 // Metric filter with scientific notation and plus symbol
-{ $.number[0] = 1e-3 } 
+{ $.number[0] = 1e+3 } 
 // Metric filter with scientific notation and minus symbol
-{ $.number[0] != 1e+3 }
+{ $.number[0] != 1e-3 }
 ```
 
 ### Matching terms in JSON log events<a name="match-items-metric-filters"></a>
